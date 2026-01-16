@@ -1,0 +1,23 @@
+{
+  "name": "תשמישי קדושה – בית חב״ד",
+  "short_name": "תשמישי קדושה",
+  "description": "תפילין, מזוזות, טליתות וסטים לבר מצווה – ליווי אישי ובדיקה מוסמכת",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0f19",
+  "theme_color": "#0b0f19",
+  "lang": "he",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
