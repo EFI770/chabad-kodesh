@@ -16,89 +16,315 @@
 :root{
   --bg:#0b0f19;
   --surface:#0f1526;
+  --surface2:#121a33;
   --text:#f1f5f9;
   --muted:#a5afc9;
   --line:rgba(255,255,255,.08);
   --gold1:#f7e7a1;
   --gold2:#e6c45d;
   --gold3:#b8912f;
+  --shadow:0 30px 80px rgba(0,0,0,.55);
+  --shadow2:0 16px 40px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
-html,body{margin:0}
+html,body{height:100%}
 body{
-  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   color:var(--text);
-  background:var(--bg);
-  padding-bottom:96px;
+  background:var(--bg); /* uniform black */
+  padding-bottom:calc(96px + env(safe-area-inset-bottom)); /* prevent overlap */
 }
 
-.container{max-width:1080px;margin:auto;padding:24px}
 a{color:inherit;text-decoration:none}
+.container{max-width:1080px;margin:0 auto;padding:24px}
 
-.top{position:sticky;top:0;z-index:10;background:#0b0f19;border-bottom:1px solid var(--line)}
-.nav{display:flex;justify-content:space-between;align-items:center}
-.logo{width:40px;height:40px;border-radius:14px;
-background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));}
+/* Sticky header */
+.top{
+  position:sticky;top:0;z-index:10;
+  background:rgba(11,15,25,.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:14px;}
+.brand{display:flex;gap:12px;align-items:center;min-width:0}
+.logo{
+  width:42px;height:42px;border-radius:14px;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
+  box-shadow:0 12px 30px rgba(214,181,74,.45);
+}
+.brand small{color:var(--muted);font-weight:700}
+.brand strong{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-.hero{margin-top:24px;padding:32px;border-radius:28px;
-background:linear-gradient(180deg,#0f1526,#0b0f19);}
+.cta-top{
+  padding:11px 18px;border-radius:999px;
+  font-weight:900;color:#0b0f19;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
+  box-shadow:0 14px 35px rgba(214,181,74,.45);
+  transition:.25s ease;
+}
+.cta-top:hover{transform:translateY(-2px);box-shadow:0 22px 50px rgba(214,181,74,.60)}
 
-h1{margin:0 0 12px;font-size:38px}
-p{color:var(--muted);line-height:1.9}
+/* Hero */
+.hero{
+  margin-top:28px;
+  background:linear-gradient(180deg,var(--surface),var(--surface2));
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  padding:36px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:28px;
+}
+h1{margin:0 0 14px;font-size:42px;line-height:1.15;letter-spacing:-.3px}
+.subtitle{margin:0;color:var(--muted);line-height:1.9;font-size:17px;max-width:60ch}
 
-.btn{display:inline-block;padding:14px 22px;border-radius:16px;
-background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-color:#0b0f19;font-weight:900;margin-top:16px}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 12px;border-radius:999px;
+  border:1px solid rgba(214,181,74,.30);
+  background:rgba(214,181,74,.10);
+  color:var(--gold1);
+  font-weight:900;
+  font-size:13px;
+  margin-bottom:12px;
+}
 
-/* floating whatsapp */
-.whatsapp{
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:14px 20px;border-radius:16px;
+  font-weight:900;
+  transition:.25s ease;
+}
+.btn.gold{
+  color:#0b0f19;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
+  box-shadow:0 14px 35px rgba(214,181,74,.45);
+}
+.btn.gold:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 22px 50px rgba(214,181,74,.60)}
+.btn.ghost{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+}
+.btn.ghost:hover{transform:translateY(-3px)}
+
+.trust{
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:20px;
+  background:rgba(255,255,255,.03);
+}
+.trust h3{margin:0 0 10px;font-size:16px}
+.trust ul{margin:0;padding:0 18px;color:var(--muted);line-height:1.9}
+.trust .mini{margin-top:14px;color:var(--muted);font-size:14px;line-height:1.8}
+
+/* Products */
+.section{margin-top:34px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.section h2{margin:0;font-size:22px}
+.note{color:var(--muted);font-size:14px;margin:8px 0 18px}
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.card{
+  grid-column:span 6;
+  background:linear-gradient(180deg,var(--surface),#0c1222);
+  border-radius:22px;
+  padding:24px;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow2);
+  transition:.3s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(214,181,74,.22)}
+.card h3{margin:0 0 8px;font-size:18px}
+.card p{margin:0;color:var(--muted);line-height:1.85}
+
+.price{
+  margin-top:14px;
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:14px;
+  color:#0b0f19;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
+  box-shadow:0 10px 25px rgba(214,181,74,.40);
+}
+
+.actions{margin-top:18px}
+.actions .btn{width:100%}
+
+/* Steps */
+.steps{
+  margin-top:28px;
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:rgba(255,255,255,.03);
+  padding:22px;
+}
+.steps-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:12px}
+.step{
+  grid-column:span 4;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.02);
+  padding:16px;
+  transition:.25s ease;
+}
+.step:hover{transform:translateY(-4px)}
+.step strong{display:block;margin-bottom:6px}
+.step span{color:var(--muted);line-height:1.7}
+
+/* Final CTA */
+.final-cta{
+  margin-top:36px;
+  text-align:center;
+  padding:36px 24px;
+  border-radius:30px;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
+  color:#0b0f19;
+  box-shadow:0 30px 70px rgba(214,181,74,.55);
+}
+.final-cta h2{margin:0 0 10px}
+.final-cta p{margin:0 0 18px}
+
+.footer{
+  margin:22px 0 6px;
+  color:var(--muted);
+  font-size:14px;
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+
+/* Floating WhatsApp */
+.fab{
   position:fixed;
-  bottom:18px;
+  bottom:calc(18px + env(safe-area-inset-bottom));
   left:18px;
   z-index:50;
 }
-.whatsapp a{
-  display:block;
-  padding:14px 20px;
-  border-radius:999px;
+.fab a{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:14px 18px;border-radius:999px;
+  font-weight:900;color:#0b0f19;
   background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  color:#0b0f19;
-  font-weight:900;
+  box-shadow:0 14px 35px rgba(214,181,74,.45);
+  transition:.25s ease;
+}
+.fab a:hover{transform:translateY(-2px)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  h1{font-size:34px}
+  .card{grid-column:span 12}
+  .step{grid-column:span 12}
 }
 </style>
 </head>
 
 <body>
-
 <div class="top">
   <div class="container nav">
-    <div style="display:flex;gap:10px;align-items:center">
-      <div class="logo"></div>
-      <strong>תשמישי קדושה – כפר רתמים</strong>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <small>בית חב״ד</small><br>
+        <strong>תשמישי קדושה – כפר רתמים</strong>
+      </div>
     </div>
-    <a class="btn" href="https://wa.me/972527707441" target="_blank">וואטסאפ</a>
+    <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ לייעוץ</a>
   </div>
 </div>
 
 <main class="container">
   <section class="hero">
-    <h1>תשמישי קדושה בוחרים פעם אחת — נכון</h1>
-    <p>
-      תפילין, מזוזות, טליתות וסטים לבר מצווה — ליווי אישי,
-      התאמה לרמה ולתקציב, ובדיקה מוסמכת.
-    </p>
-    <a class="btn" href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank">
-      דברו איתנו בוואטסאפ
-    </a>
+    <div>
+      <div class="kicker">באחריות • בנחת • באמון</div>
+      <h1>תשמישי קדושה<br>בוחרים פעם אחת — נכון</h1>
+      <p class="subtitle">
+        תפילין, מזוזות, טליתות וסטים לבר מצווה — ליווי אישי, התאמה לרמה ולתקציב,
+        ובדיקה/הגהה לפי הצורך. בלי לחץ, עם שקט נפשי.
+      </p>
+
+      <div class="hero-btns">
+        <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20ראיתי%20את%20האתר%20ואשמח%20להתייעץ%20לגבי%20תשמישי%20קדושה" target="_blank" rel="noopener">דברו איתנו בוואטסאפ</a>
+        <a class="btn ghost" href="https://slime-fragrance-6f7.notion.site/2e95ba0054dd80cfa3f6ca6803f5d0fe" target="_blank" rel="noopener">לצפייה בקטלוג</a>
+      </div>
+    </div>
+
+    <aside class="trust">
+      <h3>מה מקבלים אצלנו</h3>
+      <ul>
+        <li>הכוונה אמיתית לפני קנייה</li>
+        <li>התאמה אישית לצורך ולתקציב</li>
+        <li>בדיקה והגהה לפי הצורך</li>
+        <li>שירות קהילתי עם אחריות</li>
+      </ul>
+      <div class="mini">בית חב״ד כפר רתמים · 052-7707441</div>
+    </aside>
   </section>
+
+  <section class="section">
+    <div class="section-head"><h2>מה אפשר להזמין</h2></div>
+    <div class="note">מחירים משתנים לפי איכות, בדיקה והזמנה – נעדכן לפני סגירה</div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>תפילין</h3>
+        <p>בר מצווה | שדרוג | מבוגרים — התאמה מלאה ובדיקה.</p>
+        <div class="price">החל מ־2,000 ₪ · לפי רמה והגהה</div>
+        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אני%20מתעניין%20בתפילין%20ואשמח%20לשמוע%20אפשרויות%20ורמות" target="_blank" rel="noopener">קבל הצעת מחיר</a></div>
+      </div>
+
+      <div class="card">
+        <h3>מזוזות</h3>
+        <p>בדיקה • החלפה • קביעת מזוזה — שירות מסודר.</p>
+        <div class="price">בדיקה: החל מ־30 ₪ · מזוזות: החל מ־120 ₪</div>
+        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לתאם%20בדיקת%20מזוזות%20ולשמוע%20אפשרויות" target="_blank" rel="noopener">תיאום בדיקה</a></div>
+      </div>
+
+      <div class="card">
+        <h3>טליתות</h3>
+        <p>לבר מצווה ולשימוש יומיומי — לפי גודל וסגנון.</p>
+        <div class="price">החל מ־250 ₪ · לפי סוג וגודל</div>
+        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ%20לגבי%20טלית%20מתאימה" target="_blank" rel="noopener">בחירת טלית</a></div>
+      </div>
+
+      <div class="card">
+        <h3>סטים לבר מצווה</h3>
+        <p>סט קומפלט בליווי אישי להורים ולנער.</p>
+        <div class="price">מחיר משתנה · בנייה אישית לפי תקציב</div>
+        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20יש%20לנו%20בר%20מצווה%20ונשמח%20לליווי%20והצעת%20מחיר" target="_blank" rel="noopener">ליווי לבר מצווה</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <h2 style="margin:0">איך זה עובד</h2>
+    <div class="note" style="margin:8px 0 0">תהליך קצר וברור, בלי עומס</div>
+    <div class="steps-grid">
+      <div class="step"><strong>1) פנייה והתייעצות</strong><span>שיחה קצרה להבין צורך, תקציב ולו״ז.</span></div>
+      <div class="step"><strong>2) התאמה אישית</strong><span>מציעים אפשרויות מדויקות ומומלצות.</span></div>
+      <div class="step"><strong>3) הזמנה ובדיקה</strong><span>הזמנה לפי דרישה + בדיקה/הגהה לפי הצורך.</span></div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <h2>לא בטוחים מה נכון לכם?</h2>
+    <p>שיחה קצרה יכולה לחסוך טעויות יקרות</p>
+    <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לשיחה%20קצרה%20ולהכוונה" target="_blank" rel="noopener">דברו איתנו עכשיו</a>
+  </section>
+
+  <footer class="footer">
+    <div>© בית חב״ד — תשמישי קדושה</div>
+    <div>טלפון/וואטסאפ: 052-7707441</div>
+  </footer>
 </main>
 
-<div class="whatsapp">
-  <a href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank">
-    דברו איתנו
-  </a>
-</div>
+<div class="fab"><a href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank" rel="noopener">וואטסאפ</a></div>
 
 <script>
 if ("serviceWorker" in navigator) {
