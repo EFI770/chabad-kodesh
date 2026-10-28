@@ -10,7 +10,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="בית חב״ד רתמים">
-  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="logo-192.png">
+  <link rel="icon" type="image/png" href="logo-192.png">
 
   <style>
     :root {
@@ -62,12 +63,14 @@
       align-items: center;
     }
     .logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
-      box-shadow: 0 12px 30px rgba(214,181,74,.45);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
       flex-shrink: 0;
+      object-fit: cover;
+      background: #fff;
+      border: 2px solid rgba(255,255,255,.15);
     }
     .brand small { color: var(--muted); font-weight: 700; font-size: 13px; }
     .brand strong { font-size: 16px; }
@@ -409,7 +412,7 @@
     <div class="container">
       <div class="nav">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <img class="logo" src="logo-192.png" alt="בית חב״ד כפר רתמים" width="48" height="48">
           <div>
             <small>בית חב״ד</small><br>
             <strong>כפר רתמים</strong>
