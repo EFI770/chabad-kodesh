@@ -1,335 +1,699 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>תשמישי קדושה – בית חב״ד כפר רתמים</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>בית חב״ד כפר רתמים</title>
 
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0b0f19">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="תשמישי קדושה">
-<link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="בית חב״ד רתמים">
+  <link rel="apple-touch-icon" href="icon-192.png">
 
-<style>
-:root{
-  --bg:#0b0f19;
-  --surface:#0f1526;
-  --surface2:#121a33;
-  --text:#f1f5f9;
-  --muted:#a5afc9;
-  --line:rgba(255,255,255,.08);
-  --gold1:#f7e7a1;
-  --gold2:#e6c45d;
-  --gold3:#b8912f;
-  --shadow:0 30px 80px rgba(0,0,0,.55);
-  --shadow2:0 16px 40px rgba(0,0,0,.45);
-}
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #0f1526;
+      --surface2: #121a33;
+      --text: #f1f5f9;
+      --muted: #a5afc9;
+      --line: rgba(255,255,255,.08);
+      --gold1: #f7e7a1;
+      --gold2: #e6c45d;
+      --gold3: #b8912f;
+      --shadow: 0 30px 80px rgba(0,0,0,.55);
+      --shadow2: 0 16px 40px rgba(0,0,0,.45);
+    }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  color:var(--text);
-  background:var(--bg); /* uniform black */
-  padding-bottom:calc(96px + env(safe-area-inset-bottom)); /* prevent overlap */
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      padding-bottom: calc(110px + env(safe-area-inset-bottom));
+    }
 
-a{color:inherit;text-decoration:none}
-.container{max-width:1080px;margin:0 auto;padding:24px}
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 24px; }
 
-/* Sticky header */
-.top{
-  position:sticky;top:0;z-index:10;
-  background:rgba(11,15,25,.85);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.nav{display:flex;justify-content:space-between;align-items:center;gap:14px;}
-.brand{display:flex;gap:12px;align-items:center;min-width:0}
-.logo{
-  width:42px;height:42px;border-radius:14px;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  box-shadow:0 12px 30px rgba(214,181,74,.45);
-}
-.brand small{color:var(--muted);font-weight:700}
-.brand strong{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    /* ===== Header ===== */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,15,25,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+    }
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+      box-shadow: 0 12px 30px rgba(214,181,74,.45);
+      flex-shrink: 0;
+    }
+    .brand small { color: var(--muted); font-weight: 700; font-size: 13px; }
+    .brand strong { font-size: 16px; }
 
-.cta-top{
-  padding:11px 18px;border-radius:999px;
-  font-weight:900;color:#0b0f19;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  box-shadow:0 14px 35px rgba(214,181,74,.45);
-  transition:.25s ease;
-}
-.cta-top:hover{transform:translateY(-2px);box-shadow:0 22px 50px rgba(214,181,74,.60)}
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: .2s;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
 
-/* Hero */
-.hero{
-  margin-top:28px;
-  background:linear-gradient(180deg,var(--surface),var(--surface2));
-  border-radius:28px;
-  box-shadow:var(--shadow);
-  padding:36px;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:28px;
-}
-h1{margin:0 0 14px;font-size:42px;line-height:1.15;letter-spacing:-.3px}
-.subtitle{margin:0;color:var(--muted);line-height:1.9;font-size:17px;max-width:60ch}
+    .cta-top {
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      color: #0b0f19;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+      box-shadow: 0 14px 35px rgba(214,181,74,.45);
+      transition: .25s;
+      white-space: nowrap;
+    }
+    .cta-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 50px rgba(214,181,74,.6);
+    }
 
-.kicker{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:8px 12px;border-radius:999px;
-  border:1px solid rgba(214,181,74,.30);
-  background:rgba(214,181,74,.10);
-  color:var(--gold1);
-  font-weight:900;
-  font-size:13px;
-  margin-bottom:12px;
-}
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--line);
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: .25s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
 
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:14px 20px;border-radius:16px;
-  font-weight:900;
-  transition:.25s ease;
-}
-.btn.gold{
-  color:#0b0f19;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  box-shadow:0 14px 35px rgba(214,181,74,.45);
-}
-.btn.gold:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 22px 50px rgba(214,181,74,.60)}
-.btn.ghost{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.03);
-  color:var(--text);
-}
-.btn.ghost:hover{transform:translateY(-3px)}
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 0 18px;
+      border-top: 1px solid var(--line);
+    }
+    .mobile-menu.open {
+      display: flex;
+    }
+    .mobile-menu a {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .mobile-menu a:hover {
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
 
-.trust{
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:20px;
-  background:rgba(255,255,255,.03);
-}
-.trust h3{margin:0 0 10px;font-size:16px}
-.trust ul{margin:0;padding:0 18px;color:var(--muted);line-height:1.9}
-.trust .mini{margin-top:14px;color:var(--muted);font-size:14px;line-height:1.8}
+    /* ===== Hero ===== */
+    .hero {
+      margin-top: 28px;
+      background: linear-gradient(180deg, var(--surface), var(--surface2));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 32px;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: 40px;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 17px;
+      max-width: 55ch;
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(214,181,74,.3);
+      background: rgba(214,181,74,.1);
+      color: var(--gold1);
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
 
-/* Products */
-.section{margin-top:34px}
-.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
-.section h2{margin:0;font-size:22px}
-.note{color:var(--muted);font-size:14px;margin:8px 0 18px}
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-weight: 900;
+      transition: .25s;
+      cursor: pointer;
+    }
+    .btn.gold {
+      color: #0b0f19;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+      box-shadow: 0 14px 35px rgba(214,181,74,.45);
+    }
+    .btn.gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(214,181,74,.6);
+    }
+    .btn.ghost {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .btn.ghost:hover { transform: translateY(-3px); }
 
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
-.card{
-  grid-column:span 6;
-  background:linear-gradient(180deg,var(--surface),#0c1222);
-  border-radius:22px;
-  padding:24px;
-  border:1px solid var(--line);
-  box-shadow:var(--shadow2);
-  transition:.3s ease;
-}
-.card:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(214,181,74,.22)}
-.card h3{margin:0 0 8px;font-size:18px}
-.card p{margin:0;color:var(--muted);line-height:1.85}
+    /* ===== Sections ===== */
+    .section { margin-top: 52px; }
+    .section-head {
+      margin-bottom: 22px;
+    }
+    .section h2 {
+      margin: 0;
+      font-size: 26px;
+    }
+    .section .note {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 6px 0 0;
+    }
 
-.price{
-  margin-top:14px;
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:999px;
-  font-weight:900;
-  font-size:14px;
-  color:#0b0f19;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  box-shadow:0 10px 25px rgba(214,181,74,.40);
-}
+    /* ===== Cards Grid ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+    .card {
+      grid-column: span 6;
+      background: linear-gradient(180deg, var(--surface), #0c1222);
+      border-radius: 22px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow2);
+      transition: .3s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 70px rgba(214,181,74,.18);
+    }
+    .card h3 { margin: 0 0 10px; font-size: 19px; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.8; }
+    .card .price {
+      margin-top: 16px;
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 14px;
+      color: #0b0f19;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+    }
+    .card .actions { margin-top: 18px; }
+    .card .actions .btn { width: 100%; }
 
-.actions{margin-top:18px}
-.actions .btn{width:100%}
+    /* ===== About ===== */
+    .about-box {
+      background: linear-gradient(180deg, var(--surface), var(--surface2));
+      border-radius: 26px;
+      padding: 36px;
+      border: 1px solid var(--line);
+      line-height: 1.9;
+      color: var(--muted);
+    }
+    .about-box h3 {
+      margin: 0 0 14px;
+      color: var(--text);
+      font-size: 20px;
+    }
+    .about-box p { margin: 0 0 14px; }
 
-/* Steps */
-.steps{
-  margin-top:28px;
-  border:1px solid var(--line);
-  border-radius:26px;
-  background:rgba(255,255,255,.03);
-  padding:22px;
-}
-.steps-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:12px}
-.step{
-  grid-column:span 4;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(255,255,255,.02);
-  padding:16px;
-  transition:.25s ease;
-}
-.step:hover{transform:translateY(-4px)}
-.step strong{display:block;margin-bottom:6px}
-.step span{color:var(--muted);line-height:1.7}
+    /* ===== Contact ===== */
+    .contact-box {
+      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+      color: #0b0f19;
+      border-radius: 28px;
+      padding: 42px 32px;
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(214,181,74,.5);
+    }
+    .contact-box h2 { margin: 0 0 10px; }
+    .contact-box p { margin: 0 0 22px; opacity: .85; }
 
-/* Final CTA */
-.final-cta{
-  margin-top:36px;
-  text-align:center;
-  padding:36px 24px;
-  border-radius:30px;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  color:#0b0f19;
-  box-shadow:0 30px 70px rgba(214,181,74,.55);
-}
-.final-cta h2{margin:0 0 10px}
-.final-cta p{margin:0 0 18px}
+    /* ===== Footer ===== */
+    .footer {
+      margin: 48px 0 10px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-.footer{
-  margin:22px 0 6px;
-  color:var(--muted);
-  font-size:14px;
-  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-  border-top:1px solid var(--line);
-  padding-top:16px;
-}
+    /* ===== Floating Chavruta Button ===== */
+    #chavruta-fab {
+      position: fixed;
+      bottom: calc(22px + env(safe-area-inset-bottom));
+      right: 22px;
+      z-index: 999;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1f6b45, #0d3b24);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 8px 28px rgba(0,0,0,.45);
+      transition: transform .25s, box-shadow .25s;
+      text-align: center;
+      line-height: 1.15;
+      border: 2px solid rgba(255,255,255,.18);
+      overflow: hidden;
+    }
+    #chavruta-fab::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #2d8f5f, #1a5f3c);
+      z-index: -1;
+      animation: pulse-ring 2.4s ease-out infinite;
+      opacity: 0;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      70% { transform: scale(1.25); opacity: 0; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+    #chavruta-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 14px 36px rgba(0,0,0,.55);
+    }
+    #chavruta-fab svg {
+      width: 26px;
+      height: 26px;
+      margin-bottom: 3px;
+    }
+    #chavruta-fab span {
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
 
-/* Floating WhatsApp */
-.fab{
-  position:fixed;
-  bottom:calc(18px + env(safe-area-inset-bottom));
-  left:18px;
-  z-index:50;
-}
-.fab a{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:14px 18px;border-radius:999px;
-  font-weight:900;color:#0b0f19;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));
-  box-shadow:0 14px 35px rgba(214,181,74,.45);
-  transition:.25s ease;
-}
-.fab a:hover{transform:translateY(-2px)}
+    /* WhatsApp FAB (left) */
+    .fab-wa {
+      position: fixed;
+      bottom: calc(22px + env(safe-area-inset-bottom));
+      left: 22px;
+      z-index: 999;
+    }
+    .fab-wa a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 900;
+      color: #0b0f19;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
+      box-shadow: 0 14px 35px rgba(214,181,74,.45);
+      transition: .25s;
+    }
+    .fab-wa a:hover { transform: translateY(-2px); }
 
-@media (max-width:900px){
-  .hero{grid-template-columns:1fr}
-  h1{font-size:34px}
-  .card{grid-column:span 12}
-  .step{grid-column:span 12}
-}
-</style>
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 28px; }
+      h1 { font-size: 32px; }
+      .card { grid-column: span 12; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .cta-top { display: none; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="top">
-  <div class="container nav">
-    <div class="brand">
-      <div class="logo" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="top">
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <small>בית חב״ד</small><br>
+            <strong>כפר רתמים</strong>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <a href="#home">בית</a>
+          <a href="#about">אודות</a>
+          <a href="#services">שירותים</a>
+          <a href="#kodesh">תשמישי קדושה</a>
+          <a href="#chavruta">חברותא</a>
+          <a href="#contact">צור קשר</a>
+        </nav>
+
+        <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">
+          וואטסאפ
+        </a>
+
+        <div class="hamburger" id="hamburger" aria-label="תפריט">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMenu()">בית</a>
+        <a href="#about" onclick="closeMenu()">אודות</a>
+        <a href="#services" onclick="closeMenu()">שירותים</a>
+        <a href="#kodesh" onclick="closeMenu()">תשמישי קדושה</a>
+        <a href="#chavruta" onclick="closeMenu()">חברותא</a>
+        <a href="#contact" onclick="closeMenu()">צור קשר</a>
+        <a href="https://wa.me/972527707441" target="_blank" rel="noopener" onclick="closeMenu()" style="margin-top:8px;background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));color:#0b0f19;font-weight:900;">וואטסאפ</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero -->
+    <section id="home" class="hero">
       <div>
-        <small>בית חב״ד</small><br>
-        <strong>תשמישי קדושה – כפר רתמים</strong>
+        <div class="kicker">אהבת ישראל • אחריות • קהילה</div>
+        <h1>בית חב״ד<br>כפר רתמים</h1>
+        <p class="subtitle">
+          מרכז קהילתי פתוח לכל יהודי. שירותי דת, תשמישי קדושה, שיעורים, חברותא ואירועים —
+          הכל במקום אחד, בנחת ובאחריות.
+        </p>
+        <div class="hero-btns">
+          <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20ראיתי%20את%20האתר%20ואשמח%20לעזרה" target="_blank" rel="noopener">
+            דברו איתנו
+          </a>
+          <a class="btn ghost" href="#services">לשירותים שלנו</a>
+        </div>
       </div>
-    </div>
-    <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ לייעוץ</a>
+
+      <aside style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:22px;padding:24px;">
+        <h3 style="margin:0 0 12px;font-size:17px;">מה תמצאו אצלנו</h3>
+        <ul style="margin:0;padding:0 18px;color:var(--muted);line-height:1.9;">
+          <li>תפילין ומזוזות</li>
+          <li>טליתות וסטים לבר מצווה</li>
+          <li>חברותא ללימוד</li>
+          <li>שיעורים ואירועים</li>
+          <li>שירות קהילתי חם</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <h2>אודות בית חב״ד</h2>
+        <p class="note">בית פתוח לכל יהודי</p>
+      </div>
+
+      <div class="about-box">
+        <h3>מי אנחנו</h3>
+        <p>
+          בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי.
+          אנחנו כאן כדי ללוות, לייעץ ולסייע בכל הקשור לחיי היהדות: תשמישי קדושה, לימוד, אירועים קהילתיים ושירותי דת.
+        </p>
+        <p>
+          העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית. בין אם אתם מחפשים תפילין לבר מצווה,
+          בדיקת מזוזות, שותף ללימוד או פשוט שיחה — אנחנו כאן בשבילכם.
+        </p>
+        <p style="margin-bottom:0;">
+          <strong style="color:var(--gold1);">בית חב״ד כפר רתמים · 052-7707441</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section id="services" class="section">
+      <div class="section-head">
+        <div>
+          <h2>השירותים שלנו</h2>
+          <p class="note">הכל במקום אחד, עם ליווי אישי</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>תשמישי קדושה</h3>
+          <p>תפילין, מזוזות, טליתות וסטים לבר מצווה — התאמה אישית ובדיקה.</p>
+          <div class="actions">
+            <a class="btn gold" href="#kodesh">לפרטים והזמנה</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>חברותא</h3>
+          <p>מציאת שותף ללימוד תורה. פלטפורמה קהילתית פשוטה ונוחה.</p>
+          <div class="actions">
+            <a class="btn gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">
+              כניסה לחברותא
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>שיעורים ולימוד</h3>
+          <p>שיעורים שבועיים, הרצאות ואירועי תורה לקהל הרחב.</p>
+          <div class="actions">
+            <a class="btn ghost" href="https://wa.me/972527707441?text=אשמח%20לשמוע%20על%20שיעורים" target="_blank" rel="noopener">
+              לבירור שיעורים
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>אירועים וחגים</h3>
+          <p>סדרי פסח, חנוכה, פורים ועוד — אירועים קהילתיים פתוחים.</p>
+          <div class="actions">
+            <a class="btn ghost" href="https://wa.me/972527707441?text=אשמח%20לשמוע%20על%20אירועים%20קרובים" target="_blank" rel="noopener">
+              לפרטים
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- תשמישי קדושה -->
+    <section id="kodesh" class="section">
+      <div class="section-head">
+        <div>
+          <h2>תשמישי קדושה</h2>
+          <p class="note">בוחרים פעם אחת — נכון. ליווי אישי והתאמה לרמה ולתקציב</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>תפילין</h3>
+          <p>בר מצווה | שדרוג | מבוגרים — התאמה מלאה ובדיקה.</p>
+          <div class="price">החל מ־2,000 ₪ · לפי רמה והגהה</div>
+          <div class="actions">
+            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אני%20מתעניין%20בתפילין" target="_blank" rel="noopener">
+              קבל הצעת מחיר
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>מזוזות</h3>
+          <p>בדיקה • החלפה • קביעת מזוזה — שירות מסודר.</p>
+          <div class="price">בדיקה: החל מ־30 ₪ · מזוזות: החל מ־120 ₪</div>
+          <div class="actions">
+            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לתאם%20בדיקת%20מזוזות" target="_blank" rel="noopener">
+              תיאום בדיקה
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>טליתות</h3>
+          <p>לבר מצווה ולשימוש יומיומי — לפי גודל וסגנון.</p>
+          <div class="price">החל מ־250 ₪ · לפי סוג וגודל</div>
+          <div class="actions">
+            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ%20לגבי%20טלית" target="_blank" rel="noopener">
+              בחירת טלית
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>סטים לבר מצווה</h3>
+          <p>סט קומפלט בליווי אישי להורים ולנער.</p>
+          <div class="price">מחיר משתנה · בנייה אישית לפי תקציב</div>
+          <div class="actions">
+            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20יש%20לנו%20בר%20מצווה" target="_blank" rel="noopener">
+              ליווי לבר מצווה
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- חברותא -->
+    <section id="chavruta" class="section">
+      <div class="section-head">
+        <div>
+          <h2>חברותא</h2>
+          <p class="note">מחברים בין אנשים. מתחברים לתורה.</p>
+        </div>
+      </div>
+
+      <div class="about-box">
+        <p style="margin-top:0;">
+          פלטפורמה קהילתית למציאת שותף ללימוד תורה.<br>
+          בוחרים נושא, רמה וזמנים — והמערכת מציעה התאמות שקופות.
+        </p>
+        <div style="margin-top:22px;">
+          <a class="btn gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">
+            כניסה לאפליקציית חברותא
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="contact-box">
+        <h2>רוצים לדבר?</h2>
+        <p>שיחה קצרה יכולה לחסוך הרבה. אנחנו כאן.</p>
+        <a class="btn" style="background:#0b0f19;color:var(--gold1);" 
+           href="https://wa.me/972527707441?text=שלום%20אשמח%20לשיחה" 
+           target="_blank" rel="noopener">
+          וואטסאפ עכשיו
+        </a>
+        <div style="margin-top:18px;font-size:15px;opacity:.8;">
+          052-7707441 · בית חב״ד כפר רתמים
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© בית חב״ד כפר רתמים</div>
+      <div>טלפון / וואטסאפ: 052-7707441</div>
+    </footer>
+  </main>
+
+  <!-- Floating WhatsApp (שמאל) -->
+  <div class="fab-wa">
+    <a href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank" rel="noopener">
+      וואטסאפ
+    </a>
   </div>
-</div>
 
-<main class="container">
-  <section class="hero">
-    <div>
-      <div class="kicker">באחריות • בנחת • באמון</div>
-      <h1>תשמישי קדושה<br>בוחרים פעם אחת — נכון</h1>
-      <p class="subtitle">
-        תפילין, מזוזות, טליתות וסטים לבר מצווה — ליווי אישי, התאמה לרמה ולתקציב,
-        ובדיקה/הגהה לפי הצורך. בלי לחץ, עם שקט נפשי.
-      </p>
+  <!-- Floating Chavruta Button (ימין) -->
+  <a id="chavruta-fab" 
+     href="https://efi770.github.io/-my-new-project/" 
+     target="_blank" 
+     rel="noopener"
+     title="חברותא – מציאת שותף ללימוד">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      <path d="M12 6v8"/>
+      <path d="M8 10h8"/>
+    </svg>
+    <span>חברותא</span>
+  </a>
 
-      <div class="hero-btns">
-        <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20ראיתי%20את%20האתר%20ואשמח%20להתייעץ%20לגבי%20תשמישי%20קדושה" target="_blank" rel="noopener">דברו איתנו בוואטסאפ</a>
-        <a class="btn ghost" href="https://slime-fragrance-6f7.notion.site/2e95ba0054dd80cfa3f6ca6803f5d0fe" target="_blank" rel="noopener">לצפייה בקטלוג</a>
-      </div>
-    </div>
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    <aside class="trust">
-      <h3>מה מקבלים אצלנו</h3>
-      <ul>
-        <li>הכוונה אמיתית לפני קנייה</li>
-        <li>התאמה אישית לצורך ולתקציב</li>
-        <li>בדיקה והגהה לפי הצורך</li>
-        <li>שירות קהילתי עם אחריות</li>
-      </ul>
-      <div class="mini">בית חב״ד כפר רתמים · 052-7707441</div>
-    </aside>
-  </section>
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
 
-  <section class="section">
-    <div class="section-head"><h2>מה אפשר להזמין</h2></div>
-    <div class="note">מחירים משתנים לפי איכות, בדיקה והזמנה – נעדכן לפני סגירה</div>
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+    }
 
-    <div class="grid">
-      <div class="card">
-        <h3>תפילין</h3>
-        <p>בר מצווה | שדרוג | מבוגרים — התאמה מלאה ובדיקה.</p>
-        <div class="price">החל מ־2,000 ₪ · לפי רמה והגהה</div>
-        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אני%20מתעניין%20בתפילין%20ואשמח%20לשמוע%20אפשרויות%20ורמות" target="_blank" rel="noopener">קבל הצעת מחיר</a></div>
-      </div>
-
-      <div class="card">
-        <h3>מזוזות</h3>
-        <p>בדיקה • החלפה • קביעת מזוזה — שירות מסודר.</p>
-        <div class="price">בדיקה: החל מ־30 ₪ · מזוזות: החל מ־120 ₪</div>
-        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לתאם%20בדיקת%20מזוזות%20ולשמוע%20אפשרויות" target="_blank" rel="noopener">תיאום בדיקה</a></div>
-      </div>
-
-      <div class="card">
-        <h3>טליתות</h3>
-        <p>לבר מצווה ולשימוש יומיומי — לפי גודל וסגנון.</p>
-        <div class="price">החל מ־250 ₪ · לפי סוג וגודל</div>
-        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ%20לגבי%20טלית%20מתאימה" target="_blank" rel="noopener">בחירת טלית</a></div>
-      </div>
-
-      <div class="card">
-        <h3>סטים לבר מצווה</h3>
-        <p>סט קומפלט בליווי אישי להורים ולנער.</p>
-        <div class="price">מחיר משתנה · בנייה אישית לפי תקציב</div>
-        <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20יש%20לנו%20בר%20מצווה%20ונשמח%20לליווי%20והצעת%20מחיר" target="_blank" rel="noopener">ליווי לבר מצווה</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="steps">
-    <h2 style="margin:0">איך זה עובד</h2>
-    <div class="note" style="margin:8px 0 0">תהליך קצר וברור, בלי עומס</div>
-    <div class="steps-grid">
-      <div class="step"><strong>1) פנייה והתייעצות</strong><span>שיחה קצרה להבין צורך, תקציב ולו״ז.</span></div>
-      <div class="step"><strong>2) התאמה אישית</strong><span>מציעים אפשרויות מדויקות ומומלצות.</span></div>
-      <div class="step"><strong>3) הזמנה ובדיקה</strong><span>הזמנה לפי דרישה + בדיקה/הגהה לפי הצורך.</span></div>
-    </div>
-  </section>
-
-  <section class="final-cta">
-    <h2>לא בטוחים מה נכון לכם?</h2>
-    <p>שיחה קצרה יכולה לחסוך טעויות יקרות</p>
-    <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לשיחה%20קצרה%20ולהכוונה" target="_blank" rel="noopener">דברו איתנו עכשיו</a>
-  </section>
-
-  <footer class="footer">
-    <div>© בית חב״ד — תשמישי קדושה</div>
-    <div>טלפון/וואטסאפ: 052-7707441</div>
-  </footer>
-</main>
-
-<div class="fab"><a href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank" rel="noopener">וואטסאפ</a></div>
-
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
+    // Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
 </body>
 </html>
