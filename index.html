@@ -1,1 +1,415 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080b14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="בית חב״ד כפר רתמים - בית פתוח לכל יהודי">
+<link rel="apple-touch-icon" href="logo-192.png">
+<link rel="icon" href="logo-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>בית חב״ד כפר רתמים</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b14;--bg-soft:#0e1320;--bg-card:#121a2e;
+  --line:rgba(255,255,255,.08);--line-gold:rgba(212,175,87,.18);
+  --gold:#d4af57;--gold-light:#e8c77a;--gold-muted:rgba(212,175,87,.10);
+  --text:#f1f3f9;--muted:#8b96b5;--faint:#5e6a8a;
+  --radius:14px;--radius-lg:20px;--serif:"Frank Ruhl Libre",serif;--sans:"Heebo",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;font-weight:400;overflow-x:hidden;padding-bottom:90px}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{font-family:var(--sans)}
+.container{width:min(1160px,92vw);margin:0 auto}
+.section{padding:72px 0;border-top:1px solid var(--line)}
+.hero-section{padding:48px 0 32px;border-top:none}
+.header{position:sticky;top:0;z-index:100;background:rgba(8,11,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.header-inner{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
+.brand{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
+.brand-mark{width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:#151f36;border:1px solid var(--line-gold);display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:var(--gold-light);font-size:17px;overflow:hidden}
+.brand-mark img{width:100%;height:100%;object-fit:cover}
+.brand-name{line-height:1.15;min-width:0}
+.brand-name b{display:block;font-family:var(--serif);font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.brand-name span{display:block;font-size:9.5px;font-weight:600;letter-spacing:1.2px;color:var(--muted);margin-top:1px;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis}
+.nav{display:flex;align-items:center;gap:20px;flex-shrink:0}
+.nav a{font-size:13px;font-weight:500;color:var(--muted);transition:.2s}
+.nav a:hover{color:var(--text)}
+.actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:.2s;line-height:1.2;text-align:center;word-break:break-word}
+.btn-primary{background:var(--text);color:var(--bg)}
+.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#1a1405}
+.btn-ghost{background:rgba(255,255,255,.05);border-color:var(--line);color:var(--text)}
+.hamburger{display:none;width:40px;height:40px;flex:0 0 40px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;align-items:center;justify-content:center}
+.hamburger span{display:block;width:16px;height:2px;background:var(--text);position:relative;border-radius:2px}
+.hamburger span:before,.hamburger span:after{content:"";position:absolute;right:0;width:16px;height:2px;background:var(--text);border-radius:2px}
+.hamburger span:before{top:-5px}.hamburger span:after{top:5px}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,11,20,.98);backdrop-filter:blur(24px);padding:20px;overflow-y:auto}
+.mobile-menu.open{display:flex;flex-direction:column}
+@media(max-width:1050px){.nav{display:none}.hamburger{display:flex}}
+@media(max-width:480px){.header-inner{min-height:58px}.actions .btn-ghost{display:none}.brand-name b{font-size:15px}.container{width:min(1160px,94vw)}}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start}
+.kicker{display:flex;align-items:center;gap:10px;font-size:10.5px;font-weight:600;letter-spacing:1.8px;color:var(--gold-light);text-transform:uppercase;margin-bottom:14px;flex-wrap:wrap}
+.kicker:before{content:"";width:20px;height:1px;background:var(--gold);display:block;flex:0 0 20px}
+.hero-title{font-family:var(--serif);font-weight:400;font-size:clamp(36px,6vw,68px);line-height:.92;letter-spacing:-.6px;margin:0;overflow-wrap:break-word}
+.hero-title .gold{color:var(--gold-light);font-weight:500}
+.hero-title .thin{display:block;font-weight:300;margin-top:4px}
+.subtitle{margin:16px 0 0;color:var(--muted);font-size:15.5px;line-height:1.7;max-width:52ch;font-weight:300;overflow-wrap:break-word}
+.hero-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+@media(max-width:600px){.hero-grid{grid-template-columns:1fr;gap:24px}.hero-section{padding:32px 0 24px}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.hero-meta{grid-template-columns:1fr}}
+.hero-meta{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.meta-item b{display:block;font-family:var(--serif);font-size:17px;font-weight:500}
+.meta-item span{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);margin-top:3px;display:block}
+.side-card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px}
+.side-card h3{font-family:var(--serif);font-size:20px;font-weight:500;margin:10px 0 0}
+.side-card .desc{color:var(--muted);font-size:13px;margin:8px 0 0;font-weight:300}
+.side-list{margin:16px 0 0;padding:16px 0 0;list-style:none;border-top:1px solid var(--line)}
+.side-list li{display:flex;justify-content:space-between;padding:9px 0;font-size:12.5px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.04);gap:12px}
+.side-list li strong{color:var(--text);font-weight:500}
+.side-card-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.side-card-actions .btn{flex:1 1 120px}
+.sec-head{margin:0 0 28px 0;max-width:720px}
+.eyebrow{font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px;margin:0}
+.eyebrow:after{content:"";height:1px;width:24px;background:var(--line-gold);display:inline-block}
+.h2{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:400;line-height:1.1;margin:8px 0 0}
+.sec-desc{color:var(--muted);font-size:14.5px;max-width:56ch;margin:10px 0 0;font-weight:300}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.s-card{background:var(--bg-card);padding:22px 20px}
+.s-card .num{font-family:var(--serif);font-size:10px;letter-spacing:1px;color:var(--gold)}
+.s-card h3{font-family:var(--serif);font-size:16px;font-weight:500;margin:12px 0 6px}
+.s-card p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.6;font-weight:300}
+@media(max-width:1000px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.services-grid{grid-template-columns:1fr}.section{padding:48px 0}}
+.kodesh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.k-card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:12px}
+.k-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.k-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-muted);border:1px solid var(--line-gold);display:grid;place-items:center;color:var(--gold-light);font-size:13px;font-family:var(--serif);font-weight:700}
+.price-tag{display:inline-flex;align-items:center;min-height:22px;padding:4px 10px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:10.5px;font-weight:600;color:var(--gold-light);max-width:100%;white-space:normal;line-height:1.3}
+.k-card h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:500}
+.k-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;font-weight:300}
+.k-actions{display:flex;gap:8px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+.k-actions .btn{flex:1 1 110px}
+@media(max-width:800px){.kodesh-grid{grid-template-columns:1fr}}
+.videos-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.v-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.v-thumb{aspect-ratio:16/9;background:#0c1222}
+.v-thumb iframe{width:100%;height:100%;border:0}
+.v-body{padding:12px 14px}
+.v-body h4{margin:0;font-size:13px;font-weight:500}
+@media(max-width:900px){.videos-wrap{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.videos-wrap{grid-template-columns:1fr}}
+.cta{background:linear-gradient(180deg,rgba(212,175,87,.06),rgba(255,255,255,.01));border:1px solid var(--line-gold);border-radius:var(--radius-lg);padding:28px;display:grid;grid-template-columns:1.2fr auto;gap:20px;align-items:center}
+@media(max-width:800px){.cta{grid-template-columns:1fr}.cta .btn{width:100%}}
+.donation{background:linear-gradient(180deg,var(--bg-card),var(--bg-soft));border:1px solid var(--line-gold);border-radius:var(--radius-lg);padding:40px 28px;text-align:center}
+.donation h2{font-family:var(--serif);font-size:clamp(26px,4vw,38px);font-weight:400;margin:0}
+.donation p{color:var(--muted);max-width:52ch;margin:12px auto 0;font-weight:300;font-size:14px}
+.donation-actions{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.about-grid,.contact-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:16px}
+.c-card{background:var(--bg-card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.c-card p{margin:0;color:var(--muted);font-weight:300;line-height:1.7;font-size:13.5px}
+@media(max-width:900px){.about-grid,.contact-grid{grid-template-columns:1fr}}
+.footer{border-top:1px solid var(--line);padding:20px 0;background:var(--bg-soft)}
+.footer-grid{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--faint)}
+.fab{position:fixed;right:14px;z-index:90;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 14px;border-radius:100px;font-size:12.5px;font-weight:600;border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.fab-wa{bottom:14px;background:#111827;color:white}
+.fab-gold{bottom:62px;background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#1a1405}
+.fab .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="brand-mark"><img src="logo-192.png" alt="לוגו"></div>
+      <div class="brand-name"><b>בית חב״ד כפר רתמים</b><span>Chabad • Rtamim</span></div>
+    </div>
+    <nav class="nav">
+      <a href="#about">אודות</a>
+      <a href="#services">שירותים</a>
+      <a href="#kodesh">תשמישי קדושה</a>
+      <a href="#videos">סרטונים</a>
+      <a href="#chavruta">חברותא</a>
+      <a href="#contact">צור קשר</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
+      <a class="btn btn-gold" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה</a>
+      <button class="hamburger" id="hamburger" aria-label="תפריט"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <div class="brand"><div class="brand-mark"><img src="logo-192.png" alt="לוגו"></div><div class="brand-name"><b>בית חב״ד</b><span>כפר רתמים</span></div></div>
+    <button class="btn btn-ghost" id="closeMenu">סגור</button>
+  </div>
+  <nav style="display:flex;flex-direction:column;margin-top:24px">
+    <a href="#about" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">אודות</a>
+    <a href="#services" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">שירותים</a>
+    <a href="#kodesh" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">תשמישי קדושה</a>
+    <a href="#videos" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">סרטונים</a>
+    <a href="#chavruta" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">חברותא</a>
+    <a href="#contact" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">צור קשר</a>
+  </nav>
+  <div style="margin-top:auto;display:flex;gap:10px;padding-top:20px;flex-wrap:wrap">
+    <a class="btn btn-ghost" style="flex:1" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
+    <a class="btn btn-gold" style="flex:1" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה</a>
+  </div>
+</div>
+
+<main>
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div>
+        <div class="kicker" id="heroKicker">אהבת ישראל • אחריות • קהילה</div>
+        <h1 class="hero-title"><span class="gold" id="heroTitle">בית חב״ד</span><span class="thin" id="heroTitle2">כפר רתמים</span></h1>
+        <p class="subtitle" id="heroSubtitle">בית פתוח לכל יהודי — תפילות, שיעורי תורה, חגים, שמחות ועזרה בכל עניין יהודי.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
+          <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
+          <a class="btn btn-ghost" href="#kodesh">תשמישי קדושה</a>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item"><b>תפילין</b><span>ומזוזות</span></div>
+          <div class="meta-item"><b>חברותא</b><span>לימוד תורה</span></div>
+          <div class="meta-item"><b>קהילה</b><span>פתוחה לכולם</span></div>
+        </div>
+      </div>
+      <aside class="side-card">
+        <div class="eyebrow">עכשיו באתר</div>
+        <h3>תשמישי קדושה בליווי אישי</h3>
+        <p class="desc">התאמה לרמה ולתקציב — תפילין, מזוזות, טליתות וסטים לבר מצווה.</p>
+        <ul class="side-list">
+          <li><span>בדיקת מזוזות</span><strong>החל מ־30 ₪</strong></li>
+          <li><span>תפילין</span><strong>החל מ־2,000 ₪</strong></li>
+          <li><span>טלית</span><strong>החל מ־250 ₪</strong></li>
+        </ul>
+        <div class="side-card-actions">
+          <a class="btn btn-gold" href="#kodesh">למחירים</a>
+          <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">שאלה בוואטסאפ</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow" id="aboutEyebrow">בית פתוח לכל יהודי</div>
+        <h2 class="h2" id="aboutTitle">אודות בית חב״ד</h2>
+      </div>
+      <div class="about-grid">
+        <div class="c-card">
+          <h3 id="aboutHeading" style="font-family:var(--serif);margin:0 0 12px">מי אנחנו</h3>
+          <p id="aboutP1">בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי.</p>
+          <p id="aboutP2" style="margin-top:12px">העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית.</p>
+          <p style="margin-top:16px;color:var(--gold-light)" id="aboutFooter">בית חב״ד כפר רתמים · 052-7707441</p>
+        </div>
+        <div class="c-card">
+          <h3 id="aboutHeadingMini" style="font-family:var(--serif);margin:0 0 12px">בקיצור</h3>
+          <p id="aboutP1Short">שיעורים, חגים, תשמישי קדושה, חברותא ושירות קהילתי חם.</p>
+          <p style="margin-top:16px;color:var(--faint);font-size:12px" id="aboutFooter2">עודכן: <span id="updatedAt">—</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow" id="servicesEyebrow">הכל במקום אחד</div>
+        <h2 class="h2" id="servicesTitle">השירותים שלנו</h2>
+      </div>
+      <div class="services-grid" id="servicesGrid">
+        <div class="s-card"><div class="num">01</div><h3>תשמישי קדושה</h3><p>תפילין, מזוזות, טליתות וסטים לבר מצווה.</p></div>
+        <div class="s-card"><div class="num">02</div><h3>חברותא</h3><p>מציאת שותף ללימוד תורה.</p></div>
+        <div class="s-card"><div class="num">03</div><h3>שיעורים</h3><p>שיעורים שבועיים והרצאות.</p></div>
+        <div class="s-card"><div class="num">04</div><h3>אירועים</h3><p>חגים ואירועים קהילתיים פתוחים.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kodesh">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow" id="kodeshEyebrow">ליווי אישי</div>
+        <h2 class="h2" id="kodeshTitle">תשמישי קדושה</h2>
+        <p class="sec-desc">בוחרים פעם אחת — נכון. התאמה לרמה ולתקציב.</p>
+      </div>
+      <div class="kodesh-grid" id="kodeshGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="videos">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow" id="videosEyebrow">תורה והשראה</div>
+        <h2 class="h2" id="videosTitle">סרטונים</h2>
+      </div>
+      <div class="videos-wrap" id="videosWrap"></div>
+    </div>
+  </section>
+
+  <section class="section" id="chavruta">
+    <div class="container">
+      <div class="cta">
+        <div>
+          <div class="eyebrow" id="chavrutaEyebrow">מחברים בין אנשים</div>
+          <h2 class="h2" id="chavrutaTitle">חברותא</h2>
+          <p class="sec-desc" id="chavrutaText">פלטפורמה קהילתית למציאת שותף ללימוד תורה.</p>
+        </div>
+        <a class="btn btn-gold" id="chavrutaBtn" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">כניסה לחברותא</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="donate">
+    <div class="container">
+      <div class="donation">
+        <h2 id="donationTitle">תרמו לבית חב״ד</h2>
+        <p id="donationText">התרומה שלכם מאפשרת לנו להמשיך לפעול למען הקהילה.</p>
+        <div class="donation-actions">
+          <a class="btn btn-gold" id="donationBtn" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow">אנחנו כאן</div>
+        <h2 class="h2" id="contactTitle">רוצים לדבר?</h2>
+        <p class="sec-desc" id="contactText">שיחה קצרה יכולה לחסוך הרבה.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="c-card">
+          <p id="contactAddress">052-7707441 · בית חב״ד כפר רתמים</p>
+          <div style="margin-top:16px">
+            <a class="btn btn-gold" id="contactWa" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ עכשיו</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>© <span id="year"></span> בית חב״ד כפר רתמים</div>
+    <div>טלפון / וואטסאפ: 052-7707441</div>
+  </div>
+</footer>
+
+<a class="fab fab-gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">חברותא</a>
+<a class="fab fab-wa" href="https://wa.me/972527707441" target="_blank" rel="noopener"><span class="dot"></span> וואטסאפ</a>
+
+<script>
+const $ = id => document.getElementById(id);
+function closeMobile(){ $('mobileMenu').classList.remove('open'); }
+$('hamburger').onclick = () => $('mobileMenu').classList.add('open');
+$('closeMenu').onclick = closeMobile;
+$('year').textContent = new Date().getFullYear();
+
+function ytId(url){
+  try{
+    const u=new URL(url);
+    if(u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+    return u.searchParams.get('v');
+  }catch(e){return null}
+}
+
+async function loadJson(p){
+  const r=await fetch(p+'?t='+Date.now(),{cache:'no-store'});
+  if(!r.ok) throw new Error(p);
+  return r.json();
+}
+async function loadFromBin(id){
+  const r=await fetch('https://api.jsonbin.io/v3/b/'+id+'/latest',{cache:'no-store'});
+  if(!r.ok) throw new Error('bin');
+  const j=await r.json();
+  return j.record||j;
+}
+
+function render(data){
+  const h=data.hero||{};
+  if($('heroKicker')) $('heroKicker').textContent=h.kicker||'אהבת ישראל • אחריות • קהילה';
+  if($('heroTitle')) $('heroTitle').textContent=h.title||'בית חב״ד';
+  if($('heroTitle2')) $('heroTitle2').textContent=h.title2||'כפר רתמים';
+  if($('heroSubtitle')) $('heroSubtitle').textContent=h.subtitle||'';
+
+  const a=data.about||{};
+  if($('aboutTitle')) $('aboutTitle').textContent=a.title||'אודות בית חב״ד';
+  if($('aboutEyebrow')) $('aboutEyebrow').textContent=a.note||'בית פתוח לכל יהודי';
+  if($('aboutHeading')) $('aboutHeading').textContent=a.heading||'מי אנחנו';
+  if($('aboutP1')) $('aboutP1').textContent=a.p1||'';
+  if($('aboutP2')) $('aboutP2').textContent=a.p2||'';
+  if($('aboutFooter')) $('aboutFooter').textContent=a.footer||'';
+  if($('aboutP1Short')) $('aboutP1Short').textContent=a.p1||'';
+  if($('updatedAt')) $('updatedAt').textContent=data.updatedAt||'—';
+
+  const k=data.kodesh||{};
+  if($('kodeshTitle')) $('kodeshTitle').textContent=k.title||'תשמישי קדושה';
+  const order=['tefillin','mezuzah','tallit','barMitzvah'];
+  const items=k.items||{};
+  const grid=$('kodeshGrid');
+  if(grid){
+    grid.innerHTML=order.map((key,i)=>{
+      const it=items[key]; if(!it) return '';
+      const wa='https://wa.me/972527707441?text='+encodeURIComponent(it.waText||'');
+      return `<div class="k-card"><div class="k-top"><div class="k-icon">${i+1}</div><span class="price-tag">${it.price||''}</span></div><h3>${it.title||''}</h3><p>${it.desc||''}</p><div class="k-actions"><a class="btn btn-gold" href="${wa}" target="_blank" rel="noopener">לפרטים / הזמנה</a></div></div>`;
+    }).join('');
+  }
+
+  const v=data.videos||{};
+  if($('videosTitle')) $('videosTitle').textContent=v.title||'סרטונים';
+  const vids=v.items||[];
+  const vw=$('videosWrap');
+  const sec=$('videos');
+  if(vw){
+    if(!vids.length){ if(sec) sec.classList.add('hidden'); }
+    else{
+      if(sec) sec.classList.remove('hidden');
+      vw.innerHTML=vids.map(vid=>{
+        const id=ytId(vid.url||'');
+        const embed=id?`<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen loading="lazy"></iframe>`:'';
+        return `<div class="v-card"><div class="v-thumb">${embed}</div><div class="v-body"><h4>${vid.title||''}</h4></div></div>`;
+      }).join('');
+    }
+  }
+
+  const c=data.chavruta||{};
+  if($('chavrutaTitle')) $('chavrutaTitle').textContent=c.title||'חברותא';
+  if($('chavrutaText')) $('chavrutaText').textContent=c.text||'';
+  if($('chavrutaBtn')){
+    $('chavrutaBtn').textContent=c.button||'כניסה לחברותא';
+    if(c.url) $('chavrutaBtn').href=c.url;
+  }
+
+  const ct=data.contact||{};
+  if($('contactTitle')) $('contactTitle').textContent=ct.title||'רוצים לדבר?';
+  if($('contactText')) $('contactText').textContent=ct.text||'';
+  if($('contactAddress')) $('contactAddress').textContent=(ct.phone||'052-7707441')+' · בית חב״ד כפר רתמים';
+}
+
+async function init(){
+  let data=null;
+  try{
+    const cfg=await loadJson('./config.json');
+    if(cfg && (cfg.contentBinId||'').trim()){
+      try{ data=await loadFromBin(cfg.contentBinId.trim()); }
+      catch(e){ data=await loadJson('./content.json'); }
+    } else { data=await loadJson('./content.json'); }
+  }catch(e){
+    try{ data=await loadJson('./content.json'); }catch(_){}
+  }
+  if(data) render(data);
+}
+init();
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); });
+}
+</script>
+</body></html>
