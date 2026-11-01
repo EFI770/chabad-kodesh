@@ -1,470 +1,462 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>ניהול האתר – בית חב״ד כפר רתמים</title>
-  <style>
-    :root {
-      --bg: #0b0f19; --surface: #0f1526; --surface2: #121a33;
-      --text: #f1f5f9; --muted: #a5afc9;
-      --gold1: #f7e7a1; --gold2: #e6c45d; --gold3: #b8912f;
-      --line: rgba(255,255,255,.1);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; font-family: system-ui, -apple-system, Arial, sans-serif;
-      background: var(--bg); color: var(--text);
-      padding: 16px; padding-bottom: 120px;
-    }
-    .wrap { max-width: 980px; margin: 0 auto; }
-    .badge {
-      display: inline-block; padding: 6px 12px; border-radius: 999px;
-      background: rgba(214,181,74,.15); color: var(--gold1);
-      font-size: 12px; font-weight: 800; margin-bottom: 10px;
-    }
-    h1 { margin: 0 0 4px; font-size: 22px; }
-    .sub { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
-    .section { margin-bottom: 22px; }
-    .section > h2 {
-      margin: 0 0 10px; font-size: 18px; color: var(--gold1);
-      border-bottom: 1px solid var(--line); padding-bottom: 8px;
-    }
-    .card {
-      background: linear-gradient(180deg, var(--surface), var(--surface2));
-      border: 1px solid var(--line);
-      border-radius: 18px; padding: 16px; margin-bottom: 12px;
-    }
-    .card h3 { margin: 0 0 8px; font-size: 16px; }
-    .price-pill {
-      display: inline-block; margin: 6px 0 10px; padding: 7px 12px;
-      border-radius: 999px; font-weight: 900; font-size: 13px;
-      color: #0b0f19;
-      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
-    }
-    label { display: block; font-size: 12px; color: var(--muted); margin: 8px 0 4px; font-weight: 600; }
-    input, textarea {
-      width: 100%; padding: 11px 12px; border-radius: 12px;
-      border: 1px solid var(--line); background: rgba(0,0,0,.28);
-      color: var(--text); font-size: 14px;
-    }
-    textarea { min-height: 70px; resize: vertical; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
-    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    button {
-      padding: 12px 16px; border-radius: 12px; border: none;
-      font-weight: 800; font-size: 14px; cursor: pointer;
-    }
-    .primary { background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3)); color: #0b0f19; }
-    .save { background: linear-gradient(135deg, #2d8f5f, #1f6b45); color: #fff; }
-    .secondary { background: rgba(255,255,255,.08); color: var(--text); border: 1px solid var(--line); }
-    .danger { background: rgba(122,51,51,.5); color: #fff; }
-    #loginBox, #app { display: none; }
-    #loginBox.show, #app.show { display: block; }
-    .msg { margin: 10px 0; padding: 12px; border-radius: 12px; font-size: 13px; display: none; }
-    .msg.show { display: block; }
-    .msg.ok { background: rgba(31,107,69,.3); border: 1px solid rgba(45,143,95,.5); }
-    .msg.err { background: rgba(122,51,51,.35); border: 1px solid rgba(180,80,80,.5); }
-    .bar {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
-      background: rgba(11,15,25,.97); border-top: 1px solid var(--line);
-      padding: 10px 14px;
-    }
-    .bar-inner {
-      max-width: 980px; margin: 0 auto;
-      display: flex; gap: 8px; flex-wrap: wrap;
-      align-items: center; justify-content: space-between;
-    }
-    .hint { color: var(--muted); font-size: 12px; line-height: 1.65; }
-    a { color: var(--gold2); }
-    .video-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: end; }
-    @media (max-width: 720px) { .video-row { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#080b14">
+<title>ניהול · בית חב״ד כפר רתמים</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b14;--bg-soft:#0e1320;--bg-card:#121a2e;
+  --line:rgba(255,255,255,.08);--line-gold:rgba(212,175,87,.18);
+  --gold:#d4af57;--gold-light:#e8c77a;--gold-muted:rgba(212,175,87,.12);
+  --text:#f1f3f9;--muted:#8b96b5;--faint:#5e6a8a;
+  --ok:#1f6b45;--err:#7a3333;
+  --radius:14px;--radius-lg:18px;
+  --serif:"Frank Ruhl Libre",serif;--sans:"Heebo",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;padding-bottom:110px}
+a{color:var(--gold-light)}img{max-width:100%}
+.wrap{width:min(980px,94vw);margin:0 auto;padding:20px 0}
+.badge{display:inline-flex;padding:6px 12px;border-radius:999px;background:var(--gold-muted);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:.6px;margin-bottom:10px}
+h1{font-family:var(--serif);font-size:28px;font-weight:500;margin:0 0 6px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 18px}
+.card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;margin-bottom:14px}
+.card h2{font-family:var(--serif);font-size:18px;font-weight:500;margin:0 0 12px;color:var(--gold-light)}
+.card h3{margin:0 0 8px;font-size:15px}
+label{display:block;font-size:11px;color:var(--muted);font-weight:600;margin:10px 0 4px}
+input,textarea{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.28);color:var(--text);font-size:14px;font-family:var(--sans)}
+textarea{min-height:72px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+button,.btn{padding:12px 16px;border-radius:12px;border:none;font-weight:700;font-size:14px;cursor:pointer;font-family:var(--sans)}
+.primary{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#1a1405}
+.save{background:linear-gradient(180deg,#2d8f5f,#1f6b45);color:#fff}
+.secondary{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line)}
+.danger{background:rgba(122,51,51,.55);color:#fff}
+.price-tag{display:inline-flex;margin:6px 0 10px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--gold-light);font-size:12px;font-weight:700}
+.hint{color:var(--muted);font-size:12px;line-height:1.65;margin:8px 0}
+#loginBox,#app{display:none}
+#loginBox.show,#app.show{display:block}
+.bar{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(8,11,20,.97);border-top:1px solid var(--line);padding:12px 14px;backdrop-filter:blur(12px)}
+.bar-inner{width:min(980px,94vw);margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:99;padding:12px 18px;border-radius:12px;font-size:13px;font-weight:600;max-width:90vw;transition:.35s;opacity:0}
+.toast.ok{background:rgba(31,107,69,.95);border:1px solid rgba(45,143,95,.6);color:#fff;opacity:1}
+.toast.err{background:rgba(122,51,51,.95);border:1px solid rgba(180,80,80,.6);color:#fff;opacity:1}
+.video-row{display:grid;grid-template-columns:1fr 1.2fr auto;gap:8px;align-items:end}
+@media(max-width:720px){.video-row{grid-template-columns:1fr}}
+code{background:rgba(0,0,0,.35);padding:2px 6px;border-radius:6px;font-size:12px}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="badge">מצב מנהל · לא נראה ללקוחות</div>
-    <h1>ניהול האתר</h1>
-    <p class="sub">אותו מבנה כמו האתר הציבורי · עריכה ושמירה</p>
+<div class="wrap">
+  <div class="badge">מצב מנהל · לא נראה ללקוחות</div>
+  <h1>ניהול האתר</h1>
+  <p class="sub">בית חב״ד כפר רתמים · עריכת תוכן ושמירה לכולם</p>
 
-    <div id="loginBox" class="card">
-      <h3>כניסת מנהל</h3>
-      <label>סיסמה</label>
-      <input id="password" type="password" placeholder="סיסמת מנהל" />
-      <div class="actions"><button class="primary" id="loginBtn" type="button">כניסה</button></div>
-    </div>
-
-    <div id="app">
-      <div class="card">
-        <h3>הגדרת ענן (JSONBin) — פעם אחת</h3>
-        <div class="hint">
-          כדי שכל הלקוחות יראו עדכונים: צור Bin ב־<a href="https://jsonbin.io" target="_blank">jsonbin.io</a>,
-          העתק Bin ID + Access Key, שמור כאן. אחר כך שלח לי את ה־Bin ID כדי לחבר לאתר הציבורי.
-        </div>
-        <label>Bin ID</label>
-        <input id="binId" placeholder="Bin ID" />
-        <label>Access Key</label>
-        <input id="apiKey" type="password" placeholder="Access Key" autocomplete="off" />
-        <div class="actions">
-          <button class="secondary" id="saveSetupBtn" type="button">שמור הגדרות</button>
-        </div>
-      </div>
-
-      <div class="msg" id="msg"></div>
-
-      <!-- HERO -->
-      <div class="section">
-        <h2>עמוד הבית (Hero)</h2>
-        <div class="card">
-          <label>שורת זהב עליונה</label>
-          <input id="hero_kicker" />
-          <label>כותרת שורה 1</label>
-          <input id="hero_title" />
-          <label>כותרת שורה 2</label>
-          <input id="hero_title2" />
-          <label>תיאור</label>
-          <textarea id="hero_subtitle"></textarea>
-        </div>
-      </div>
-
-      <!-- ABOUT -->
-      <div class="section">
-        <h2>אודות</h2>
-        <div class="card">
-          <label>כותרת מקטע</label>
-          <input id="about_title" />
-          <label>תת־כותרת</label>
-          <input id="about_note" />
-          <label>כותרת פנימית</label>
-          <input id="about_heading" />
-          <label>פסקה 1</label>
-          <textarea id="about_p1"></textarea>
-          <label>פסקה 2</label>
-          <textarea id="about_p2"></textarea>
-          <label>שורה תחתונה</label>
-          <input id="about_footer" />
-        </div>
-      </div>
-
-      <!-- KODESH -->
-      <div class="section">
-        <h2>תשמישי קדושה</h2>
-        <div class="card">
-          <label>כותרת מקטע</label>
-          <input id="kodesh_title" />
-          <label>תת־כותרת</label>
-          <input id="kodesh_note" />
-        </div>
-        <div class="grid" id="kodeshGrid"></div>
-      </div>
-
-      <!-- VIDEOS -->
-      <div class="section">
-        <h2>סרטונים</h2>
-        <div class="card">
-          <label>כותרת מקטע</label>
-          <input id="videos_title" />
-          <label>תת־כותרת</label>
-          <input id="videos_note" />
-          <div id="videosList"></div>
-          <div class="actions">
-            <button class="secondary" id="addVideoBtn" type="button">+ הוסף סרטון</button>
-          </div>
-          <div class="hint">קישור יוטיוב או Vimeo. הלקוחות רואים רק את הסרטונים — לא את כפתורי העריכה.</div>
-        </div>
-      </div>
-
-      <!-- CHAVRUTA -->
-      <div class="section">
-        <h2>חברותא</h2>
-        <div class="card">
-          <label>כותרת</label>
-          <input id="ch_title" />
-          <label>תת־כותרת</label>
-          <input id="ch_note" />
-          <label>טקסט</label>
-          <textarea id="ch_text"></textarea>
-          <label>טקסט כפתור</label>
-          <input id="ch_button" />
-          <label>קישור</label>
-          <input id="ch_url" />
-        </div>
-      </div>
-
-      <!-- CONTACT -->
-      <div class="section">
-        <h2>צור קשר</h2>
-        <div class="card">
-          <label>כותרת</label>
-          <input id="contact_title" />
-          <label>טקסט</label>
-          <textarea id="contact_text"></textarea>
-          <label>טלפון</label>
-          <input id="contact_phone" />
-        </div>
-      </div>
-    </div>
+  <div id="loginBox" class="card">
+    <h2>כניסת מנהל</h2>
+    <label>סיסמה</label>
+    <input id="password" type="password" placeholder="סיסמת מנהל" autocomplete="current-password">
+    <div class="actions"><button class="primary" id="loginBtn" type="button">כניסה</button></div>
   </div>
 
-  <div class="bar" id="bar" style="display:none">
-    <div class="bar-inner">
-      <div class="sub" id="statusLine" style="margin:0">מוכן</div>
-      <div class="actions" style="margin:0">
-        <button class="secondary" id="reloadBtn" type="button">רענן</button>
-        <button class="save" id="saveBtn" type="button">שמור לכולם</button>
-      </div>
+  <div id="app">
+    <div class="card">
+      <h2>הגדרות ענן (JSONBin) — פעם אחת</h2>
+      <p class="hint">צור Bin ב־<a href="https://jsonbin.io" target="_blank" rel="noopener">jsonbin.io</a>, העתק Bin ID ו־Access Key, שמור כאן. אחר כך שלח את ה־Bin ID כדי לחבר לאתר הציבורי ב־config.json.</p>
+      <label>Bin ID</label>
+      <input id="binId" placeholder="לדוגמה 67f1a2b3c4d5e6f7a8b9c0d1" autocomplete="off">
+      <label>Access Key (Master Key)</label>
+      <input id="apiKey" type="password" placeholder="$2a$10$..." autocomplete="off">
+      <div class="actions"><button class="secondary" id="saveSetupBtn" type="button">שמור הגדרות במכשיר</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Hero / עמוד הבית</h2>
+      <label>שורת זהב (kicker)</label><input id="hero_kicker">
+      <label>כותרת שורה 1</label><input id="hero_title">
+      <label>כותרת שורה 2</label><input id="hero_title2">
+      <label>תיאור</label><textarea id="hero_subtitle"></textarea>
+    </div>
+
+    <div class="card">
+      <h2>אודות</h2>
+      <label>כותרת מקטע</label><input id="about_title">
+      <label>תת־כותרת / note</label><input id="about_note">
+      <label>כותרת פנימית</label><input id="about_heading">
+      <label>פסקה 1</label><textarea id="about_p1"></textarea>
+      <label>פסקה 2</label><textarea id="about_p2"></textarea>
+      <label>שורה תחתונה</label><input id="about_footer">
+    </div>
+
+    <div class="card">
+      <h2>תשמישי קדושה — כותרות מקטע</h2>
+      <label>כותרת</label><input id="kodesh_title">
+      <label>תת־כותרת</label><input id="kodesh_note">
+    </div>
+    <div class="grid" id="kodeshGrid"></div>
+
+    <div class="card">
+      <h2>סרטונים</h2>
+      <label>כותרת מקטע</label><input id="videos_title">
+      <label>תת־כותרת</label><input id="videos_note">
+      <div id="videosList"></div>
+      <div class="actions"><button class="secondary" id="addVideoBtn" type="button">+ הוסף סרטון</button></div>
+      <p class="hint">הדבק קישור יוטיוב מלא. הלקוחות רואים רק את הסרטונים — בלי כפתורי עריכה.</p>
+    </div>
+
+    <div class="card">
+      <h2>חברותא</h2>
+      <label>כותרת</label><input id="ch_title">
+      <label>תת־כותרת</label><input id="ch_note">
+      <label>טקסט</label><textarea id="ch_text"></textarea>
+      <label>טקסט כפתור</label><input id="ch_button">
+      <label>קישור</label><input id="ch_url">
+    </div>
+
+    <div class="card">
+      <h2>צור קשר</h2>
+      <label>כותרת</label><input id="contact_title">
+      <label>טקסט</label><textarea id="contact_text"></textarea>
+      <label>טלפון</label><input id="contact_phone">
+    </div>
+
+    <div class="card">
+      <h2>תרומה</h2>
+      <label>כותרת</label><input id="donation_title">
+      <label>טקסט</label><textarea id="donation_text"></textarea>
     </div>
   </div>
+</div>
 
-  <script>
-    var PASS = "chabad770";
-    var ORDER = ["tefillin", "mezuzah", "tallit", "barMitzvah"];
-    var CFG_KEY = "chabad_jsonbin_cfg";
-    var data = null;
+<div class="bar" id="bar" style="display:none">
+  <div class="bar-inner">
+    <div class="sub" id="statusLine" style="margin:0">מוכן</div>
+    <div class="actions" style="margin:0">
+      <button class="secondary" id="reloadBtn" type="button">רענן</button>
+      <button class="save" id="saveBtn" type="button">שמור לכולם</button>
+    </div>
+  </div>
+</div>
 
-    var loginBox = document.getElementById("loginBox");
-    var app = document.getElementById("app");
-    var msg = document.getElementById("msg");
-    var bar = document.getElementById("bar");
-    var statusLine = document.getElementById("statusLine");
-
-    function showMsg(t, ok) {
-      msg.textContent = t;
-      msg.className = "msg show " + (ok ? "ok" : "err");
-      statusLine.textContent = t;
+<script>
+const PASS = 'chabad770';
+const CFG_KEY = 'chabad_jsonbin_cfg';
+const ORDER = ['tefillin','mezuzah','tallit','barMitzvah'];
+const DEFAULTS = {
+  updatedAt: new Date().toISOString().slice(0,10),
+  hero: {
+    kicker: 'אהבת ישראל • אחריות • קהילה',
+    title: 'בית חב״ד',
+    title2: 'כפר רתמים',
+    subtitle: 'בית פתוח לכל יהודי — תפילות, שיעורי תורה, חגים, שמחות ועזרה בכל עניין יהודי.'
+  },
+  about: {
+    title: 'אודות בית חב״ד',
+    note: 'בית פתוח לכל יהודי',
+    heading: 'מי אנחנו',
+    p1: 'בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי.',
+    p2: 'העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית.',
+    footer: 'בית חב״ד כפר רתמים · 052-7707441'
+  },
+  kodesh: {
+    title: 'תשמישי קדושה',
+    note: 'בוחרים פעם אחת — נכון. ליווי אישי והתאמה לרמה ולתקציב',
+    items: {
+      tefillin: { title:'תפילין', desc:'בר מצווה | שדרוג | מבוגרים — התאמה מלאה ובדיקה.', price:'החל מ־2,000 ₪ · לפי רמה והגהה', waText:'שלום אני מתעניין בתפילין' },
+      mezuzah: { title:'מזוזות', desc:'בדיקה • החלפה • קביעת מזוזה — שירות מסודר.', price:'בדיקה: החל מ־30 ₪ · מזוזות: החל מ־120 ₪', waText:'שלום אשמח לתאם בדיקת מזוזות' },
+      tallit: { title:'טליתות', desc:'לבר מצווה ולשימוש יומיומי — לפי גודל וסגנון.', price:'החל מ־250 ₪ · לפי סוג וגודל', waText:'שלום אשמח להתייעץ לגבי טלית' },
+      barMitzvah: { title:'סטים לבר מצווה', desc:'סט קומפלט בליווי אישי להורים ולנער.', price:'מחיר משתנה · בנייה אישית לפי תקציב', waText:'שלום יש לנו בר מצווה' }
     }
-    function esc(s) {
-      return String(s == null ? "" : s)
-        .replace(/&/g, "&").replace(/</g, "<").replace(/"/g, """);
-    }
-    function getCfg() {
-      try { return JSON.parse(localStorage.getItem(CFG_KEY) || "null"); }
-      catch (e) { return null; }
-    }
-    function setCfg(binId, apiKey) {
-      localStorage.setItem(CFG_KEY, JSON.stringify({ binId: binId, apiKey: apiKey }));
-    }
+  },
+  videos: { title:'סרטונים', note:'תורה, השראה וקהילה', items:[] },
+  chavruta: {
+    title:'חברותא', note:'מחברים בין אנשים. מתחברים לתורה.',
+    text:'פלטפורמה קהילתית למציאת שותף ללימוד תורה.',
+    button:'כניסה לאפליקציית חברותא',
+    url:'https://efi770.github.io/-my-new-project/'
+  },
+  contact: { title:'רוצים לדבר?', text:'שיחה קצרה יכולה לחסוך הרבה. אנחנו כאן.', phone:'052-7707441' },
+  donation: { title:'תרמו לבית חב״ד', text:'התרומה שלכם מאפשרת לנו להמשיך לפעול למען הקהילה.' }
+};
 
-    function fillForm() {
-      var h = data.hero || {};
-      document.getElementById("hero_kicker").value = h.kicker || "";
-      document.getElementById("hero_title").value = h.title || "";
-      document.getElementById("hero_title2").value = h.title2 || "";
-      document.getElementById("hero_subtitle").value = h.subtitle || "";
+let data = null;
+const loginBox = document.getElementById('loginBox');
+const app = document.getElementById('app');
+const bar = document.getElementById('bar');
+const statusLine = document.getElementById('statusLine');
 
-      var a = data.about || {};
-      document.getElementById("about_title").value = a.title || "";
-      document.getElementById("about_note").value = a.note || "";
-      document.getElementById("about_heading").value = a.heading || "";
-      document.getElementById("about_p1").value = a.p1 || "";
-      document.getElementById("about_p2").value = a.p2 || "";
-      document.getElementById("about_footer").value = a.footer || "";
+function toast(msg, type){
+  statusLine.textContent = msg;
+  const div = document.createElement('div');
+  div.className = 'toast ' + (type==='err'?'err':'ok');
+  div.textContent = msg;
+  document.body.appendChild(div);
+  setTimeout(()=>{ div.style.opacity='0'; setTimeout(()=>div.remove(),350); }, type==='err'?6000:3800);
+}
+function esc(s){
+  return String(s==null?'':s).replace(/&/g,'&').replace(/</g,'<').replace(/"/g,'"');
+}
+function getCfg(){
+  try { return JSON.parse(localStorage.getItem(CFG_KEY)||'null'); } catch(e){ return null; }
+}
+function setCfg(binId, apiKey){
+  localStorage.setItem(CFG_KEY, JSON.stringify({ binId, apiKey }));
+}
 
-      var k = data.kodesh || {};
-      document.getElementById("kodesh_title").value = k.title || "";
-      document.getElementById("kodesh_note").value = k.note || "";
-      var grid = document.getElementById("kodeshGrid");
-      grid.innerHTML = "";
-      ORDER.forEach(function (key) {
-        var it = (k.items || {})[key] || {};
-        var card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML =
-          "<h3>" + esc(it.title || key) + "</h3>" +
-          "<div class=\"price-pill\" data-preview=\"" + key + "\">" + esc(it.price || "") + "</div>" +
-          "<label>כותרת</label><input data-k=\"" + key + "\" data-f=\"title\" value=\"" + esc(it.title || "") + "\" />" +
-          "<label>תיאור</label><textarea data-k=\"" + key + "\" data-f=\"desc\">" + esc(it.desc || "") + "</textarea>" +
-          "<label>מחיר</label><input data-k=\"" + key + "\" data-f=\"price\" value=\"" + esc(it.price || "") + "\" />" +
-          "<label>וואטסאפ</label><input data-k=\"" + key + "\" data-f=\"waText\" value=\"" + esc(it.waText || "") + "\" />";
-        grid.appendChild(card);
-      });
-      grid.querySelectorAll('input[data-f="price"]').forEach(function (inp) {
-        inp.addEventListener("input", function () {
-          var p = grid.querySelector('[data-preview="' + inp.getAttribute("data-k") + '"]');
-          if (p) p.textContent = inp.value || "—";
-        });
-      });
-
-      var v = data.videos || { items: [] };
-      document.getElementById("videos_title").value = v.title || "";
-      document.getElementById("videos_note").value = v.note || "";
-      renderVideos(v.items || []);
-
-      var c = data.chavruta || {};
-      document.getElementById("ch_title").value = c.title || "";
-      document.getElementById("ch_note").value = c.note || "";
-      document.getElementById("ch_text").value = c.text || "";
-      document.getElementById("ch_button").value = c.button || "";
-      document.getElementById("ch_url").value = c.url || "";
-
-      var ct = data.contact || {};
-      document.getElementById("contact_title").value = ct.title || "";
-      document.getElementById("contact_text").value = ct.text || "";
-      document.getElementById("contact_phone").value = ct.phone || "";
-    }
-
-    function renderVideos(items) {
-      var box = document.getElementById("videosList");
-      box.innerHTML = "";
-      items.forEach(function (vid, i) {
-        var row = document.createElement("div");
-        row.className = "card";
-        row.innerHTML =
-          "<div class=\"video-row\">" +
-          "<div><label>כותרת סרטון</label><input data-v=\"" + i + "\" data-f=\"title\" value=\"" + esc(vid.title || "") + "\" /></div>" +
-          "<div><label>קישור</label><input data-v=\"" + i + "\" data-f=\"url\" value=\"" + esc(vid.url || "") + "\" /></div>" +
-          "<div><button type=\"button\" class=\"danger\" data-del=\"" + i + "\">מחק</button></div>" +
-          "</div>";
-        box.appendChild(row);
-      });
-      box.querySelectorAll("[data-del]").forEach(function (btn) {
-        btn.onclick = function () {
-          var idx = +btn.getAttribute("data-del");
-          data.videos.items.splice(idx, 1);
-          renderVideos(data.videos.items);
-        };
-      });
-    }
-
-    function collect() {
-      data.hero = {
-        kicker: document.getElementById("hero_kicker").value.trim(),
-        title: document.getElementById("hero_title").value.trim(),
-        title2: document.getElementById("hero_title2").value.trim(),
-        subtitle: document.getElementById("hero_subtitle").value.trim()
-      };
-      data.about = {
-        title: document.getElementById("about_title").value.trim(),
-        note: document.getElementById("about_note").value.trim(),
-        heading: document.getElementById("about_heading").value.trim(),
-        p1: document.getElementById("about_p1").value.trim(),
-        p2: document.getElementById("about_p2").value.trim(),
-        footer: document.getElementById("about_footer").value.trim()
-      };
-      if (!data.kodesh) data.kodesh = { items: {} };
-      data.kodesh.title = document.getElementById("kodesh_title").value.trim();
-      data.kodesh.note = document.getElementById("kodesh_note").value.trim();
-      if (!data.kodesh.items) data.kodesh.items = {};
-      document.querySelectorAll("#kodeshGrid [data-k]").forEach(function (el) {
-        var k = el.getAttribute("data-k");
-        var f = el.getAttribute("data-f");
-        if (!data.kodesh.items[k]) data.kodesh.items[k] = {};
-        data.kodesh.items[k][f] = el.value.trim();
-      });
-
-      if (!data.videos) data.videos = { items: [] };
-      data.videos.title = document.getElementById("videos_title").value.trim();
-      data.videos.note = document.getElementById("videos_note").value.trim();
-      var vids = [];
-      document.querySelectorAll("#videosList [data-v]").forEach(function (el) {
-        var i = +el.getAttribute("data-v");
-        var f = el.getAttribute("data-f");
-        if (!vids[i]) vids[i] = { title: "", url: "" };
-        vids[i][f] = el.value.trim();
-      });
-      data.videos.items = vids.filter(function (v) { return v && (v.title || v.url); });
-
-      data.chavruta = {
-        title: document.getElementById("ch_title").value.trim(),
-        note: document.getElementById("ch_note").value.trim(),
-        text: document.getElementById("ch_text").value.trim(),
-        button: document.getElementById("ch_button").value.trim(),
-        url: document.getElementById("ch_url").value.trim()
-      };
-      data.contact = {
-        title: document.getElementById("contact_title").value.trim(),
-        text: document.getElementById("contact_text").value.trim(),
-        phone: document.getElementById("contact_phone").value.trim()
-      };
-      data.updatedAt = new Date().toISOString().slice(0, 10);
-    }
-
-    async function loadContent() {
-      var cfg = getCfg();
-      try {
-        if (cfg && cfg.binId) {
-          var res = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId + "/latest?ts=" + Date.now(), {
-            headers: cfg.apiKey ? { "X-Master-Key": cfg.apiKey } : {},
-            cache: "no-store"
-          });
-          if (res.ok) {
-            var j = await res.json();
-            data = j.record || j;
-            if (data.kodesh) { fillForm(); showMsg("נטען מהענן · " + (data.updatedAt || ""), true); return; }
-          }
-        }
-      } catch (e) {}
-      var res2 = await fetch("./content.json?ts=" + Date.now(), { cache: "no-store" });
-      data = await res2.json();
-      fillForm();
-      showMsg("נטען מהאתר · " + (data.updatedAt || ""), true);
-    }
-
-    async function saveToAll() {
-      var cfg = getCfg();
-      if (!cfg || !cfg.binId || !cfg.apiKey) {
-        showMsg("קודם הגדר Bin ID ו-Access Key.", false);
-        return;
-      }
-      collect();
-      showMsg("שומר לכולם...", true);
-      var res = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Master-Key": cfg.apiKey,
-          "X-Bin-Versioning": "false"
-        },
-        body: JSON.stringify(data)
-      });
-      if (!res.ok) {
-        showMsg("שמירה נכשלה (" + res.status + ").", false);
-        return;
-      }
-      showMsg("נשמר לכולם. לאחר חיבור ה-Bin ID לאתר — הלקוחות יראו את השינוי.", true);
-    }
-
-    function enterApp() {
-      loginBox.classList.remove("show");
-      app.classList.add("show");
-      bar.style.display = "block";
-      var cfg = getCfg();
-      if (cfg) {
-        document.getElementById("binId").value = cfg.binId || "";
-        document.getElementById("apiKey").value = cfg.apiKey || "";
-      }
-      loadContent();
-    }
-
-    document.getElementById("loginBtn").onclick = function () {
-      if (document.getElementById("password").value === PASS) {
-        sessionStorage.setItem("chabad_admin", "1");
-        enterApp();
-      } else alert("סיסמה שגויה");
-    };
-    document.getElementById("password").addEventListener("keydown", function (e) {
-      if (e.key === "Enter") document.getElementById("loginBtn").click();
+function renderKodesh(){
+  const grid = document.getElementById('kodeshGrid');
+  grid.innerHTML = '';
+  const items = (data.kodesh && data.kodesh.items) || {};
+  ORDER.forEach(key=>{
+    const it = items[key] || {};
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<h3>'+esc(it.title||key)+'</h3>'+
+      '<div class="price-tag" data-preview="'+key+'">'+esc(it.price||'')+'</div>'+
+      '<label>כותרת</label><input data-k="'+key+'" data-f="title" value="'+esc(it.title||'')+'">'+
+      '<label>תיאור</label><textarea data-k="'+key+'" data-f="desc">'+esc(it.desc||'')+'</textarea>'+
+      '<label>מחיר</label><input data-k="'+key+'" data-f="price" value="'+esc(it.price||'')+'">'+
+      '<label>טקסט וואטסאפ</label><input data-k="'+key+'" data-f="waText" value="'+esc(it.waText||'')+'">';
+    grid.appendChild(card);
+  });
+  grid.querySelectorAll('input[data-f="price"]').forEach(inp=>{
+    inp.addEventListener('input',()=>{
+      const p = grid.querySelector('[data-preview="'+inp.getAttribute('data-k')+'"]');
+      if(p) p.textContent = inp.value || '—';
     });
-    document.getElementById("saveSetupBtn").onclick = function () {
-      var binId = document.getElementById("binId").value.trim();
-      var apiKey = document.getElementById("apiKey").value.trim();
-      if (!binId || !apiKey) return showMsg("מלא Bin ID ו-Access Key.", false);
-      setCfg(binId, apiKey);
-      showMsg("הגדרות נשמרו במכשיר.", true);
-    };
-    document.getElementById("addVideoBtn").onclick = function () {
-      if (!data.videos) data.videos = { items: [] };
-      if (!data.videos.items) data.videos.items = [];
-      data.videos.items.push({ title: "סרטון חדש", url: "" });
-      renderVideos(data.videos.items);
-    };
-    document.getElementById("saveBtn").onclick = saveToAll;
-    document.getElementById("reloadBtn").onclick = loadContent;
+  });
+}
 
-    if (sessionStorage.getItem("chabad_admin") === "1") enterApp();
-    else loginBox.classList.add("show");
-  </script>
+function renderVideos(){
+  const box = document.getElementById('videosList');
+  const items = (data.videos && data.videos.items) || [];
+  box.innerHTML = '';
+  items.forEach((vid,i)=>{
+    const row = document.createElement('div');
+    row.className = 'card';
+    row.innerHTML =
+      '<div class="video-row">'+
+      '<div><label>כותרת</label><input data-v="'+i+'" data-f="title" value="'+esc(vid.title||'')+'"></div>'+
+      '<div><label>קישור יוטיוב</label><input data-v="'+i+'" data-f="url" value="'+esc(vid.url||'')+'"></div>'+
+      '<div><button type="button" class="danger" data-del="'+i+'">מחק</button></div>'+
+      '</div>';
+    box.appendChild(row);
+  });
+  box.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.onclick = ()=>{
+      const idx = +btn.getAttribute('data-del');
+      data.videos.items.splice(idx,1);
+      renderVideos();
+    };
+  });
+}
+
+function fillForm(){
+  const h = data.hero || {};
+  document.getElementById('hero_kicker').value = h.kicker || '';
+  document.getElementById('hero_title').value = h.title || '';
+  document.getElementById('hero_title2').value = h.title2 || '';
+  document.getElementById('hero_subtitle').value = h.subtitle || '';
+
+  const a = data.about || {};
+  document.getElementById('about_title').value = a.title || '';
+  document.getElementById('about_note').value = a.note || '';
+  document.getElementById('about_heading').value = a.heading || '';
+  document.getElementById('about_p1').value = a.p1 || '';
+  document.getElementById('about_p2').value = a.p2 || '';
+  document.getElementById('about_footer').value = a.footer || '';
+
+  const k = data.kodesh || {};
+  document.getElementById('kodesh_title').value = k.title || '';
+  document.getElementById('kodesh_note').value = k.note || '';
+  if(!data.kodesh) data.kodesh = { items:{} };
+  if(!data.kodesh.items) data.kodesh.items = {};
+  renderKodesh();
+
+  const v = data.videos || { items:[] };
+  document.getElementById('videos_title').value = v.title || '';
+  document.getElementById('videos_note').value = v.note || '';
+  if(!data.videos) data.videos = { items:[] };
+  if(!data.videos.items) data.videos.items = [];
+  renderVideos();
+
+  const c = data.chavruta || {};
+  document.getElementById('ch_title').value = c.title || '';
+  document.getElementById('ch_note').value = c.note || '';
+  document.getElementById('ch_text').value = c.text || '';
+  document.getElementById('ch_button').value = c.button || '';
+  document.getElementById('ch_url').value = c.url || '';
+
+  const ct = data.contact || {};
+  document.getElementById('contact_title').value = ct.title || '';
+  document.getElementById('contact_text').value = ct.text || '';
+  document.getElementById('contact_phone').value = ct.phone || '';
+
+  const d = data.donation || {};
+  document.getElementById('donation_title').value = d.title || '';
+  document.getElementById('donation_text').value = d.text || '';
+}
+
+function collect(){
+  data.hero = {
+    kicker: document.getElementById('hero_kicker').value.trim(),
+    title: document.getElementById('hero_title').value.trim(),
+    title2: document.getElementById('hero_title2').value.trim(),
+    subtitle: document.getElementById('hero_subtitle').value.trim()
+  };
+  data.about = {
+    title: document.getElementById('about_title').value.trim(),
+    note: document.getElementById('about_note').value.trim(),
+    heading: document.getElementById('about_heading').value.trim(),
+    p1: document.getElementById('about_p1').value.trim(),
+    p2: document.getElementById('about_p2').value.trim(),
+    footer: document.getElementById('about_footer').value.trim()
+  };
+  if(!data.kodesh) data.kodesh = { items:{} };
+  data.kodesh.title = document.getElementById('kodesh_title').value.trim();
+  data.kodesh.note = document.getElementById('kodesh_note').value.trim();
+  if(!data.kodesh.items) data.kodesh.items = {};
+  document.querySelectorAll('#kodeshGrid [data-k]').forEach(el=>{
+    const k = el.getAttribute('data-k');
+    const f = el.getAttribute('data-f');
+    if(!data.kodesh.items[k]) data.kodesh.items[k] = {};
+    data.kodesh.items[k][f] = el.value.trim();
+  });
+
+  if(!data.videos) data.videos = { items:[] };
+  data.videos.title = document.getElementById('videos_title').value.trim();
+  data.videos.note = document.getElementById('videos_note').value.trim();
+  const vids = [];
+  document.querySelectorAll('#videosList [data-v]').forEach(el=>{
+    const i = +el.getAttribute('data-v');
+    const f = el.getAttribute('data-f');
+    if(!vids[i]) vids[i] = { title:'', url:'' };
+    vids[i][f] = el.value.trim();
+  });
+  data.videos.items = vids.filter(v => v && (v.title || v.url));
+
+  data.chavruta = {
+    title: document.getElementById('ch_title').value.trim(),
+    note: document.getElementById('ch_note').value.trim(),
+    text: document.getElementById('ch_text').value.trim(),
+    button: document.getElementById('ch_button').value.trim(),
+    url: document.getElementById('ch_url').value.trim()
+  };
+  data.contact = {
+    title: document.getElementById('contact_title').value.trim(),
+    text: document.getElementById('contact_text').value.trim(),
+    phone: document.getElementById('contact_phone').value.trim()
+  };
+  data.donation = {
+    title: document.getElementById('donation_title').value.trim(),
+    text: document.getElementById('donation_text').value.trim()
+  };
+  data.updatedAt = new Date().toISOString().slice(0,10);
+}
+
+async function loadContent(){
+  const cfg = getCfg();
+  try{
+    if(cfg && cfg.binId){
+      const headers = cfg.apiKey ? { 'X-Master-Key': cfg.apiKey } : {};
+      const res = await fetch('https://api.jsonbin.io/v3/b/'+cfg.binId+'/latest?t='+Date.now(), { headers, cache:'no-store' });
+      if(res.ok){
+        const j = await res.json();
+        data = j.record || j;
+        fillForm();
+        toast('נטען מהענן · '+ (data.updatedAt||''), 'ok');
+        return;
+      }
+    }
+  }catch(e){}
+  try{
+    const res = await fetch('./content.json?t='+Date.now(), { cache:'no-store' });
+    if(res.ok){
+      data = await res.json();
+      fillForm();
+      toast('נטען מ־content.json · '+ (data.updatedAt||''), 'ok');
+      return;
+    }
+  }catch(e){}
+  data = JSON.parse(JSON.stringify(DEFAULTS));
+  fillForm();
+  toast('נטענו ברירות מחדל', 'ok');
+}
+
+async function saveToAll(){
+  const cfg = getCfg();
+  if(!cfg || !cfg.binId || !cfg.apiKey){
+    toast('קודם הגדר Bin ID ו-Access Key למעלה', 'err');
+    return;
+  }
+  collect();
+  toast('שומר לכולם...', 'ok');
+  try{
+    const res = await fetch('https://api.jsonbin.io/v3/b/'+cfg.binId, {
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json',
+        'X-Master-Key': cfg.apiKey,
+        'X-Bin-Versioning': 'false'
+      },
+      body: JSON.stringify(data)
+    });
+    if(!res.ok){
+      toast('שמירה נכשלה ('+res.status+'). בדוק מפתח ו-Bin ID', 'err');
+      return;
+    }
+    toast('נשמר לכולם · '+data.updatedAt, 'ok');
+  }catch(e){
+    toast('שגיאת רשת בשמירה', 'err');
+  }
+}
+
+function enterApp(){
+  loginBox.classList.remove('show');
+  app.classList.add('show');
+  bar.style.display = 'block';
+  const cfg = getCfg();
+  if(cfg){
+    document.getElementById('binId').value = cfg.binId || '';
+    document.getElementById('apiKey').value = cfg.apiKey || '';
+  }
+  loadContent();
+}
+
+document.getElementById('loginBtn').onclick = ()=>{
+  if(document.getElementById('password').value === PASS){
+    sessionStorage.setItem('chabad_admin','1');
+    enterApp();
+  } else toast('סיסמה שגויה', 'err');
+};
+document.getElementById('password').addEventListener('keydown', e=>{
+  if(e.key==='Enter') document.getElementById('loginBtn').click();
+});
+document.getElementById('saveSetupBtn').onclick = ()=>{
+  const binId = document.getElementById('binId').value.trim();
+  const apiKey = document.getElementById('apiKey').value.trim();
+  if(!binId || !apiKey){ toast('מלא Bin ID ו-Access Key', 'err'); return; }
+  setCfg(binId, apiKey);
+  toast('הגדרות נשמרו במכשיר', 'ok');
+};
+document.getElementById('addVideoBtn').onclick = ()=>{
+  if(!data.videos) data.videos = { items:[] };
+  if(!data.videos.items) data.videos.items = [];
+  data.videos.items.push({ title:'סרטון חדש', url:'' });
+  renderVideos();
+};
+document.getElementById('saveBtn').onclick = saveToAll;
+document.getElementById('reloadBtn').onclick = loadContent;
+
+if(sessionStorage.getItem('chabad_admin')==='1') enterApp();
+else loginBox.classList.add('show');
+</script>
 </body>
 </html>
