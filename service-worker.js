@@ -1,4 +1,4 @@
-const CACHE_NAME = "chabad-kodesh-v5";
+const CACHE_NAME = "chabad-kodesh-v6";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
@@ -25,7 +25,6 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Network-first for HTML so updates appear quickly; cache-first for the rest
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   const isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
