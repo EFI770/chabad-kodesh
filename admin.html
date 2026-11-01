@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>ניהול מחירים – בית חב״ד</title>
+  <title>ניהול האתר – בית חב״ד כפר רתמים</title>
   <style>
     :root {
       --bg: #0b0f19; --surface: #0f1526; --surface2: #121a33;
@@ -16,102 +16,201 @@
     body {
       margin: 0; font-family: system-ui, -apple-system, Arial, sans-serif;
       background: var(--bg); color: var(--text);
-      padding: 20px; padding-bottom: 120px;
+      padding: 16px; padding-bottom: 120px;
     }
-    .wrap { max-width: 960px; margin: 0 auto; }
-    h1 { margin: 0; font-size: 22px; }
-    .sub { color: var(--muted); font-size: 13px; margin: 4px 0 16px; line-height: 1.5; }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 999px;
+      background: rgba(214,181,74,.15); color: var(--gold1);
+      font-size: 12px; font-weight: 800; margin-bottom: 10px;
+    }
+    h1 { margin: 0 0 4px; font-size: 22px; }
+    .sub { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .section { margin-bottom: 22px; }
+    .section > h2 {
+      margin: 0 0 10px; font-size: 18px; color: var(--gold1);
+      border-bottom: 1px solid var(--line); padding-bottom: 8px;
+    }
     .card {
       background: linear-gradient(180deg, var(--surface), var(--surface2));
       border: 1px solid var(--line);
-      border-radius: 20px; padding: 18px; margin-bottom: 14px;
+      border-radius: 18px; padding: 16px; margin-bottom: 12px;
     }
-    .card h3 { margin: 0 0 8px; font-size: 17px; }
-    .preview-price {
-      display: inline-block; margin: 8px 0 12px; padding: 8px 14px;
-      border-radius: 999px; font-weight: 900; font-size: 14px;
+    .card h3 { margin: 0 0 8px; font-size: 16px; }
+    .price-pill {
+      display: inline-block; margin: 6px 0 10px; padding: 7px 12px;
+      border-radius: 999px; font-weight: 900; font-size: 13px;
       color: #0b0f19;
       background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
     }
-    label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; font-weight: 600; }
+    label { display: block; font-size: 12px; color: var(--muted); margin: 8px 0 4px; font-weight: 600; }
     input, textarea {
-      width: 100%; padding: 12px 14px; border-radius: 12px;
+      width: 100%; padding: 11px 12px; border-radius: 12px;
       border: 1px solid var(--line); background: rgba(0,0,0,.28);
-      color: var(--text); font-size: 15px;
+      color: var(--text); font-size: 14px;
     }
-    textarea { min-height: 68px; resize: vertical; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    textarea { min-height: 70px; resize: vertical; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     button {
-      padding: 14px 18px; border-radius: 14px; border: none;
-      font-weight: 800; font-size: 15px; cursor: pointer;
+      padding: 12px 16px; border-radius: 12px; border: none;
+      font-weight: 800; font-size: 14px; cursor: pointer;
     }
     .primary { background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3)); color: #0b0f19; }
     .save { background: linear-gradient(135deg, #2d8f5f, #1f6b45); color: #fff; }
     .secondary { background: rgba(255,255,255,.08); color: var(--text); border: 1px solid var(--line); }
+    .danger { background: rgba(122,51,51,.5); color: #fff; }
     #loginBox, #app { display: none; }
     #loginBox.show, #app.show { display: block; }
-    .msg { margin-top: 12px; padding: 12px 14px; border-radius: 12px; font-size: 14px; display: none; line-height: 1.5; }
+    .msg { margin: 10px 0; padding: 12px; border-radius: 12px; font-size: 13px; display: none; }
     .msg.show { display: block; }
     .msg.ok { background: rgba(31,107,69,.3); border: 1px solid rgba(45,143,95,.5); }
     .msg.err { background: rgba(122,51,51,.35); border: 1px solid rgba(180,80,80,.5); }
     .bar {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: rgba(11,15,25,.96); border-top: 1px solid var(--line);
-      padding: 12px 16px; z-index: 50;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(11,15,25,.97); border-top: 1px solid var(--line);
+      padding: 10px 14px;
     }
     .bar-inner {
-      max-width: 960px; margin: 0 auto;
-      display: flex; gap: 10px; flex-wrap: wrap;
+      max-width: 980px; margin: 0 auto;
+      display: flex; gap: 8px; flex-wrap: wrap;
       align-items: center; justify-content: space-between;
     }
-    .hint { color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .hint { color: var(--muted); font-size: 12px; line-height: 1.65; }
     a { color: var(--gold2); }
-    code { background: rgba(0,0,0,.35); padding: 2px 6px; border-radius: 6px; }
+    .video-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: end; }
+    @media (max-width: 720px) { .video-row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>ניהול מחירים</h1>
-    <div class="sub">כתובת סודית · עדכון לכל הלקוחות בעולם בלחיצה</div>
+    <div class="badge">מצב מנהל · לא נראה ללקוחות</div>
+    <h1>ניהול האתר</h1>
+    <p class="sub">אותו מבנה כמו האתר הציבורי · עריכה ושמירה</p>
 
     <div id="loginBox" class="card">
       <h3>כניסת מנהל</h3>
       <label>סיסמה</label>
       <input id="password" type="password" placeholder="סיסמת מנהל" />
-      <div class="actions">
-        <button class="primary" id="loginBtn" type="button">כניסה</button>
-      </div>
+      <div class="actions"><button class="primary" id="loginBtn" type="button">כניסה</button></div>
     </div>
 
     <div id="app">
-      <div class="card" id="setupBox">
-        <h3>הגדרה חד־פעמית (כדי לעדכן את כולם)</h3>
+      <div class="card">
+        <h3>הגדרת ענן (JSONBin) — פעם אחת</h3>
         <div class="hint">
-          1. היכנס ל־<a href="https://jsonbin.io" target="_blank" rel="noopener">jsonbin.io</a> ופתח חשבון חינם<br>
-          2. Create Bin → הדבק את תוכן המחירים (או Bin ריק) → Create<br>
-          3. העתק את ה־<strong>Bin ID</strong> (בכתובת / מהמסך)<br>
-          4. API Keys → העתק <strong>Access Key</strong> (X-Master-Key)<br>
-          5. הדבק כאן ולחץ שמור הגדרות
+          כדי שכל הלקוחות יראו עדכונים: צור Bin ב־<a href="https://jsonbin.io" target="_blank">jsonbin.io</a>,
+          העתק Bin ID + Access Key, שמור כאן. אחר כך שלח לי את ה־Bin ID כדי לחבר לאתר הציבורי.
         </div>
         <label>Bin ID</label>
-        <input id="binId" placeholder="לדוגמה 67f1a2b3c4d5e6f7a8b9c0d1" />
-        <label>Access Key (Master Key)</label>
-        <input id="apiKey" type="password" placeholder="$2a$10$..." autocomplete="off" />
+        <input id="binId" placeholder="Bin ID" />
+        <label>Access Key</label>
+        <input id="apiKey" type="password" placeholder="Access Key" autocomplete="off" />
         <div class="actions">
-          <button class="secondary" id="saveSetupBtn" type="button">שמור הגדרות במכשיר</button>
+          <button class="secondary" id="saveSetupBtn" type="button">שמור הגדרות</button>
         </div>
       </div>
 
-      <div class="grid" id="fields"></div>
       <div class="msg" id="msg"></div>
+
+      <!-- HERO -->
+      <div class="section">
+        <h2>עמוד הבית (Hero)</h2>
+        <div class="card">
+          <label>שורת זהב עליונה</label>
+          <input id="hero_kicker" />
+          <label>כותרת שורה 1</label>
+          <input id="hero_title" />
+          <label>כותרת שורה 2</label>
+          <input id="hero_title2" />
+          <label>תיאור</label>
+          <textarea id="hero_subtitle"></textarea>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="section">
+        <h2>אודות</h2>
+        <div class="card">
+          <label>כותרת מקטע</label>
+          <input id="about_title" />
+          <label>תת־כותרת</label>
+          <input id="about_note" />
+          <label>כותרת פנימית</label>
+          <input id="about_heading" />
+          <label>פסקה 1</label>
+          <textarea id="about_p1"></textarea>
+          <label>פסקה 2</label>
+          <textarea id="about_p2"></textarea>
+          <label>שורה תחתונה</label>
+          <input id="about_footer" />
+        </div>
+      </div>
+
+      <!-- KODESH -->
+      <div class="section">
+        <h2>תשמישי קדושה</h2>
+        <div class="card">
+          <label>כותרת מקטע</label>
+          <input id="kodesh_title" />
+          <label>תת־כותרת</label>
+          <input id="kodesh_note" />
+        </div>
+        <div class="grid" id="kodeshGrid"></div>
+      </div>
+
+      <!-- VIDEOS -->
+      <div class="section">
+        <h2>סרטונים</h2>
+        <div class="card">
+          <label>כותרת מקטע</label>
+          <input id="videos_title" />
+          <label>תת־כותרת</label>
+          <input id="videos_note" />
+          <div id="videosList"></div>
+          <div class="actions">
+            <button class="secondary" id="addVideoBtn" type="button">+ הוסף סרטון</button>
+          </div>
+          <div class="hint">קישור יוטיוב או Vimeo. הלקוחות רואים רק את הסרטונים — לא את כפתורי העריכה.</div>
+        </div>
+      </div>
+
+      <!-- CHAVRUTA -->
+      <div class="section">
+        <h2>חברותא</h2>
+        <div class="card">
+          <label>כותרת</label>
+          <input id="ch_title" />
+          <label>תת־כותרת</label>
+          <input id="ch_note" />
+          <label>טקסט</label>
+          <textarea id="ch_text"></textarea>
+          <label>טקסט כפתור</label>
+          <input id="ch_button" />
+          <label>קישור</label>
+          <input id="ch_url" />
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="section">
+        <h2>צור קשר</h2>
+        <div class="card">
+          <label>כותרת</label>
+          <input id="contact_title" />
+          <label>טקסט</label>
+          <textarea id="contact_text"></textarea>
+          <label>טלפון</label>
+          <input id="contact_phone" />
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="bar" id="bar" style="display:none">
     <div class="bar-inner">
-      <div class="sub" id="statusLine">מוכן</div>
+      <div class="sub" id="statusLine" style="margin:0">מוכן</div>
       <div class="actions" style="margin:0">
         <button class="secondary" id="reloadBtn" type="button">רענן</button>
         <button class="save" id="saveBtn" type="button">שמור לכולם</button>
@@ -123,119 +222,194 @@
     var PASS = "chabad770";
     var ORDER = ["tefillin", "mezuzah", "tallit", "barMitzvah"];
     var CFG_KEY = "chabad_jsonbin_cfg";
+    var data = null;
 
     var loginBox = document.getElementById("loginBox");
     var app = document.getElementById("app");
-    var fields = document.getElementById("fields");
     var msg = document.getElementById("msg");
     var bar = document.getElementById("bar");
     var statusLine = document.getElementById("statusLine");
-    var data = null;
 
-    function showMsg(text, ok) {
-      msg.textContent = text;
+    function showMsg(t, ok) {
+      msg.textContent = t;
       msg.className = "msg show " + (ok ? "ok" : "err");
-      statusLine.textContent = text;
+      statusLine.textContent = t;
     }
-
     function esc(s) {
       return String(s == null ? "" : s)
-        .replace(/&/g, "&")
-        .replace(/</g, "<")
-        .replace(/"/g, """);
+        .replace(/&/g, "&").replace(/</g, "<").replace(/"/g, """);
     }
-
     function getCfg() {
       try { return JSON.parse(localStorage.getItem(CFG_KEY) || "null"); }
       catch (e) { return null; }
     }
-
     function setCfg(binId, apiKey) {
       localStorage.setItem(CFG_KEY, JSON.stringify({ binId: binId, apiKey: apiKey }));
     }
 
-    function remoteUrl(binId) {
-      return "https://api.jsonbin.io/v3/b/" + binId + "/latest";
-    }
+    function fillForm() {
+      var h = data.hero || {};
+      document.getElementById("hero_kicker").value = h.kicker || "";
+      document.getElementById("hero_title").value = h.title || "";
+      document.getElementById("hero_title2").value = h.title2 || "";
+      document.getElementById("hero_subtitle").value = h.subtitle || "";
 
-    function render() {
-      fields.innerHTML = "";
+      var a = data.about || {};
+      document.getElementById("about_title").value = a.title || "";
+      document.getElementById("about_note").value = a.note || "";
+      document.getElementById("about_heading").value = a.heading || "";
+      document.getElementById("about_p1").value = a.p1 || "";
+      document.getElementById("about_p2").value = a.p2 || "";
+      document.getElementById("about_footer").value = a.footer || "";
+
+      var k = data.kodesh || {};
+      document.getElementById("kodesh_title").value = k.title || "";
+      document.getElementById("kodesh_note").value = k.note || "";
+      var grid = document.getElementById("kodeshGrid");
+      grid.innerHTML = "";
       ORDER.forEach(function (key) {
-        var it = data.items[key];
-        if (!it) return;
+        var it = (k.items || {})[key] || {};
         var card = document.createElement("div");
         card.className = "card";
         card.innerHTML =
-          "<h3>" + esc(it.title) + "</h3>" +
-          "<div class=\"preview-price\" data-preview=\"" + key + "\">" + esc(it.price) + "</div>" +
-          "<label>כותרת</label>" +
-          "<input data-key=\"" + key + "\" data-field=\"title\" value=\"" + esc(it.title) + "\" />" +
-          "<label>תיאור</label>" +
-          "<textarea data-key=\"" + key + "\" data-field=\"desc\">" + esc(it.desc) + "</textarea>" +
-          "<label>מחיר שמוצג באתר</label>" +
-          "<input data-key=\"" + key + "\" data-field=\"price\" value=\"" + esc(it.price) + "\" />" +
-          "<label>טקסט לוואטסאפ</label>" +
-          "<input data-key=\"" + key + "\" data-field=\"waText\" value=\"" + esc(it.waText) + "\" />";
-        fields.appendChild(card);
+          "<h3>" + esc(it.title || key) + "</h3>" +
+          "<div class=\"price-pill\" data-preview=\"" + key + "\">" + esc(it.price || "") + "</div>" +
+          "<label>כותרת</label><input data-k=\"" + key + "\" data-f=\"title\" value=\"" + esc(it.title || "") + "\" />" +
+          "<label>תיאור</label><textarea data-k=\"" + key + "\" data-f=\"desc\">" + esc(it.desc || "") + "</textarea>" +
+          "<label>מחיר</label><input data-k=\"" + key + "\" data-f=\"price\" value=\"" + esc(it.price || "") + "\" />" +
+          "<label>וואטסאפ</label><input data-k=\"" + key + "\" data-f=\"waText\" value=\"" + esc(it.waText || "") + "\" />";
+        grid.appendChild(card);
+      });
+      grid.querySelectorAll('input[data-f="price"]').forEach(function (inp) {
+        inp.addEventListener("input", function () {
+          var p = grid.querySelector('[data-preview="' + inp.getAttribute("data-k") + '"]');
+          if (p) p.textContent = inp.value || "—";
+        });
       });
 
-      fields.querySelectorAll('input[data-field="price"]').forEach(function (inp) {
-        inp.addEventListener("input", function () {
-          var key = inp.getAttribute("data-key");
-          var prev = fields.querySelector('[data-preview="' + key + '"]');
-          if (prev) prev.textContent = inp.value || "—";
-        });
+      var v = data.videos || { items: [] };
+      document.getElementById("videos_title").value = v.title || "";
+      document.getElementById("videos_note").value = v.note || "";
+      renderVideos(v.items || []);
+
+      var c = data.chavruta || {};
+      document.getElementById("ch_title").value = c.title || "";
+      document.getElementById("ch_note").value = c.note || "";
+      document.getElementById("ch_text").value = c.text || "";
+      document.getElementById("ch_button").value = c.button || "";
+      document.getElementById("ch_url").value = c.url || "";
+
+      var ct = data.contact || {};
+      document.getElementById("contact_title").value = ct.title || "";
+      document.getElementById("contact_text").value = ct.text || "";
+      document.getElementById("contact_phone").value = ct.phone || "";
+    }
+
+    function renderVideos(items) {
+      var box = document.getElementById("videosList");
+      box.innerHTML = "";
+      items.forEach(function (vid, i) {
+        var row = document.createElement("div");
+        row.className = "card";
+        row.innerHTML =
+          "<div class=\"video-row\">" +
+          "<div><label>כותרת סרטון</label><input data-v=\"" + i + "\" data-f=\"title\" value=\"" + esc(vid.title || "") + "\" /></div>" +
+          "<div><label>קישור</label><input data-v=\"" + i + "\" data-f=\"url\" value=\"" + esc(vid.url || "") + "\" /></div>" +
+          "<div><button type=\"button\" class=\"danger\" data-del=\"" + i + "\">מחק</button></div>" +
+          "</div>";
+        box.appendChild(row);
       });
-      fields.querySelectorAll('input[data-field="title"]').forEach(function (inp) {
-        inp.addEventListener("input", function () {
-          var h = inp.closest(".card").querySelector("h3");
-          if (h) h.textContent = inp.value || "";
-        });
+      box.querySelectorAll("[data-del]").forEach(function (btn) {
+        btn.onclick = function () {
+          var idx = +btn.getAttribute("data-del");
+          data.videos.items.splice(idx, 1);
+          renderVideos(data.videos.items);
+        };
       });
     }
 
     function collect() {
-      fields.querySelectorAll("[data-key]").forEach(function (el) {
-        var key = el.getAttribute("data-key");
-        var field = el.getAttribute("data-field");
-        data.items[key][field] = el.value.trim();
+      data.hero = {
+        kicker: document.getElementById("hero_kicker").value.trim(),
+        title: document.getElementById("hero_title").value.trim(),
+        title2: document.getElementById("hero_title2").value.trim(),
+        subtitle: document.getElementById("hero_subtitle").value.trim()
+      };
+      data.about = {
+        title: document.getElementById("about_title").value.trim(),
+        note: document.getElementById("about_note").value.trim(),
+        heading: document.getElementById("about_heading").value.trim(),
+        p1: document.getElementById("about_p1").value.trim(),
+        p2: document.getElementById("about_p2").value.trim(),
+        footer: document.getElementById("about_footer").value.trim()
+      };
+      if (!data.kodesh) data.kodesh = { items: {} };
+      data.kodesh.title = document.getElementById("kodesh_title").value.trim();
+      data.kodesh.note = document.getElementById("kodesh_note").value.trim();
+      if (!data.kodesh.items) data.kodesh.items = {};
+      document.querySelectorAll("#kodeshGrid [data-k]").forEach(function (el) {
+        var k = el.getAttribute("data-k");
+        var f = el.getAttribute("data-f");
+        if (!data.kodesh.items[k]) data.kodesh.items[k] = {};
+        data.kodesh.items[k][f] = el.value.trim();
       });
+
+      if (!data.videos) data.videos = { items: [] };
+      data.videos.title = document.getElementById("videos_title").value.trim();
+      data.videos.note = document.getElementById("videos_note").value.trim();
+      var vids = [];
+      document.querySelectorAll("#videosList [data-v]").forEach(function (el) {
+        var i = +el.getAttribute("data-v");
+        var f = el.getAttribute("data-f");
+        if (!vids[i]) vids[i] = { title: "", url: "" };
+        vids[i][f] = el.value.trim();
+      });
+      data.videos.items = vids.filter(function (v) { return v && (v.title || v.url); });
+
+      data.chavruta = {
+        title: document.getElementById("ch_title").value.trim(),
+        note: document.getElementById("ch_note").value.trim(),
+        text: document.getElementById("ch_text").value.trim(),
+        button: document.getElementById("ch_button").value.trim(),
+        url: document.getElementById("ch_url").value.trim()
+      };
+      data.contact = {
+        title: document.getElementById("contact_title").value.trim(),
+        text: document.getElementById("contact_text").value.trim(),
+        phone: document.getElementById("contact_phone").value.trim()
+      };
       data.updatedAt = new Date().toISOString().slice(0, 10);
     }
 
-    async function loadPrices() {
+    async function loadContent() {
       var cfg = getCfg();
       try {
         if (cfg && cfg.binId) {
-          var res = await fetch(remoteUrl(cfg.binId) + "?ts=" + Date.now(), {
+          var res = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId + "/latest?ts=" + Date.now(), {
             headers: cfg.apiKey ? { "X-Master-Key": cfg.apiKey } : {},
             cache: "no-store"
           });
           if (res.ok) {
-            var json = await res.json();
-            data = json.record || json;
-            render();
-            showMsg("נטען מהענן · עודכן: " + (data.updatedAt || "—"), true);
-            return;
+            var j = await res.json();
+            data = j.record || j;
+            if (data.kodesh) { fillForm(); showMsg("נטען מהענן · " + (data.updatedAt || ""), true); return; }
           }
         }
       } catch (e) {}
-
-      var res2 = await fetch("./prices.json?ts=" + Date.now(), { cache: "no-store" });
+      var res2 = await fetch("./content.json?ts=" + Date.now(), { cache: "no-store" });
       data = await res2.json();
-      render();
-      showMsg("נטען מהאתר · עודכן: " + (data.updatedAt || "—"), true);
+      fillForm();
+      showMsg("נטען מהאתר · " + (data.updatedAt || ""), true);
     }
 
     async function saveToAll() {
       var cfg = getCfg();
       if (!cfg || !cfg.binId || !cfg.apiKey) {
-        showMsg("קודם מלא Bin ID ו-Access Key ולחץ שמור הגדרות.", false);
+        showMsg("קודם הגדר Bin ID ו-Access Key.", false);
         return;
       }
       collect();
       showMsg("שומר לכולם...", true);
-
       var res = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId, {
         method: "PUT",
         headers: {
@@ -245,19 +419,11 @@
         },
         body: JSON.stringify(data)
       });
-
       if (!res.ok) {
-        var t = await res.text();
-        showMsg("שמירה נכשלה (" + res.status + "). בדוק Bin ID ו-Access Key.", false);
-        console.log(t);
+        showMsg("שמירה נכשלה (" + res.status + ").", false);
         return;
       }
-
-      // also mirror locally so this device is instant
-      localStorage.setItem("chabad_prices_v1", JSON.stringify(data));
-      // store public bin id for the main site
-      localStorage.setItem("chabad_prices_bin", cfg.binId);
-      showMsg("נשמר לכולם. לקוחות יראו תוך שניות אחרי רענון.", true);
+      showMsg("נשמר לכולם. לאחר חיבור ה-Bin ID לאתר — הלקוחות יראו את השינוי.", true);
     }
 
     function enterApp() {
@@ -269,7 +435,7 @@
         document.getElementById("binId").value = cfg.binId || "";
         document.getElementById("apiKey").value = cfg.apiKey || "";
       }
-      loadPrices();
+      loadContent();
     }
 
     document.getElementById("loginBtn").onclick = function () {
@@ -281,19 +447,21 @@
     document.getElementById("password").addEventListener("keydown", function (e) {
       if (e.key === "Enter") document.getElementById("loginBtn").click();
     });
-
     document.getElementById("saveSetupBtn").onclick = function () {
       var binId = document.getElementById("binId").value.trim();
       var apiKey = document.getElementById("apiKey").value.trim();
       if (!binId || !apiKey) return showMsg("מלא Bin ID ו-Access Key.", false);
       setCfg(binId, apiKey);
-      // public bin id for main site on this device; also write to a well-known local key
-      localStorage.setItem("chabad_prices_bin", binId);
-      showMsg("ההגדרות נשמרו במכשיר. עכשיו אפשר לשמור לכולם.", true);
+      showMsg("הגדרות נשמרו במכשיר.", true);
     };
-
+    document.getElementById("addVideoBtn").onclick = function () {
+      if (!data.videos) data.videos = { items: [] };
+      if (!data.videos.items) data.videos.items = [];
+      data.videos.items.push({ title: "סרטון חדש", url: "" });
+      renderVideos(data.videos.items);
+    };
     document.getElementById("saveBtn").onclick = saveToAll;
-    document.getElementById("reloadBtn").onclick = loadPrices;
+    document.getElementById("reloadBtn").onclick = loadContent;
 
     if (sessionStorage.getItem("chabad_admin") === "1") enterApp();
     else loginBox.classList.add("show");
