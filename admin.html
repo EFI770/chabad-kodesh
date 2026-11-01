@@ -14,20 +14,19 @@
     }
     * { box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Arial, sans-serif;
+      margin: 0; font-family: system-ui, -apple-system, Arial, sans-serif;
       background: var(--bg); color: var(--text);
-      padding: 20px; padding-bottom: 110px;
+      padding: 20px; padding-bottom: 120px;
     }
     .wrap { max-width: 960px; margin: 0 auto; }
     h1 { margin: 0; font-size: 22px; }
-    .sub { color: var(--muted); font-size: 13px; margin: 4px 0 18px; }
+    .sub { color: var(--muted); font-size: 13px; margin: 4px 0 16px; line-height: 1.5; }
     .card {
       background: linear-gradient(180deg, var(--surface), var(--surface2));
       border: 1px solid var(--line);
       border-radius: 20px; padding: 18px; margin-bottom: 14px;
     }
-    .card h3 { margin: 0 0 6px; font-size: 18px; }
+    .card h3 { margin: 0 0 8px; font-size: 17px; }
     .preview-price {
       display: inline-block; margin: 8px 0 12px; padding: 8px 14px;
       border-radius: 999px; font-weight: 900; font-size: 14px;
@@ -40,10 +39,10 @@
       border: 1px solid var(--line); background: rgba(0,0,0,.28);
       color: var(--text); font-size: 15px;
     }
-    textarea { min-height: 70px; resize: vertical; }
+    textarea { min-height: 68px; resize: vertical; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
     button {
       padding: 14px 18px; border-radius: 14px; border: none;
       font-weight: 800; font-size: 15px; cursor: pointer;
@@ -53,10 +52,7 @@
     .secondary { background: rgba(255,255,255,.08); color: var(--text); border: 1px solid var(--line); }
     #loginBox, #app { display: none; }
     #loginBox.show, #app.show { display: block; }
-    .msg {
-      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
-      font-size: 14px; display: none; line-height: 1.5;
-    }
+    .msg { margin-top: 12px; padding: 12px 14px; border-radius: 12px; font-size: 14px; display: none; line-height: 1.5; }
     .msg.show { display: block; }
     .msg.ok { background: rgba(31,107,69,.3); border: 1px solid rgba(45,143,95,.5); }
     .msg.err { background: rgba(122,51,51,.35); border: 1px solid rgba(180,80,80,.5); }
@@ -70,28 +66,44 @@
       display: flex; gap: 10px; flex-wrap: wrap;
       align-items: center; justify-content: space-between;
     }
-    .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0 0 14px; }
+    .hint { color: var(--muted); font-size: 13px; line-height: 1.7; }
+    a { color: var(--gold2); }
+    code { background: rgba(0,0,0,.35); padding: 2px 6px; border-radius: 6px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>ניהול מחירים</h1>
-    <div class="sub">כתובת סודית · לא מוצג ללקוחות</div>
+    <div class="sub">כתובת סודית · עדכון לכל הלקוחות בעולם בלחיצה</div>
 
     <div id="loginBox" class="card">
       <h3>כניסת מנהל</h3>
       <label>סיסמה</label>
       <input id="password" type="password" placeholder="סיסמת מנהל" />
-      <div class="actions" style="margin-top:12px">
+      <div class="actions">
         <button class="primary" id="loginBtn" type="button">כניסה</button>
       </div>
     </div>
 
     <div id="app">
-      <p class="hint">
-        לחץ <strong style="color:#fff">שמור במכשיר</strong> — המחירים יתעדכנו מיד באתר ובאפליקציה <em>במכשיר הזה</em>.
-        בלי טוקנים ובלי גיטהאב.
-      </p>
+      <div class="card" id="setupBox">
+        <h3>הגדרה חד־פעמית (כדי לעדכן את כולם)</h3>
+        <div class="hint">
+          1. היכנס ל־<a href="https://jsonbin.io" target="_blank" rel="noopener">jsonbin.io</a> ופתח חשבון חינם<br>
+          2. Create Bin → הדבק את תוכן המחירים (או Bin ריק) → Create<br>
+          3. העתק את ה־<strong>Bin ID</strong> (בכתובת / מהמסך)<br>
+          4. API Keys → העתק <strong>Access Key</strong> (X-Master-Key)<br>
+          5. הדבק כאן ולחץ שמור הגדרות
+        </div>
+        <label>Bin ID</label>
+        <input id="binId" placeholder="לדוגמה 67f1a2b3c4d5e6f7a8b9c0d1" />
+        <label>Access Key (Master Key)</label>
+        <input id="apiKey" type="password" placeholder="$2a$10$..." autocomplete="off" />
+        <div class="actions">
+          <button class="secondary" id="saveSetupBtn" type="button">שמור הגדרות במכשיר</button>
+        </div>
+      </div>
+
       <div class="grid" id="fields"></div>
       <div class="msg" id="msg"></div>
     </div>
@@ -101,16 +113,16 @@
     <div class="bar-inner">
       <div class="sub" id="statusLine">מוכן</div>
       <div class="actions" style="margin:0">
-        <button class="secondary" id="reloadBtn" type="button">טען מהאתר</button>
-        <button class="save" id="saveBtn" type="button">שמור במכשיר</button>
+        <button class="secondary" id="reloadBtn" type="button">רענן</button>
+        <button class="save" id="saveBtn" type="button">שמור לכולם</button>
       </div>
     </div>
   </div>
 
   <script>
     var PASS = "chabad770";
-    var STORAGE_KEY = "chabad_prices_v1";
     var ORDER = ["tefillin", "mezuzah", "tallit", "barMitzvah"];
+    var CFG_KEY = "chabad_jsonbin_cfg";
 
     var loginBox = document.getElementById("loginBox");
     var app = document.getElementById("app");
@@ -131,6 +143,19 @@
         .replace(/&/g, "&")
         .replace(/</g, "<")
         .replace(/"/g, """);
+    }
+
+    function getCfg() {
+      try { return JSON.parse(localStorage.getItem(CFG_KEY) || "null"); }
+      catch (e) { return null; }
+    }
+
+    function setCfg(binId, apiKey) {
+      localStorage.setItem(CFG_KEY, JSON.stringify({ binId: binId, apiKey: apiKey }));
+    }
+
+    function remoteUrl(binId) {
+      return "https://api.jsonbin.io/v3/b/" + binId + "/latest";
     }
 
     function render() {
@@ -179,33 +204,71 @@
     }
 
     async function loadPrices() {
-      // Prefer local saved prices, else network
+      var cfg = getCfg();
       try {
-        var local = localStorage.getItem(STORAGE_KEY);
-        if (local) {
-          data = JSON.parse(local);
-          render();
-          showMsg("נטען מהשמירה במכשיר · " + (data.updatedAt || ""), true);
-          return;
+        if (cfg && cfg.binId) {
+          var res = await fetch(remoteUrl(cfg.binId) + "?ts=" + Date.now(), {
+            headers: cfg.apiKey ? { "X-Master-Key": cfg.apiKey } : {},
+            cache: "no-store"
+          });
+          if (res.ok) {
+            var json = await res.json();
+            data = json.record || json;
+            render();
+            showMsg("נטען מהענן · עודכן: " + (data.updatedAt || "—"), true);
+            return;
+          }
         }
       } catch (e) {}
 
-      var res = await fetch("./prices.json?ts=" + Date.now(), { cache: "no-store" });
-      data = await res.json();
+      var res2 = await fetch("./prices.json?ts=" + Date.now(), { cache: "no-store" });
+      data = await res2.json();
       render();
-      showMsg("נטען מהאתר · " + (data.updatedAt || ""), true);
+      showMsg("נטען מהאתר · עודכן: " + (data.updatedAt || "—"), true);
     }
 
-    function saveLocal() {
+    async function saveToAll() {
+      var cfg = getCfg();
+      if (!cfg || !cfg.binId || !cfg.apiKey) {
+        showMsg("קודם מלא Bin ID ו-Access Key ולחץ שמור הגדרות.", false);
+        return;
+      }
       collect();
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      showMsg("נשמר במכשיר. רענן את האתר / האפליקציה כדי לראות.", true);
+      showMsg("שומר לכולם...", true);
+
+      var res = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": cfg.apiKey,
+          "X-Bin-Versioning": "false"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) {
+        var t = await res.text();
+        showMsg("שמירה נכשלה (" + res.status + "). בדוק Bin ID ו-Access Key.", false);
+        console.log(t);
+        return;
+      }
+
+      // also mirror locally so this device is instant
+      localStorage.setItem("chabad_prices_v1", JSON.stringify(data));
+      // store public bin id for the main site
+      localStorage.setItem("chabad_prices_bin", cfg.binId);
+      showMsg("נשמר לכולם. לקוחות יראו תוך שניות אחרי רענון.", true);
     }
 
     function enterApp() {
       loginBox.classList.remove("show");
       app.classList.add("show");
       bar.style.display = "block";
+      var cfg = getCfg();
+      if (cfg) {
+        document.getElementById("binId").value = cfg.binId || "";
+        document.getElementById("apiKey").value = cfg.apiKey || "";
+      }
       loadPrices();
     }
 
@@ -213,22 +276,24 @@
       if (document.getElementById("password").value === PASS) {
         sessionStorage.setItem("chabad_admin", "1");
         enterApp();
-      } else {
-        alert("סיסמה שגויה");
-      }
+      } else alert("סיסמה שגויה");
     };
     document.getElementById("password").addEventListener("keydown", function (e) {
       if (e.key === "Enter") document.getElementById("loginBtn").click();
     });
 
-    document.getElementById("saveBtn").onclick = saveLocal;
-    document.getElementById("reloadBtn").onclick = async function () {
-      localStorage.removeItem(STORAGE_KEY);
-      var res = await fetch("./prices.json?ts=" + Date.now(), { cache: "no-store" });
-      data = await res.json();
-      render();
-      showMsg("נטען מחדש מהאתר (בוטלה שמירה מקומית).", true);
+    document.getElementById("saveSetupBtn").onclick = function () {
+      var binId = document.getElementById("binId").value.trim();
+      var apiKey = document.getElementById("apiKey").value.trim();
+      if (!binId || !apiKey) return showMsg("מלא Bin ID ו-Access Key.", false);
+      setCfg(binId, apiKey);
+      // public bin id for main site on this device; also write to a well-known local key
+      localStorage.setItem("chabad_prices_bin", binId);
+      showMsg("ההגדרות נשמרו במכשיר. עכשיו אפשר לשמור לכולם.", true);
     };
+
+    document.getElementById("saveBtn").onclick = saveToAll;
+    document.getElementById("reloadBtn").onclick = loadPrices;
 
     if (sessionStorage.getItem("chabad_admin") === "1") enterApp();
     else loginBox.classList.add("show");
