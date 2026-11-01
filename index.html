@@ -222,14 +222,28 @@
       if (!grid) return;
       try {
         var data = null;
+
+        // 1) config.json → JSONBin (ענן לכולם)
         try {
-          var local = localStorage.getItem('chabad_prices_v1');
-          if (local) data = JSON.parse(local);
+          var cfgRes = await fetch('./config.json?ts=' + Date.now(), { cache: 'no-store' });
+          if (cfgRes.ok) {
+            var cfg = await cfgRes.json();
+            if (cfg && cfg.pricesBinId) {
+              var binRes = await fetch('https://api.jsonbin.io/v3/b/' + cfg.pricesBinId + '/latest?ts=' + Date.now(), { cache: 'no-store' });
+              if (binRes.ok) {
+                var binJson = await binRes.json();
+                data = binJson.record || binJson;
+              }
+            }
+          }
         } catch (e) {}
-        if (!data) {
+
+        // 2) fallback: prices.json באתר
+        if (!data || !data.items) {
           var res = await fetch('./prices.json?ts=' + Date.now(), { cache: 'no-store' });
           data = await res.json();
         }
+
         var order = ['tefillin', 'mezuzah', 'tallit', 'barMitzvah'];
         grid.innerHTML = order.map(function(key) {
           var it = data.items[key];
