@@ -4,173 +4,118 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>ניהול מחירים – בית חב״ד כפר רתמים</title>
+  <title>ניהול מחירים – בית חב״ד</title>
   <style>
     :root {
-      --bg: #0b0f19;
-      --surface: #0f1526;
-      --surface2: #121a33;
-      --text: #f1f5f9;
-      --muted: #a5afc9;
-      --gold1: #f7e7a1;
-      --gold2: #e6c45d;
-      --gold3: #b8912f;
+      --bg: #0b0f19; --surface: #0f1526; --surface2: #121a33;
+      --text: #f1f5f9; --muted: #a5afc9;
+      --gold1: #f7e7a1; --gold2: #e6c45d; --gold3: #b8912f;
       --line: rgba(255,255,255,.1);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: 20px;
-      padding-bottom: 120px;
+      font-family: system-ui, -apple-system, Arial, sans-serif;
+      background: var(--bg); color: var(--text);
+      padding: 20px; padding-bottom: 110px;
     }
     .wrap { max-width: 960px; margin: 0 auto; }
-    header.top {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
-    }
     h1 { margin: 0; font-size: 22px; }
-    .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .sub { color: var(--muted); font-size: 13px; margin: 4px 0 18px; }
     .card {
       background: linear-gradient(180deg, var(--surface), var(--surface2));
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 16px;
+      border-radius: 20px; padding: 18px; margin-bottom: 14px;
     }
     .card h3 { margin: 0 0 6px; font-size: 18px; }
     .preview-price {
-      display: inline-block;
-      margin: 8px 0 14px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 14px;
+      display: inline-block; margin: 8px 0 12px; padding: 8px 14px;
+      border-radius: 999px; font-weight: 900; font-size: 14px;
       color: #0b0f19;
       background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
     }
     label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; font-weight: 600; }
     input, textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.28);
-      color: var(--text);
-      font-size: 15px;
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--line); background: rgba(0,0,0,.28);
+      color: var(--text); font-size: 15px;
     }
-    textarea { min-height: 72px; resize: vertical; }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+    textarea { min-height: 70px; resize: vertical; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
-    .actions {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
-    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
     button {
-      padding: 14px 18px;
-      border-radius: 14px;
-      border: none;
-      font-weight: 800;
-      font-size: 15px;
-      cursor: pointer;
+      padding: 14px 18px; border-radius: 14px; border: none;
+      font-weight: 800; font-size: 15px; cursor: pointer;
     }
     .primary { background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3)); color: #0b0f19; }
-    .publish { background: linear-gradient(135deg, #2d8f5f, #1f6b45); color: #fff; }
+    .save { background: linear-gradient(135deg, #2d8f5f, #1f6b45); color: #fff; }
     .secondary { background: rgba(255,255,255,.08); color: var(--text); border: 1px solid var(--line); }
     #loginBox, #app { display: none; }
     #loginBox.show, #app.show { display: block; }
     .msg {
-      margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-size: 14px;
-      display: none; line-height: 1.5;
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      font-size: 14px; display: none; line-height: 1.5;
     }
     .msg.show { display: block; }
     .msg.ok { background: rgba(31,107,69,.3); border: 1px solid rgba(45,143,95,.5); }
     .msg.err { background: rgba(122,51,51,.35); border: 1px solid rgba(180,80,80,.5); }
     .bar {
       position: fixed; bottom: 0; left: 0; right: 0;
-      background: rgba(11,15,25,.95);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid var(--line);
-      padding: 12px 16px;
-      z-index: 50;
+      background: rgba(11,15,25,.96); border-top: 1px solid var(--line);
+      padding: 12px 16px; z-index: 50;
     }
     .bar-inner {
       max-width: 960px; margin: 0 auto;
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      display: flex; gap: 10px; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
     }
-    .hint { color: var(--muted); font-size: 12px; line-height: 1.6; margin-top: 10px; }
-    code { background: rgba(0,0,0,.35); padding: 2px 6px; border-radius: 6px; }
-    a { color: var(--gold2); }
+    .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0 0 14px; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header class="top">
-      <div>
-        <h1>ניהול תשמישי קדושה</h1>
-        <div class="sub">כתובת סודית · לא מוצג ללקוחות · מתעדכן גם באפליקציית האייפון</div>
-      </div>
-    </header>
+    <h1>ניהול מחירים</h1>
+    <div class="sub">כתובת סודית · לא מוצג ללקוחות</div>
 
     <div id="loginBox" class="card">
       <h3>כניסת מנהל</h3>
       <label>סיסמה</label>
-      <input id="password" type="password" placeholder="סיסמת מנהל" autocomplete="current-password" />
-      <div class="actions">
+      <input id="password" type="password" placeholder="סיסמת מנהל" />
+      <div class="actions" style="margin-top:12px">
         <button class="primary" id="loginBtn" type="button">כניסה</button>
       </div>
     </div>
 
     <div id="app">
-      <div class="card">
-        <h3>חיבור פרסום (פעם אחת)</h3>
-        <label>GitHub Personal Access Token</label>
-        <input id="token" type="password" placeholder="ghp_..." autocomplete="off" />
-        <div class="actions">
-          <button class="secondary" id="saveTokenBtn" type="button">שמור טוקן במכשיר</button>
-          <button class="secondary" id="clearTokenBtn" type="button">מחק טוקן</button>
-        </div>
-        <div class="hint">
-          GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) →
-          Generate new token · סמן <code>repo</code> → העתק לכאן.
-          הטוקן נשמר רק במכשיר שלך.
-        </div>
-      </div>
-
+      <p class="hint">
+        לחץ <strong style="color:#fff">שמור במכשיר</strong> — המחירים יתעדכנו מיד באתר ובאפליקציה <em>במכשיר הזה</em>.
+        בלי טוקנים ובלי גיטהאב.
+      </p>
       <div class="grid" id="fields"></div>
-
       <div class="msg" id="msg"></div>
     </div>
   </div>
 
   <div class="bar" id="bar" style="display:none">
     <div class="bar-inner">
-      <div class="sub" id="statusLine">מוכן לעריכה</div>
+      <div class="sub" id="statusLine">מוכן</div>
       <div class="actions" style="margin:0">
-        <button class="secondary" id="reloadBtn" type="button">רענן</button>
-        <button class="secondary" id="downloadBtn" type="button">גיבוי</button>
-        <button class="publish" id="publishBtn" type="button">פרסם לאתר עכשיו</button>
+        <button class="secondary" id="reloadBtn" type="button">טען מהאתר</button>
+        <button class="save" id="saveBtn" type="button">שמור במכשיר</button>
       </div>
     </div>
   </div>
 
   <script>
     var PASS = "chabad770";
-    var REPO_OWNER = "EFI770";
-    var REPO_NAME = "chabad-kodesh";
-    var FILE_PATH = "prices.json";
+    var STORAGE_KEY = "chabad_prices_v1";
     var ORDER = ["tefillin", "mezuzah", "tallit", "barMitzvah"];
 
     var loginBox = document.getElementById("loginBox");
     var app = document.getElementById("app");
     var fields = document.getElementById("fields");
     var msg = document.getElementById("msg");
-    var tokenInput = document.getElementById("token");
     var bar = document.getElementById("bar");
     var statusLine = document.getElementById("statusLine");
     var data = null;
@@ -182,14 +127,10 @@
     }
 
     function esc(s) {
-      return String(s)
+      return String(s == null ? "" : s)
         .replace(/&/g, "&")
         .replace(/</g, "<")
         .replace(/"/g, """);
-    }
-
-    function getToken() {
-      return localStorage.getItem("chabad_gh_token") || "";
     }
 
     function render() {
@@ -202,13 +143,13 @@
         card.innerHTML =
           "<h3>" + esc(it.title) + "</h3>" +
           "<div class=\"preview-price\" data-preview=\"" + key + "\">" + esc(it.price) + "</div>" +
-          "<label>כותרת (כמו באתר)</label>" +
+          "<label>כותרת</label>" +
           "<input data-key=\"" + key + "\" data-field=\"title\" value=\"" + esc(it.title) + "\" />" +
           "<label>תיאור</label>" +
           "<textarea data-key=\"" + key + "\" data-field=\"desc\">" + esc(it.desc) + "</textarea>" +
           "<label>מחיר שמוצג באתר</label>" +
           "<input data-key=\"" + key + "\" data-field=\"price\" value=\"" + esc(it.price) + "\" />" +
-          "<label>טקסט הודעת וואטסאפ</label>" +
+          "<label>טקסט לוואטסאפ</label>" +
           "<input data-key=\"" + key + "\" data-field=\"waText\" value=\"" + esc(it.waText) + "\" />";
         fields.appendChild(card);
       });
@@ -222,11 +163,8 @@
       });
       fields.querySelectorAll('input[data-field="title"]').forEach(function (inp) {
         inp.addEventListener("input", function () {
-          var card = inp.closest(".card");
-          if (card) {
-            var h = card.querySelector("h3");
-            if (h) h.textContent = inp.value || "";
-          }
+          var h = inp.closest(".card").querySelector("h3");
+          if (h) h.textContent = inp.value || "";
         });
       });
     }
@@ -241,68 +179,33 @@
     }
 
     async function loadPrices() {
+      // Prefer local saved prices, else network
+      try {
+        var local = localStorage.getItem(STORAGE_KEY);
+        if (local) {
+          data = JSON.parse(local);
+          render();
+          showMsg("נטען מהשמירה במכשיר · " + (data.updatedAt || ""), true);
+          return;
+        }
+      } catch (e) {}
+
       var res = await fetch("./prices.json?ts=" + Date.now(), { cache: "no-store" });
       data = await res.json();
       render();
-      showMsg("נטען מהאתר · עודכן לאחרונה: " + (data.updatedAt || "—"), true);
+      showMsg("נטען מהאתר · " + (data.updatedAt || ""), true);
     }
 
-    function toBase64Unicode(str) {
-      return btoa(unescape(encodeURIComponent(str)));
-    }
-
-    async function publishToGitHub() {
-      var token = getToken();
-      if (!token) {
-        showMsg("אין טוקן שמור. הדבק GitHub Token למעלה ולחץ שמור.", false);
-        return;
-      }
+    function saveLocal() {
       collect();
-      var bodyText = JSON.stringify(data, null, 2) + "\n";
-      showMsg("מפרסם לאתר...", true);
-
-      var metaRes = await fetch(
-        "https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/contents/" + FILE_PATH,
-        { headers: { Accept: "application/vnd.github+json", Authorization: "Bearer " + token } }
-      );
-      if (!metaRes.ok) {
-        showMsg("שגיאה בגיטהאב (" + metaRes.status + "). בדוק שהטוקן כולל הרשאת repo.", false);
-        return;
-      }
-      var meta = await metaRes.json();
-
-      var putRes = await fetch(
-        "https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/contents/" + FILE_PATH,
-        {
-          method: "PUT",
-          headers: {
-            Accept: "application/vnd.github+json",
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            message: "עדכון מחירים " + data.updatedAt,
-            content: toBase64Unicode(bodyText),
-            sha: meta.sha,
-            branch: "main"
-          })
-        }
-      );
-
-      if (!putRes.ok) {
-        var errText = await putRes.text();
-        showMsg("פרסום נכשל (" + putRes.status + ").", false);
-        console.log(errText);
-        return;
-      }
-      showMsg("פורסם בהצלחה. תוך כדקה זה יתעדכן באתר ובאפליקציה.", true);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      showMsg("נשמר במכשיר. רענן את האתר / האפליקציה כדי לראות.", true);
     }
 
     function enterApp() {
       loginBox.classList.remove("show");
       app.classList.add("show");
       bar.style.display = "block";
-      tokenInput.value = getToken();
       loadPrices();
     }
 
@@ -318,28 +221,13 @@
       if (e.key === "Enter") document.getElementById("loginBtn").click();
     });
 
-    document.getElementById("saveTokenBtn").onclick = function () {
-      var t = tokenInput.value.trim();
-      if (!t) return showMsg("הכנס טוקן קודם.", false);
-      localStorage.setItem("chabad_gh_token", t);
-      showMsg("הטוקן נשמר במכשיר.", true);
-    };
-    document.getElementById("clearTokenBtn").onclick = function () {
-      localStorage.removeItem("chabad_gh_token");
-      tokenInput.value = "";
-      showMsg("הטוקן נמחק.", true);
-    };
-    document.getElementById("publishBtn").onclick = publishToGitHub;
-    document.getElementById("reloadBtn").onclick = loadPrices;
-    document.getElementById("downloadBtn").onclick = function () {
-      collect();
-      var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-      var a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "prices.json";
-      a.click();
-      URL.revokeObjectURL(a.href);
-      showMsg("גיבוי ירד.", true);
+    document.getElementById("saveBtn").onclick = saveLocal;
+    document.getElementById("reloadBtn").onclick = async function () {
+      localStorage.removeItem(STORAGE_KEY);
+      var res = await fetch("./prices.json?ts=" + Date.now(), { cache: "no-store" });
+      data = await res.json();
+      render();
+      showMsg("נטען מחדש מהאתר (בוטלה שמירה מקומית).", true);
     };
 
     if (sessionStorage.getItem("chabad_admin") === "1") enterApp();
