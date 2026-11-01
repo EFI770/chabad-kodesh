@@ -1,12 +1,11 @@
-const CACHE_NAME = "chabad-kodesh-v7";
+const CACHE_NAME = "chabad-kodesh-v8";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./logo-192.png",
   "./logo-512.png",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./prices.json"
 ];
 
 self.addEventListener("install", (event) => {
@@ -27,9 +26,12 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
+  const url = new URL(req.url);
   const isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
+  const isPrices = url.pathname.endsWith("prices.json");
 
-  if (isHTML) {
+  // Always network-first for HTML and prices so updates reach PWA users
+  if (isHTML || isPrices) {
     event.respondWith(
       fetch(req)
         .then((res) => {
@@ -37,7 +39,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
           return res;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match("./index.html")))
+        .catch(() => caches.match(req).then((r) => r || (isHTML ? caches.match("./index.html") : null)))
     );
     return;
   }
