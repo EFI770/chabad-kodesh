@@ -41,7 +41,6 @@
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1080px; margin: 0 auto; padding: 24px; }
 
-    /* ===== Header ===== */
     .top {
       position: sticky;
       top: 0;
@@ -129,7 +128,6 @@
       box-shadow: 0 16px 36px rgba(13,59,36,.55);
     }
 
-    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -148,17 +146,10 @@
       border-radius: 2px;
       transition: .25s;
     }
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Mobile menu */
     .mobile-menu {
       display: none;
       flex-direction: column;
@@ -166,9 +157,7 @@
       padding: 12px 0 18px;
       border-top: 1px solid var(--line);
     }
-    .mobile-menu.open {
-      display: flex;
-    }
+    .mobile-menu.open { display: flex; }
     .mobile-menu a {
       padding: 12px 16px;
       border-radius: 12px;
@@ -180,7 +169,6 @@
       color: var(--text);
     }
 
-    /* ===== Hero ===== */
     .hero {
       margin-top: 28px;
       background: linear-gradient(180deg, var(--surface), var(--surface2));
@@ -224,7 +212,6 @@
       margin-top: 22px;
     }
 
-    /* ===== Buttons ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -260,22 +247,15 @@
       box-shadow: 0 18px 40px rgba(13,59,36,.55);
     }
 
-    /* ===== Sections ===== */
     .section { margin-top: 52px; }
-    .section-head {
-      margin-bottom: 22px;
-    }
-    .section h2 {
-      margin: 0;
-      font-size: 26px;
-    }
+    .section-head { margin-bottom: 22px; }
+    .section h2 { margin: 0; font-size: 26px; }
     .section .note {
       color: var(--muted);
       font-size: 15px;
       margin: 6px 0 0;
     }
 
-    /* ===== Cards Grid ===== */
     .grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -309,7 +289,6 @@
     .card .actions { margin-top: 18px; }
     .card .actions .btn { width: 100%; }
 
-    /* ===== About ===== */
     .about-box {
       background: linear-gradient(180deg, var(--surface), var(--surface2));
       border-radius: 26px;
@@ -325,7 +304,6 @@
     }
     .about-box p { margin: 0 0 14px; }
 
-    /* ===== Donate highlight ===== */
     .donate-box {
       background: linear-gradient(135deg, #1a5f3c, #0d3b24);
       color: #fff;
@@ -338,7 +316,6 @@
     .donate-box h2 { margin: 0 0 10px; color: #fff; }
     .donate-box p { margin: 0 0 22px; opacity: .9; }
 
-    /* ===== Contact ===== */
     .contact-box {
       background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
       color: #0b0f19;
@@ -350,7 +327,6 @@
     .contact-box h2 { margin: 0 0 10px; }
     .contact-box p { margin: 0 0 22px; opacity: .85; }
 
-    /* ===== Footer ===== */
     .footer {
       margin: 48px 0 10px;
       padding-top: 20px;
@@ -363,7 +339,6 @@
       flex-wrap: wrap;
     }
 
-    /* ===== Floating Chavruta Button ===== */
     #chavruta-fab {
       position: fixed;
       bottom: calc(22px + env(safe-area-inset-bottom));
@@ -416,7 +391,6 @@
       letter-spacing: 0.3px;
     }
 
-    /* WhatsApp FAB (left) */
     .fab-wa {
       position: fixed;
       bottom: calc(22px + env(safe-area-inset-bottom));
@@ -437,7 +411,6 @@
     }
     .fab-wa a:hover { transform: translateY(-2px); }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding: 28px; }
       h1 { font-size: 32px; }
@@ -451,7 +424,6 @@
 
 <body>
 
-  <!-- Header -->
   <header class="top">
     <div class="container">
       <div class="nav">
@@ -474,22 +446,15 @@
         </nav>
 
         <div class="header-actions">
-          <a class="cta-donate" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">
-            תרומה
-          </a>
-          <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">
-            וואטסאפ
-          </a>
+          <a class="cta-donate" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">תרומה</a>
+          <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
         </div>
 
         <div class="hamburger" id="hamburger" aria-label="תפריט">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </div>
       </div>
 
-      <!-- Mobile menu -->
       <div class="mobile-menu" id="mobileMenu">
         <a href="#home" onclick="closeMenu()">בית</a>
         <a href="#about" onclick="closeMenu()">אודות</a>
@@ -506,7 +471,6 @@
 
   <main class="container">
 
-    <!-- Hero -->
     <section id="home" class="hero">
       <div>
         <div class="kicker">אהבת ישראל • אחריות • קהילה</div>
@@ -516,12 +480,8 @@
           הכל במקום אחד, בנחת ובאחריות.
         </p>
         <div class="hero-btns">
-          <a class="btn donate" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">
-            לתרומה מאובטחת
-          </a>
-          <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20ראיתי%20את%20האתר%20ואשמח%20לעזרה" target="_blank" rel="noopener">
-            דברו איתנו
-          </a>
+          <a class="btn donate" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
+          <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20ראיתי%20את%20האתר%20ואשמח%20לעזרה" target="_blank" rel="noopener">דברו איתנו</a>
           <a class="btn ghost" href="#services">לשירותים שלנו</a>
         </div>
       </div>
@@ -538,79 +498,50 @@
       </aside>
     </section>
 
-    <!-- About -->
     <section id="about" class="section">
       <div class="section-head">
         <h2>אודות בית חב״ד</h2>
         <p class="note">בית פתוח לכל יהודי</p>
       </div>
-
       <div class="about-box">
         <h3>מי אנחנו</h3>
-        <p>
-          בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי.
-          אנחנו כאן כדי ללוות, לייעץ ולסייע בכל הקשור לחיי היהדות: תשמישי קדושה, לימוד, אירועים קהילתיים ושירותי דת.
-        </p>
-        <p>
-          העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית. בין אם אתם מחפשים תפילין לבר מצווה,
-          בדיקת מזוזות, שותף ללימוד או פשוט שיחה — אנחנו כאן בשבילכם.
-        </p>
-        <p style="margin-bottom:0;">
-          <strong style="color:var(--gold1);">בית חב״ד כפר רתמים · 052-7707441</strong>
-        </p>
+        <p>בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי. אנחנו כאן כדי ללוות, לייעץ ולסייע בכל הקשור לחיי היהדות: תשמישי קדושה, לימוד, אירועים קהילתיים ושירותי דת.</p>
+        <p>העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית. בין אם אתם מחפשים תפילין לבר מצווה, בדיקת מזוזות, שותף ללימוד או פשוט שיחה — אנחנו כאן בשבילכם.</p>
+        <p style="margin-bottom:0;"><strong style="color:var(--gold1);">בית חב״ד כפר רתמים · 052-7707441</strong></p>
       </div>
     </section>
 
-    <!-- Services Overview -->
     <section id="services" class="section">
       <div class="section-head">
         <div>
           <h2>השירותים שלנו</h2>
-          <p class="note">הכל במקום אחד, עם ליווי אישי</pvison        </div>
+          <p class="note">הכל במקום אחד, עם ליווי אישי</p>
+        </div>
       </div>
-
       <div class="grid">
         <div class="card">
           <h3>תשמישי קדושה</h3>
           <p>תפילין, מזוזות, טליתות וסטים לבר מצווה — התאמה אישית ובדיקה.</p>
-          <div class="actions">
-            <a class="btn gold" href="#kodesh">לפרטים והזמנה</a>
-          </div>
+          <div class="actions"><a class="btn gold" href="#kodesh">לפרטים והזמנה</a></div>
         </div>
-
         <div class="card">
           <h3>חברותא</h3>
           <p>מציאת שותף ללימוד תורה. פלטפורמה קהילתית פשוטה ונוחה.</p>
-          <div class="actions">
-            <a class="btn gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">
-              כניסה לחברותא
-            </a>
-          </div>
+          <div class="actions"><a class="btn gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">כניסה לחברותא</a></div>
         </div>
-
         <div class="card">
           <h3>שיעורים ולימוד</h3>
           <p>שיעורים שבועיים, הרצאות ואירועי תורה לקהל הרחב.</p>
-          <div class="actions">
-            <a class="btn ghost" href="https://wa.me/972527707441?text=אשמח%20לשמוע%20על%20שיעורים" target="_blank" rel="noopener">
-              לבירור שיעורים
-            </a>
-          </div>
+          <div class="actions"><a class="btn ghost" href="https://wa.me/972527707441?text=אשמח%20לשמוע%20על%20שיעורים" target="_blank" rel="noopener">לבירור שיעורים</a></div>
         </div>
-
         <div class="card">
           <h3>אירועים וחגים</h3>
           <p>סדרי פסח, חנוכה, פורים ועוד — אירועים קהילתיים פתוחים.</p>
-          <div class="actions">
-            <a class="btn ghost" href="https://wa.me/972527707441?text=אשמח%20לשמוע%20על%20אירועים%20קרובים" target="_blank" rel="noopener">
-              לפרטים
-            </a>
-          </div>
+          <div class="actions"><a class="btn ghost" href="https://wa.me/972527707441?text=אשמח%20לשמוע%20על%20אירועים%20קרובים" target="_blank" rel="noopener">לפרטים</a></div>
         </div>
       </div>
     </section>
 
-    <!-- תשמישי קדושה -->
     <section id="kodesh" class="section">
       <div class="section-head">
         <div>
@@ -618,55 +549,34 @@
           <p class="note">בוחרים פעם אחת — נכון. ליווי אישי והתאמה לרמה ולתקציב</p>
         </div>
       </div>
-
       <div class="grid">
         <div class="card">
           <h3>תפילין</h3>
           <p>בר מצווה | שדרוג | מבוגרים — התאמה מלאה ובדיקה.</p>
           <div class="price">החל מ־2,000 ₪ · לפי רמה והגהה</div>
-          <div class="actions">
-            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אני%20מתעניין%20בתפילין" target="_blank" rel="noopener">
-              קבל הצעת מחיר
-            </a>
-          </div>
+          <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אני%20מתעניין%20בתפילין" target="_blank" rel="noopener">קבל הצעת מחיר</a></div>
         </div>
-
         <div class="card">
           <h3>מזוזות</h3>
           <p>בדיקה • החלפה • קביעת מזוזה — שירות מסודר.</p>
           <div class="price">בדיקה: החל מ־30 ₪ · מזוזות: החל מ־120 ₪</div>
-          <div class="actions">
-            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לתאם%20בדיקת%20מזוזות" target="_blank" rel="noopener">
-              תיאום בדיקה
-            </a>
-          </div>
+          <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20לתאם%20בדיקת%20מזוזות" target="_blank" rel="noopener">תיאום בדיקה</a></div>
         </div>
-
         <div class="card">
           <h3>טליתות</h3>
           <p>לבר מצווה ולשימוש יומיומי — לפי גודל וסגנון.</p>
           <div class="price">החל מ־250 ₪ · לפי סוג וגודל</div>
-          <div class="actions">
-            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ%20לגבי%20טלית" target="_blank" rel="noopener">
-              בחירת טלית
-            </a>
-          </div>
+          <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ%20לגבי%20טלית" target="_blank" rel="noopener">בחירת טלית</a></div>
         </div>
-
         <div class="card">
           <h3>סטים לבר מצווה</h3>
           <p>סט קומפלט בליווי אישי להורים ולנער.</p>
           <div class="price">מחיר משתנה · בנייה אישית לפי תקציב</div>
-          <div class="actions">
-            <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20יש%20לנו%20בר%20מצווה" target="_blank" rel="noopener">
-              ליווי לבר מצווה
-            </a>
-          </div>
+          <div class="actions"><a class="btn gold" href="https://wa.me/972527707441?text=שלום%20יש%20לנו%20בר%20מצווה" target="_blank" rel="noopener">ליווי לבר מצווה</a></div>
         </div>
       </div>
     </section>
 
-    <!-- חברותא -->
     <section id="chavruta" class="section">
       <div class="section-head">
         <div>
@@ -674,46 +584,28 @@
           <p class="note">מחברים בין אנשים. מתחברים לתורה.</p>
         </div>
       </div>
-
       <div class="about-box">
-        <p style="margin-top:0;">
-          פלטפורמה קהילתית למציאת שותף ללימוד תורה.<br>
-          בוחרים נושא, רמה וזמנים — והמערכת מציעה התאמות שקופות.
-        </p>
+        <p style="margin-top:0;">פלטפורמה קהילתית למציאת שותף ללימוד תורה.<br>בוחרים נושא, רמה וזמנים — והמערכת מציעה התאמות שקופות.</p>
         <div style="margin-top:22px;">
-          <a class="btn gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">
-            כניסה לאפליקציית חברותא
-          </a>
+          <a class="btn gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">כניסה לאפליקציית חברותא</a>
         </div>
       </div>
     </section>
 
-    <!-- Donate -->
     <section id="donate" class="section">
       <div class="donate-box">
         <h2>תרמו לבית חב״ד</h2>
         <p>התרומה שלכם מאפשרת לנו להמשיך לפעול למען הקהילה — באהבה ובאחריות.</p>
-        <a class="btn" style="background:#fff;color:#0d3b24;" 
-           href="https://ultra.kesherhk.info/external/paymentPage/328257" 
-           target="_blank" rel="noopener">
-          לתרומה מאובטחת
-        </a>
+        <a class="btn" style="background:#fff;color:#0d3b24;" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="section">
       <div class="contact-box">
         <h2>רוצים לדבר?</h2>
         <p>שיחה קצרה יכולה לחסוך הרבה. אנחנו כאן.</p>
-        <a class="btn" style="background:#0b0f19;color:var(--gold1);" 
-           href="https://wa.me/972527707441?text=שלום%20אשמח%20לשיחה" 
-           target="_blank" rel="noopener">
-          וואטסאפ עכשיו
-        </a>
-        <div style="margin-top:18px;font-size:15px;opacity:.8;">
-          052-7707441 · בית חב״ד כפר רתמים
-        </div>
+        <a class="btn" style="background:#0b0f19;color:var(--gold1);" href="https://wa.me/972527707441?text=שלום%20אשמח%20לשיחה" target="_blank" rel="noopener">וואטסאפ עכשיו</a>
+        <div style="margin-top:18px;font-size:15px;opacity:.8;">052-7707441 · בית חב״ד כפר רתמים</div>
       </div>
     </section>
 
@@ -723,19 +615,11 @@
     </footer>
   </main>
 
-  <!-- Floating WhatsApp (שמאל) -->
   <div class="fab-wa">
-    <a href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank" rel="noopener">
-      וואטסאפ
-    </a>
+    <a href="https://wa.me/972527707441?text=שלום%20אשמח%20להתייעץ" target="_blank" rel="noopener">וואטסאפ</a>
   </div>
 
-  <!-- Floating Chavruta Button (ימין) -->
-  <a id="chavruta-fab" 
-     href="https://efi770.github.io/-my-new-project/" 
-     target="_blank" 
-     rel="noopener"
-     title="חברותא – מציאת שותף ללימוד">
+  <a id="chavruta-fab" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener" title="חברותא – מציאת שותף ללימוד">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
@@ -746,21 +630,16 @@
   </a>
 
   <script>
-    // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('open');
     });
-
     function closeMenu() {
       hamburger.classList.remove('active');
       mobileMenu.classList.remove('open');
     }
-
-    // Service Worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js");
     }
