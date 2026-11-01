@@ -93,6 +93,12 @@
       color: var(--text);
     }
 
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
     .cta-top {
       padding: 11px 18px;
       border-radius: 999px;
@@ -106,6 +112,21 @@
     .cta-top:hover {
       transform: translateY(-2px);
       box-shadow: 0 22px 50px rgba(214,181,74,.6);
+    }
+    .cta-donate {
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #1f6b45, #0d3b24);
+      box-shadow: 0 10px 28px rgba(13,59,36,.45);
+      transition: .25s;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .cta-donate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(13,59,36,.55);
     }
 
     /* Hamburger */
@@ -228,6 +249,16 @@
       background: rgba(255,255,255,.03);
     }
     .btn.ghost:hover { transform: translateY(-3px); }
+    .btn.donate {
+      color: #fff;
+      background: linear-gradient(135deg, #1f6b45, #0d3b24);
+      box-shadow: 0 12px 30px rgba(13,59,36,.4);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .btn.donate:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(13,59,36,.55);
+    }
 
     /* ===== Sections ===== */
     .section { margin-top: 52px; }
@@ -293,6 +324,19 @@
       font-size: 20px;
     }
     .about-box p { margin: 0 0 14px; }
+
+    /* ===== Donate highlight ===== */
+    .donate-box {
+      background: linear-gradient(135deg, #1a5f3c, #0d3b24);
+      color: #fff;
+      border-radius: 28px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(13,59,36,.45);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .donate-box h2 { margin: 0 0 10px; color: #fff; }
+    .donate-box p { margin: 0 0 22px; opacity: .9; }
 
     /* ===== Contact ===== */
     .contact-box {
@@ -400,7 +444,7 @@
       .card { grid-column: span 12; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .cta-top { display: none; }
+      .header-actions { display: none; }
     }
   </style>
 </head>
@@ -425,12 +469,18 @@
           <a href="#services">שירותים</a>
           <a href="#kodesh">תשמישי קדושה</a>
           <a href="#chavruta">חברותא</a>
+          <a href="#donate">תרומה</a>
           <a href="#contact">צור קשר</a>
         </nav>
 
-        <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">
-          וואטסאפ
-        </a>
+        <div class="header-actions">
+          <a class="cta-donate" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">
+            תרומה
+          </a>
+          <a class="cta-top" href="https://wa.me/972527707441" target="_blank" rel="noopener">
+            וואטסאפ
+          </a>
+        </div>
 
         <div class="hamburger" id="hamburger" aria-label="תפריט">
           <span></span>
@@ -446,8 +496,10 @@
         <a href="#services" onclick="closeMenu()">שירותים</a>
         <a href="#kodesh" onclick="closeMenu()">תשמישי קדושה</a>
         <a href="#chavruta" onclick="closeMenu()">חברותא</a>
+        <a href="#donate" onclick="closeMenu()">תרומה</a>
         <a href="#contact" onclick="closeMenu()">צור קשר</a>
-        <a href="https://wa.me/972527707441" target="_blank" rel="noopener" onclick="closeMenu()" style="margin-top:8px;background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));color:#0b0f19;font-weight:900;">וואטסאפ</a>
+        <a href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener" onclick="closeMenu()" style="margin-top:8px;background:linear-gradient(135deg,#1f6b45,#0d3b24);color:#fff;font-weight:900;">לתרומה מאובטחת</a>
+        <a href="https://wa.me/972527707441" target="_blank" rel="noopener" onclick="closeMenu()" style="background:linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3));color:#0b0f19;font-weight:900;">וואטסאפ</a>
       </div>
     </div>
   </header>
@@ -464,6 +516,9 @@
           הכל במקום אחד, בנחת ובאחריות.
         </p>
         <div class="hero-btns">
+          <a class="btn donate" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">
+            לתרומה מאובטחת
+          </a>
           <a class="btn gold" href="https://wa.me/972527707441?text=שלום%20ראיתי%20את%20האתר%20ואשמח%20לעזרה" target="_blank" rel="noopener">
             דברו איתנו
           </a>
@@ -511,8 +566,7 @@
       <div class="section-head">
         <div>
           <h2>השירותים שלנו</h2>
-          <p class="note">הכל במקום אחד, עם ליווי אישי</p>
-        </div>
+          <p class="note">הכל במקום אחד, עם ליווי אישי</pvison        </div>
       </div>
 
       <div class="grid">
@@ -631,6 +685,19 @@
             כניסה לאפליקציית חברותא
           </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Donate -->
+    <section id="donate" class="section">
+      <div class="donate-box">
+        <h2>תרמו לבית חב״ד</h2>
+        <p>התרומה שלכם מאפשרת לנו להמשיך לפעול למען הקהילה — באהבה ובאחריות.</p>
+        <a class="btn" style="background:#fff;color:#0d3b24;" 
+           href="https://ultra.kesherhk.info/external/paymentPage/328257" 
+           target="_blank" rel="noopener">
+          לתרומה מאובטחת
+        </a>
       </div>
     </section>
 
