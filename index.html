@@ -176,7 +176,7 @@
 
     <section id="kodesh" class="section">
       <div class="section-head"><h2>תשמישי קדושה</h2><p class="note">בוחרים פעם אחת — נכון. ליווי אישי והתאמה לרמה ולתקציב</p></div>
-      <div class="grid" id="kodeshGrid"><!-- נטען מ-prices.json --></div>
+      <div class="grid" id="kodeshGrid"><!-- נטען דינמית --></div>
     </section>
 
     <section id="chavruta" class="section">
@@ -221,8 +221,15 @@
       var grid = document.getElementById('kodeshGrid');
       if (!grid) return;
       try {
-        var res = await fetch('./prices.json?ts=' + Date.now(), { cache: 'no-store' });
-        var data = await res.json();
+        var data = null;
+        try {
+          var local = localStorage.getItem('chabad_prices_v1');
+          if (local) data = JSON.parse(local);
+        } catch (e) {}
+        if (!data) {
+          var res = await fetch('./prices.json?ts=' + Date.now(), { cache: 'no-store' });
+          data = await res.json();
+        }
         var order = ['tefillin', 'mezuzah', 'tallit', 'barMitzvah'];
         grid.innerHTML = order.map(function(key) {
           var it = data.items[key];
