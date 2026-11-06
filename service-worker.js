@@ -1,4 +1,5 @@
-const CACHE_NAME = "chabad-kodesh-v8";
+const CACHE_NAME = "chabad-kodesh-v9";
+const CACHE_PREFIX = "chabad-kodesh-"; // shared origin efi770.github.io: never touch other apps' caches
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
@@ -18,7 +19,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : null)))
+      Promise.all(keys.map((k) => (k.startsWith(CACHE_PREFIX) && k !== CACHE_NAME ? caches.delete(k) : null)))
     )
   );
   self.clients.claim();

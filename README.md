@@ -4,12 +4,9 @@
 
 ## קישורים
 - אתר: https://efi770.github.io/chabad-kodesh/
-- ניהול (סודי): https://efi770.github.io/chabad-kodesh/admin.html
-
-סיסמת ניהול: `chabad770`
 
 ## קבצים
 - `index.html` — האתר הציבורי
-- `admin.html` — עריכת תוכן
+- עריכת תוכן: מעדכנים את `content.json` / `prices.json` ישירות במאגר (עריכה דרך ממשק הווב של GitHub). אין עמוד ניהול; הרשאות העריכה הן הרשאות המאגר ב-GitHub. בעת שינוי משמעותי בתוכן סטטי, מקפיצים את `CACHE_NAME` ב-`service-worker.js`.
 - `content.json` — תוכן ברירת מחדל
 - `config.json` — חיבור JSONBin (אופציונלי)
