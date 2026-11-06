@@ -326,12 +326,6 @@ async function loadJson(p){
   if(!r.ok) throw new Error(p);
   return r.json();
 }
-async function loadFromBin(id){
-  const r=await fetch('https://api.jsonbin.io/v3/b/'+id+'/latest',{cache:'no-store'});
-  if(!r.ok) throw new Error('bin');
-  const j=await r.json();
-  return j.record||j;
-}
 
 function render(data){
   const h=data.hero||{};
@@ -397,14 +391,8 @@ function render(data){
 async function init(){
   let data=null;
   try{
-    const cfg=await loadJson('./config.json');
-    if(cfg && (cfg.contentBinId||'').trim()){
-      try{ data=await loadFromBin(cfg.contentBinId.trim()); }
-      catch(e){ data=await loadJson('./content.json'); }
-    } else { data=await loadJson('./content.json'); }
-  }catch(e){
-    try{ data=await loadJson('./content.json'); }catch(_){}
-  }
+    data=await loadJson('./content.json');
+  }catch(e){}
   if(data) render(data);
 }
 init();
