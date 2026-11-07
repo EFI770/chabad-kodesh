@@ -361,6 +361,8 @@ function ytId(url){
   }catch(e){return null}
 }
 
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
 async function loadJson(p){
   const r=await fetch(p+'?t='+Date.now(),{cache:'no-store'});
   if(!r.ok) throw new Error(p);
@@ -394,13 +396,13 @@ function render(data){
     grid.innerHTML=order.map((key,i)=>{
       const it=items[key]; if(!it) return '';
       const wa='https://wa.me/972527707441?text='+encodeURIComponent(it.waText||'');
-      return `<div class="k-card"><div class="k-top"><div class="k-icon">${i+1}</div><span class="price-tag">${it.price||''}</span></div><h3>${it.title||''}</h3><p>${it.desc||''}</p><div class="k-actions"><a class="btn btn-petrol" href="${wa}" target="_blank" rel="noopener">לפרטים / הזמנה</a></div></div>`;
+      return `<div class="k-card"><div class="k-top"><div class="k-icon">${i+1}</div><span class="price-tag">${esc(it.price)}</span></div><h3>${esc(it.title)}</h3><p>${esc(it.desc)}</p><div class="k-actions"><a class="btn btn-petrol" href="${wa}" target="_blank" rel="noopener">לפרטים / הזמנה</a></div></div>`;
     }).join('');
   }
   const side=$('sideList');
   if(side){
     const sideOrder=['mezuzah','tefillin','tallit'];
-    const lis=sideOrder.map(key=>{ const it=items[key]; return it?`<li><span>${it.title||''}</span><strong>${it.price||''}</strong></li>`:''; }).join('');
+    const lis=sideOrder.map(key=>{ const it=items[key]; return it?`<li><span>${esc(it.title)}</span><strong>${esc(it.price)}</strong></li>`:''; }).join('');
     if(lis) side.innerHTML=lis;
   }
 
@@ -415,8 +417,8 @@ function render(data){
       if(sec) sec.classList.remove('hidden');
       vw.innerHTML=vids.map(vid=>{
         const id=ytId(vid.url||'');
-        const embed=id?`<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen loading="lazy"></iframe>`:'';
-        return `<div class="v-card"><div class="v-thumb">${embed}</div><div class="v-body"><h4>${vid.title||''}</h4></div></div>`;
+        const embed=id?`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(id)}" allowfullscreen loading="lazy"></iframe>`:'';
+        return `<div class="v-card"><div class="v-thumb">${embed}</div><div class="v-body"><h4>${esc(vid.title)}</h4></div></div>`;
       }).join('');
     }
   }
@@ -426,7 +428,7 @@ function render(data){
   if($('chavrutaText')) $('chavrutaText').textContent=c.text||'';
   if($('chavrutaBtn')){
     $('chavrutaBtn').textContent=c.button||'כניסה לחברותא';
-    if(c.url) $('chavrutaBtn').href=c.url;
+    if(c.url && /^https:\/\//.test(c.url)) $('chavrutaBtn').href=c.url;
   }
 
   const ct=data.contact||{};
