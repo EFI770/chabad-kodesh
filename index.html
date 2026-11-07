@@ -302,7 +302,7 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
           <h2 class="h2" id="chavrutaTitle">חברותא</h2>
           <p class="sec-desc" id="chavrutaText">פלטפורמה קהילתית למציאת שותף ללימוד תורה.</p>
         </div>
-        <a class="btn btn-petrol" id="chavrutaBtn" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">כניסה לחברותא</a>
+        <a class="btn btn-petrol" id="chavrutaBtn" aria-disabled="true">חברותא החדשה - ההרשמה עדיין לא פתוחה</a>
       </div>
     </div>
   </section>
@@ -343,7 +343,7 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
   </div>
 </footer>
 
-<a class="fab fab-gold" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">חברותא</a>
+<a class="fab fab-gold" id="chavrutaFab" aria-disabled="true">חברותא החדשה - ההרשמה עדיין לא פתוחה</a>
 <a class="fab fab-wa" href="https://wa.me/972527707441" target="_blank" rel="noopener"><span class="dot"></span> וואטסאפ</a>
 
 <script>
@@ -426,10 +426,20 @@ function render(data){
   const c=data.chavruta||{};
   if($('chavrutaTitle')) $('chavrutaTitle').textContent=c.title||'חברותא';
   if($('chavrutaText')) $('chavrutaText').textContent=c.text||'';
-  if($('chavrutaBtn')){
-    $('chavrutaBtn').textContent=c.button||'כניסה לחברותא';
-    if(c.url && /^https:\/\//.test(c.url)) $('chavrutaBtn').href=c.url;
-  }
+  const chavrutaStatus='חברותא החדשה - ההרשמה עדיין לא פתוחה';
+  const chavrutaUrl=(c.url && /^https:\/\//.test(c.url) && c.url.indexOf('-my-new-project')===-1)?c.url:'';
+  ['chavrutaBtn','chavrutaFab'].forEach(id=>{
+    const btn=$(id); if(!btn) return;
+    if(chavrutaUrl){
+      btn.textContent=c.button||'כניסה לחברותא';
+      btn.href=chavrutaUrl; btn.target='_blank'; btn.rel='noopener';
+      btn.removeAttribute('aria-disabled');
+    }else{
+      btn.textContent=chavrutaStatus;
+      btn.removeAttribute('href'); btn.removeAttribute('target'); btn.removeAttribute('rel');
+      btn.setAttribute('aria-disabled','true');
+    }
+  });
 
   const ct=data.contact||{};
   if($('contactTitle')) $('contactTitle').textContent=ct.title||'רוצים לדבר?';
