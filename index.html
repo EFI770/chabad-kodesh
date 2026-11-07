@@ -184,10 +184,10 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
         <div class="eyebrow">עכשיו באתר</div>
         <h3>תשמישי קדושה בליווי אישי</h3>
         <p class="desc">התאמה לרמה ולתקציב — תפילין, מזוזות, טליתות וסטים לבר מצווה.</p>
-        <ul class="side-list">
-          <li><span>בדיקת מזוזות</span><strong>החל מ־30 ₪</strong></li>
-          <li><span>תפילין</span><strong>החל מ־2,000 ₪</strong></li>
-          <li><span>טלית</span><strong>החל מ־250 ₪</strong></li>
+        <ul class="side-list" id="sideList">
+          <li><span>מזוזות</span><strong>בדיקה: החל מ־30 ₪ · מזוזות: החל מ־120 ₪</strong></li>
+          <li><span>תפילין</span><strong>החל 1000 ₪ · לפי רמה והגהה</strong></li>
+          <li><span>טליתות</span><strong>החל מ־250 ₪ · לפי סוג וגודל</strong></li>
         </ul>
         <div class="side-card-actions">
           <a class="btn btn-gold" href="#kodesh">למחירים</a>
@@ -359,6 +359,12 @@ function render(data){
       const wa='https://wa.me/972527707441?text='+encodeURIComponent(it.waText||'');
       return `<div class="k-card"><div class="k-top"><div class="k-icon">${i+1}</div><span class="price-tag">${it.price||''}</span></div><h3>${it.title||''}</h3><p>${it.desc||''}</p><div class="k-actions"><a class="btn btn-gold" href="${wa}" target="_blank" rel="noopener">לפרטים / הזמנה</a></div></div>`;
     }).join('');
+  }
+  const side=$('sideList');
+  if(side){
+    const sideOrder=['mezuzah','tefillin','tallit'];
+    const lis=sideOrder.map(key=>{ const it=items[key]; return it?`<li><span>${it.title||''}</span><strong>${it.price||''}</strong></li>`:''; }).join('');
+    if(lis) side.innerHTML=lis;
   }
 
   const v=data.videos||{};

@@ -1,4 +1,4 @@
-const CACHE_NAME = "chabad-kodesh-v9";
+const CACHE_NAME = "chabad-kodesh-v10";
 const CACHE_PREFIX = "chabad-kodesh-"; // shared origin efi770.github.io: never touch other apps' caches
 const FILES_TO_CACHE = [
   "./",
