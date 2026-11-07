@@ -168,6 +168,7 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
         <div class="kicker" id="heroKicker">אהבת ישראל • אחריות • קהילה</div>
         <h1 class="hero-title"><span class="gold" id="heroTitle">בית חב״ד</span><span class="thin" id="heroTitle2">כפר רתמים</span></h1>
         <p class="subtitle" id="heroSubtitle">בית פתוח לכל יהודי — תפילות, שיעורי תורה, חגים, שמחות ועזרה בכל עניין יהודי.</p>
+        <p id="parashaLine" style="color:var(--gold-light);font-family:var(--serif);font-size:15px;margin:14px 0 0"></p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
           <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
@@ -335,6 +336,7 @@ function render(data){
   if($('heroTitle')) $('heroTitle').textContent=h.title||'בית חב״ד';
   if($('heroTitle2')) $('heroTitle2').textContent=h.title2||'כפר רתמים';
   if($('heroSubtitle')) $('heroSubtitle').textContent=h.subtitle||'';
+  if($('parashaLine')) $('parashaLine').textContent=data.parasha?('פרשת השבוע: '+data.parasha):'';
 
   const a=data.about||{};
   if($('aboutTitle')) $('aboutTitle').textContent=a.title||'אודות בית חב״ד';
@@ -393,7 +395,7 @@ function render(data){
 async function init(){
   let data=null;
   try{
-    data=await loadJson('./content.json');
+    data=await loadJson('https://chabad-platform-preview.efie770.workers.dev/api/t/ratamim/site');
   }catch(e){}
   if(data) render(data);
 }
