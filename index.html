@@ -427,7 +427,7 @@ function render(data){
   if($('chavrutaTitle')) $('chavrutaTitle').textContent=c.title||'חברותא';
   if($('chavrutaText')) $('chavrutaText').textContent=c.text||'';
   const chavrutaStatus='חברותא החדשה - ההרשמה עדיין לא פתוחה';
-  const chavrutaUrl=(c.url && /^https:\/\//.test(c.url) && c.url.indexOf('-my-new-project')===-1)?c.url:'';
+  const chavrutaUrl=(c.url && /^https:\/\//.test(c.url))?c.url:'';
   const chavrutaFab=$('chavrutaFab');
   if(chavrutaFab){
     if(chavrutaUrl){
