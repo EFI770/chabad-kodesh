@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080b14">
+<meta name="theme-color" content="#fffdf8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="description" content="בית חב״ד כפר רתמים - בית פתוח לכל יהודי">
 <link rel="apple-touch-icon" href="logo-192.png">
@@ -11,154 +11,192 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#080b14;--bg-soft:#0e1320;--bg-card:#121a2e;
-  --line:rgba(255,255,255,.08);--line-gold:rgba(212,175,87,.18);
-  --gold:#d4af57;--gold-light:#e8c77a;--gold-muted:rgba(212,175,87,.10);
-  --text:#f1f3f9;--muted:#8b96b5;--faint:#7d8ba8;
-  --radius:14px;--radius-lg:20px;--serif:"Frank Ruhl Libre",serif;--sans:"Heebo",system-ui,sans-serif;
+  --bg:#fffdf8;--bg-soft:#f7f2e7;--card:#ffffff;
+  --line:#ece2cd;--line-soft:#f2ead9;
+  --petrol:#1a4b58;--petrol-deep:#123845;--petrol-soft:#e8f1f3;
+  --gold:#b98a2f;--gold-deep:#96700f;--gold-soft:#f5e9cf;
+  --mint:#edf5e8;--blue:#edf4f5;--pink:#fcecf2;--peach:#fceee7;
+  --text:#21313a;--muted:#5c6f77;--faint:#8b9aa1;
+  --radius:16px;--radius-lg:22px;--serif:"Frank Ruhl Libre",serif;--sans:"Heebo",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;font-weight:400;overflow-x:hidden;padding-bottom:126px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.75;font-weight:400;overflow-x:hidden;padding-bottom:126px}
 a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{font-family:var(--sans)}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
 .container{width:min(1160px,92vw);margin:0 auto}
-.section{padding:72px 0;border-top:1px solid var(--line)}
-.hero-section{padding:48px 0 32px;border-top:none}
-.header{position:sticky;top:0;z-index:100;background:rgba(8,11,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
-.header-inner{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
+.section{padding:72px 0;border-top:1px solid var(--line-soft)}
+.hero-section{padding:40px 0 36px;border-top:none}
+
+.topbar{background:var(--petrol-deep);color:#eaf3f5;font-size:13px}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center;padding:7px 0;gap:10px}
+.topbar a{color:#eaf3f5;font-weight:500}
+
+.header{position:sticky;top:0;z-index:100;background:rgba(255,253,248,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.header-inner{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
 .brand{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
-.brand-mark{width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:#151f36;border:1px solid var(--line-gold);display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:var(--gold-light);font-size:17px;overflow:hidden}
-.brand-mark img{width:100%;height:100%;object-fit:cover}
-.brand-name{line-height:1.15;min-width:0}
-.brand-name b{display:block;font-family:var(--serif);font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis}
-.brand-name span{display:block;font-size:9.5px;font-weight:600;letter-spacing:1.2px;color:var(--muted);margin-top:1px;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis}
-.nav{display:flex;align-items:center;gap:20px;flex-shrink:0}
-.nav a{font-size:13px;font-weight:500;color:var(--muted);transition:.2s}
-.nav a:hover{color:var(--text)}
-.actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:.2s;line-height:1.2;text-align:center;word-break:break-word}
-.btn-primary{background:var(--text);color:var(--bg)}
-.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#1a1405}
-.btn-ghost{background:rgba(255,255,255,.05);border-color:var(--line);color:var(--text)}
-.hamburger{display:none;width:40px;height:40px;flex:0 0 40px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;align-items:center;justify-content:center}
-.hamburger span{display:block;width:16px;height:2px;background:var(--text);position:relative;border-radius:2px}
-.hamburger span:before,.hamburger span:after{content:"";position:absolute;right:0;width:16px;height:2px;background:var(--text);border-radius:2px}
-.hamburger span:before{top:-5px}.hamburger span:after{top:5px}
-.mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,11,20,.98);backdrop-filter:blur(24px);padding:20px;overflow-y:auto}
-.mobile-menu.open{display:flex;flex-direction:column}
-@media(max-width:1050px){.nav{display:none}.hamburger{display:flex}}
-@media(max-width:480px){.header-inner{min-height:58px}.actions .btn-ghost{display:none}.brand-name b{font-size:15px}.container{width:min(1160px,94vw)}}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start}
-.kicker{display:flex;align-items:center;gap:10px;font-size:10.5px;font-weight:600;letter-spacing:1.8px;color:var(--gold-light);text-transform:uppercase;margin-bottom:14px;flex-wrap:wrap}
-.kicker:before{content:"";width:20px;height:1px;background:var(--gold);display:block;flex:0 0 20px}
-.hero-title{font-family:var(--serif);font-weight:400;font-size:clamp(36px,6vw,68px);line-height:.92;letter-spacing:-.6px;margin:0;overflow-wrap:break-word}
-.hero-title .gold{color:var(--gold-light);font-weight:500}
-.hero-title .thin{display:block;font-weight:300;margin-top:4px}
-.subtitle{margin:16px 0 0;color:var(--muted);font-size:15.5px;line-height:1.7;max-width:52ch;font-weight:300;overflow-wrap:break-word}
-.hero-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
-@media(max-width:600px){.hero-grid{grid-template-columns:1fr;gap:24px}.hero-section{padding:32px 0 24px}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.hero-meta{grid-template-columns:1fr}}
-.hero-meta{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.meta-item b{display:block;font-family:var(--serif);font-size:17px;font-weight:500}
-.meta-item span{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);margin-top:3px;display:block}
-.side-card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px}
-.side-card h3{font-family:var(--serif);font-size:20px;font-weight:500;margin:10px 0 0}
-.side-card .desc{color:var(--muted);font-size:13px;margin:8px 0 0;font-weight:300}
-.side-list{margin:16px 0 0;padding:16px 0 0;list-style:none;border-top:1px solid var(--line)}
-.side-list li{display:flex;justify-content:space-between;padding:9px 0;font-size:12.5px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.04);gap:12px}
-.side-list li strong{color:var(--text);font-weight:500}
-.side-card-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.side-card-actions .btn{flex:1 1 120px}
-.sec-head{margin:0 0 28px 0;max-width:720px}
-.eyebrow{font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px;margin:0}
-.eyebrow:after{content:"";height:1px;width:24px;background:var(--line-gold);display:inline-block}
-.h2{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:400;line-height:1.1;margin:8px 0 0}
-.sec-desc{color:var(--muted);font-size:14.5px;max-width:56ch;margin:10px 0 0;font-weight:300}
-.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.s-card{background:var(--bg-card);padding:22px 20px}
-.s-card .num{font-family:var(--serif);font-size:10px;letter-spacing:1px;color:var(--gold)}
-.s-card h3{font-family:var(--serif);font-size:16px;font-weight:500;margin:12px 0 6px}
-.s-card p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.6;font-weight:300}
-@media(max-width:1000px){.services-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.services-grid{grid-template-columns:1fr}.section{padding:48px 0}}
+.brand-logo{width:42px;height:42px;border-radius:50%;background:var(--petrol);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:700;flex:0 0 auto}
+.brand-text{min-width:0}
+.brand-name{font-family:var(--serif);font-weight:700;font-size:18px;color:var(--petrol-deep);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:10px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+.nav{display:flex;gap:22px;align-items:center;font-size:15px;color:var(--muted)}
+.nav a:hover{color:var(--petrol)}
+.nav .btn{padding:9px 20px;font-size:14px}
+.hamburger{display:none;background:none;border:0;width:42px;height:42px;cursor:pointer;position:relative}
+.hamburger span,.hamburger span::before,.hamburger span::after{content:"";display:block;width:22px;height:2px;background:var(--petrol-deep);position:absolute;right:10px;transition:.2s}
+.hamburger span{top:20px}.hamburger span::before{top:-7px;right:0}.hamburger span::after{top:7px;right:0}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;padding:70px 8vw;flex-direction:column;gap:8px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:19px;font-family:var(--serif);color:var(--petrol-deep);padding:14px 0;border-bottom:1px solid var(--line)}
+#closeMenu{align-self:flex-start;margin-bottom:14px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;border-radius:999px;font-weight:600;font-size:16px;border:1.5px solid transparent;cursor:pointer;transition:.18s;line-height:1.2}
+.btn-petrol{background:var(--petrol);color:#fff}
+.btn-petrol:hover{background:var(--petrol-deep)}
+.btn-outline{border-color:var(--petrol);color:var(--petrol);background:transparent}
+.btn-outline:hover{background:var(--petrol-soft)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-deep)}
+.btn-mint{background:var(--mint);color:var(--petrol-deep);border-color:#d8e6cd}
+.btn-ghost{border-color:var(--line);color:var(--muted);background:var(--card)}
+
+.kicker{color:var(--gold);font-weight:600;font-size:14px;letter-spacing:.06em;margin-bottom:14px}
+.eyebrow{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.08em;margin-bottom:10px}
+.eyebrow::after{content:"";display:block;width:44px;height:2px;background:var(--gold);margin-top:8px;border-radius:2px}
+.h2{font-family:var(--serif);font-size:clamp(28px,4.5vw,40px);font-weight:700;color:var(--petrol-deep);margin:0 0 10px;line-height:1.25}
+.sec-desc{color:var(--muted);max-width:640px;margin:0}
+.sec-head{margin-bottom:36px}
+
+.hero-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:start}
+.hero-title{font-family:var(--serif);font-size:clamp(40px,6.5vw,64px);line-height:1.12;margin:0 0 18px;color:var(--petrol-deep);font-weight:700}
+.hero-title .thin{display:block;color:var(--petrol)}
+.subtitle{font-size:18px;color:var(--muted);max-width:560px;margin:0 0 8px}
+#parashaLine{color:var(--gold-deep);font-family:var(--serif);font-size:16px;margin:12px 0 0}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero-meta{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+.meta-item b{display:block;font-family:var(--serif);color:var(--petrol-deep);font-size:17px}
+.meta-item span{font-size:13px;color:var(--faint)}
+
+.side-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;box-shadow:0 10px 34px rgba(26,75,88,.07)}
+.side-card h3{font-family:var(--serif);color:var(--petrol-deep);font-size:21px;margin:0 0 8px}
+.side-card .desc{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+.side-list{list-style:none;margin:0 0 18px;padding:0}
+.side-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.side-list li:last-child{border-bottom:0}
+.side-list span{color:var(--muted)}
+.side-list strong{color:var(--petrol-deep);font-weight:600;text-align:left}
+.side-card-actions{display:flex;flex-direction:column;gap:10px}
+.side-card-actions .btn{width:100%;padding:11px 18px;font-size:15px}
+
+.strip{background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:16px 0;text-align:center;color:var(--muted);font-size:14.5px}
+
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.s-card{border-radius:var(--radius);padding:24px 20px;border:1px solid transparent}
+.s-card:nth-child(1){background:var(--mint);border-color:#dce9d2}
+.s-card:nth-child(2){background:var(--blue);border-color:#d8e6e8}
+.s-card:nth-child(3){background:var(--pink);border-color:#f3d9e3}
+.s-card:nth-child(4){background:var(--peach);border-color:#f2dfcf}
+.s-card .num{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.08em}
+.s-card h3{font-family:var(--serif);color:var(--petrol-deep);font-size:19px;margin:8px 0 6px}
+.s-card p{color:var(--muted);font-size:14px;margin:0;line-height:1.6}
+
 .kodesh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.k-card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:12px}
-.k-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
-.k-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-muted);border:1px solid var(--line-gold);display:grid;place-items:center;color:var(--gold-light);font-size:13px;font-family:var(--serif);font-weight:700}
-.price-tag{display:inline-flex;align-items:center;min-height:22px;padding:4px 10px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:10.5px;font-weight:600;color:var(--gold-light);max-width:100%;white-space:normal;line-height:1.3}
-.k-card h3{margin:0;font-family:var(--serif);font-size:20px;font-weight:500}
-.k-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;font-weight:300}
-.k-actions{display:flex;gap:8px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
-.k-actions .btn{flex:1 1 110px}
-@media(max-width:800px){.kodesh-grid{grid-template-columns:1fr}}
-.videos-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.v-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.v-thumb{aspect-ratio:16/9;background:#0c1222}
-.v-thumb iframe{width:100%;height:100%;border:0}
-.v-body{padding:12px 14px}
-.v-body h4{margin:0;font-size:13px;font-weight:500}
-@media(max-width:900px){.videos-wrap{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.videos-wrap{grid-template-columns:1fr}}
-.cta{background:linear-gradient(180deg,rgba(212,175,87,.06),rgba(255,255,255,.01));border:1px solid var(--line-gold);border-radius:var(--radius-lg);padding:28px;display:grid;grid-template-columns:1.2fr auto;gap:20px;align-items:center}
-@media(max-width:800px){.cta{grid-template-columns:1fr}.cta .btn{width:100%}}
-.donation{background:linear-gradient(180deg,var(--bg-card),var(--bg-soft));border:1px solid var(--line-gold);border-radius:var(--radius-lg);padding:40px 28px;text-align:center}
-.donation h2{font-family:var(--serif);font-size:clamp(26px,4vw,38px);font-weight:400;margin:0}
-.donation p{color:var(--muted);max-width:52ch;margin:12px auto 0;font-weight:300;font-size:14px}
-.donation-actions{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.about-grid,.contact-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:16px}
-.c-card{background:var(--bg-card);border:1px solid var(--line);border-radius:16px;padding:22px}
-.c-card p{margin:0;color:var(--muted);font-weight:300;line-height:1.7;font-size:13.5px}
-@media(max-width:900px){.about-grid,.contact-grid{grid-template-columns:1fr}}
-.footer{border-top:1px solid var(--line);padding:20px 0;background:var(--bg-soft)}
-.footer-grid{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--faint)}
-.fab{position:fixed;right:14px;z-index:90;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 14px;border-radius:100px;font-size:12.5px;font-weight:600;border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.fab-wa{bottom:14px;background:#111827;color:white}
-.fab-gold{bottom:62px;background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#1a1405}
-.fab .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block}
-@media(max-width:600px){.fab{display:none}body{padding-bottom:24px}}
-.hidden{display:none !important}
+.k-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 6px 22px rgba(26,75,88,.05)}
+.k-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.k-icon{width:34px;height:34px;border-radius:10px;background:var(--petrol-soft);color:var(--petrol);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
+.price-tag{background:var(--peach);color:#8a5a13;font-weight:600;font-size:13.5px;padding:5px 13px;border-radius:999px;border:1px solid #f0ddc4}
+.k-card h3{font-family:var(--serif);color:var(--petrol-deep);font-size:20px;margin:0 0 6px}
+.k-card p{color:var(--muted);font-size:14.5px;margin:0 0 16px;line-height:1.65}
+.k-actions .btn{padding:10px 24px;font-size:14.5px}
+
+.videos-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.v-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.v-thumb{aspect-ratio:16/9;background:var(--petrol-soft)}
+.v-thumb iframe{width:100%;height:100%;border:0;display:block}
+.v-body{padding:14px 18px}
+.v-body h4{font-family:var(--serif);color:var(--petrol-deep);margin:0;font-size:16px}
+#videos.hidden{display:none}
+
+.chavruta-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:36px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;box-shadow:0 10px 34px rgba(26,75,88,.06)}
+
+.donate-card{background:linear-gradient(135deg,var(--petrol) 0%,var(--petrol-deep) 100%);border-radius:var(--radius-lg);padding:44px 36px;text-align:center;color:#eaf3f5}
+.donate-card h2{font-family:var(--serif);font-size:clamp(24px,3.5vw,32px);margin:0 0 10px;color:#fff}
+.donate-card p{color:#bcd2d8;margin:0 0 22px}
+.donate-card .btn-gold{border:0}
+
+.contact-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.c-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.c-card h3{font-family:var(--serif);color:var(--petrol-deep);margin:0 0 12px;font-size:20px}
+.c-card p{color:var(--muted);margin:0}
+.mini-note{color:var(--faint);font-size:12.5px;margin-top:14px}
+
+.footer{border-top:1px solid var(--line);padding:26px 0;color:var(--faint);font-size:14px;background:var(--bg-soft)}
+.footer-grid{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.fab{position:fixed;bottom:20px;z-index:120;display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;box-shadow:0 8px 24px rgba(26,75,88,.22)}
+.fab-gold{left:20px;background:var(--gold);color:#fff}
+.fab-wa{right:20px;background:var(--petrol);color:#fff}
+.fab .dot{width:9px;height:9px;border-radius:50%;background:#7be495}
+
+@media(max-width:960px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-grid{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .kodesh-grid,.videos-wrap{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .nav{display:none}
+  .hamburger{display:block}
+  .section{padding:52px 0}
+  .chavruta-card{padding:26px}
+}
+@media(min-width:721px){
+  body{padding-bottom:0}
+  .fab{display:none}
+}
 </style>
 </head>
 <body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <a href="tel:0527707441">052-7707441</a>
+    <span>כפר רתמים</span>
+  </div>
+</div>
+
 <header class="header">
   <div class="container header-inner">
     <div class="brand">
-      <div class="brand-mark"><img src="logo-192.png" alt="לוגו"></div>
-      <div class="brand-name"><b>בית חב״ד כפר רתמים</b><span>Chabad • Rtamim</span></div>
+      <div class="brand-logo">ח</div>
+      <div class="brand-text">
+        <div class="brand-name">בית חב״ד כפר רתמים</div>
+        <div class="brand-sub">Chabad · Rtamim</div>
+      </div>
     </div>
     <nav class="nav">
       <a href="#about">אודות</a>
       <a href="#services">שירותים</a>
       <a href="#kodesh">תשמישי קדושה</a>
-      <a href="#videos">סרטונים</a>
+      <a href="#videos">שיעורים</a>
       <a href="#chavruta">חברותא</a>
       <a href="#contact">צור קשר</a>
-    </nav>
-    <div class="actions">
-      <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
       <a class="btn btn-gold" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה</a>
-      <button class="hamburger" id="hamburger" aria-label="תפריט" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
-    </div>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="תפריט" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
   </div>
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-    <div class="brand"><div class="brand-mark"><img src="logo-192.png" alt="לוגו"></div><div class="brand-name"><b>בית חב״ד</b><span>כפר רתמים</span></div></div>
-    <button class="btn btn-ghost" id="closeMenu">סגור</button>
-  </div>
-  <nav style="display:flex;flex-direction:column;margin-top:24px">
-    <a href="#about" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">אודות</a>
-    <a href="#services" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">שירותים</a>
-    <a href="#kodesh" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">תשמישי קדושה</a>
-    <a href="#videos" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">סרטונים</a>
-    <a href="#chavruta" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">חברותא</a>
-    <a href="#contact" onclick="closeMobile()" style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)">צור קשר</a>
-  </nav>
-  <div style="margin-top:auto;display:flex;gap:10px;padding-top:20px;flex-wrap:wrap">
-    <a class="btn btn-ghost" style="flex:1" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
-    <a class="btn btn-gold" style="flex:1" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה</a>
-  </div>
+  <button class="btn btn-ghost" id="closeMenu">סגור</button>
+  <a href="#about" onclick="closeMobile()">אודות</a>
+  <a href="#services" onclick="closeMobile()">שירותים</a>
+  <a href="#kodesh" onclick="closeMobile()">תשמישי קדושה</a>
+  <a href="#videos" onclick="closeMobile()">שיעורים</a>
+  <a href="#chavruta" onclick="closeMobile()">חברותא</a>
+  <a href="#contact" onclick="closeMobile()">צור קשר</a>
+  <a class="btn btn-gold" style="margin-top:14px;border-bottom:0" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה</a>
 </div>
 
 <main>
@@ -166,13 +204,13 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
     <div class="container hero-grid">
       <div>
         <div class="kicker" id="heroKicker">אהבת ישראל • אחריות • קהילה</div>
-        <h1 class="hero-title"><span class="gold" id="heroTitle">בית חב״ד</span><span class="thin" id="heroTitle2">כפר רתמים</span></h1>
+        <h1 class="hero-title"><span id="heroTitle">בית חב״ד</span><span class="thin" id="heroTitle2">כפר רתמים</span></h1>
         <p class="subtitle" id="heroSubtitle">בית פתוח לכל יהודי — תפילות, שיעורי תורה, חגים, שמחות ועזרה בכל עניין יהודי.</p>
-        <p id="parashaLine" style="color:var(--gold-light);font-family:var(--serif);font-size:15px;margin:14px 0 0"></p>
+        <p id="parashaLine"></p>
         <div class="hero-actions">
-          <a class="btn btn-gold" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
-          <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
-          <a class="btn btn-ghost" href="#kodesh">תשמישי קדושה</a>
+          <a class="btn btn-petrol" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
+          <a class="btn btn-outline" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ</a>
+          <a class="btn btn-mint" href="#kodesh">תשמישי קדושה</a>
         </div>
         <div class="hero-meta">
           <div class="meta-item"><b>תפילין</b><span>ומזוזות</span></div>
@@ -190,34 +228,14 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
           <li><span>טליתות</span><strong>החל מ־250 ₪ · לפי סוג וגודל</strong></li>
         </ul>
         <div class="side-card-actions">
-          <a class="btn btn-gold" href="#kodesh">למחירים</a>
-          <a class="btn btn-ghost" href="https://wa.me/972527707441" target="_blank" rel="noopener">שאלה בוואטסאפ</a>
+          <a class="btn btn-petrol" href="#kodesh">למחירים</a>
+          <a class="btn btn-outline" href="https://wa.me/972527707441" target="_blank" rel="noopener">שאלה בוואטסאפ</a>
         </div>
       </aside>
     </div>
   </section>
 
-  <section class="section" id="about">
-    <div class="container">
-      <div class="sec-head">
-        <div class="eyebrow" id="aboutEyebrow">בית פתוח לכל יהודי</div>
-        <h2 class="h2" id="aboutTitle">אודות בית חב״ד</h2>
-      </div>
-      <div class="about-grid">
-        <div class="c-card">
-          <h3 id="aboutHeading" style="font-family:var(--serif);margin:0 0 12px">מי אנחנו</h3>
-          <p id="aboutP1">בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי.</p>
-          <p id="aboutP2" style="margin-top:12px">העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית.</p>
-          <p style="margin-top:16px;color:var(--gold-light)" id="aboutFooter">בית חב״ד כפר רתמים · 052-7707441</p>
-        </div>
-        <div class="c-card">
-          <h3 id="aboutHeadingMini" style="font-family:var(--serif);margin:0 0 12px">בקיצור</h3>
-          <p id="aboutP1Short">שיעורים, חגים, תשמישי קדושה, חברותא ושירות קהילתי חם.</p>
-          <p style="margin-top:16px;color:var(--faint);font-size:12px" id="aboutFooter2">עודכן: <span id="updatedAt">—</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="strip">בית פתוח לכל יהודי · תורה, חסד וקהילה · בנחת ובאחריות</div>
 
   <section class="section" id="services">
     <div class="container">
@@ -239,13 +257,12 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
       <div class="sec-head">
         <div class="eyebrow" id="kodeshEyebrow">ליווי אישי</div>
         <h2 class="h2" id="kodeshTitle">תשמישי קדושה</h2>
-        <p class="sec-desc">בוחרים פעם אחת — נכון. התאמה לרמה ולתקציב.</p>
       </div>
       <div class="kodesh-grid" id="kodeshGrid"></div>
     </div>
   </section>
 
-  <section class="section" id="videos">
+  <section class="section hidden" id="videos">
     <div class="container">
       <div class="sec-head">
         <div class="eyebrow" id="videosEyebrow">תורה והשראה</div>
@@ -255,27 +272,47 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
     </div>
   </section>
 
+  <section class="section" id="about">
+    <div class="container">
+      <div class="sec-head">
+        <div class="eyebrow" id="aboutEyebrow">בית פתוח לכל יהודי</div>
+        <h2 class="h2" id="aboutTitle">אודות בית חב״ד</h2>
+      </div>
+      <div class="services-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="c-card">
+          <h3 id="aboutHeading">מי אנחנו</h3>
+          <p id="aboutP1">בית חב״ד כפר רתמים פועל מתוך שליחותו של הרבי מליובאוויטש — להיות כתובת לכל עניין יהודי.</p>
+          <p id="aboutP2" style="margin-top:12px">העבודה נעשית בנחת, באחריות ובאהבת ישראל אמיתית.</p>
+          <p style="margin-top:16px;color:var(--gold-deep);font-weight:600" id="aboutFooter">בית חב״ד כפר רתמים · 052-7707441</p>
+        </div>
+        <div class="c-card">
+          <h3 id="aboutHeadingMini">בקיצור</h3>
+          <p id="aboutP1Short">שיעורים, חגים, תשמישי קדושה, חברותא ושירות קהילתי חם.</p>
+          <p class="mini-note" id="aboutFooter2">עודכן: <span id="updatedAt">—</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="chavruta">
     <div class="container">
-      <div class="cta">
+      <div class="chavruta-card">
         <div>
           <div class="eyebrow" id="chavrutaEyebrow">מחברים בין אנשים</div>
           <h2 class="h2" id="chavrutaTitle">חברותא</h2>
           <p class="sec-desc" id="chavrutaText">פלטפורמה קהילתית למציאת שותף ללימוד תורה.</p>
         </div>
-        <a class="btn btn-gold" id="chavrutaBtn" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">כניסה לחברותא</a>
+        <a class="btn btn-petrol" id="chavrutaBtn" href="https://efi770.github.io/-my-new-project/" target="_blank" rel="noopener">כניסה לחברותא</a>
       </div>
     </div>
   </section>
 
   <section class="section" id="donate">
     <div class="container">
-      <div class="donation">
+      <div class="donate-card">
         <h2 id="donationTitle">תרמו לבית חב״ד</h2>
         <p id="donationText">התרומה שלכם מאפשרת לנו להמשיך לפעול למען הקהילה.</p>
-        <div class="donation-actions">
-          <a class="btn btn-gold" id="donationBtn" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
-        </div>
+        <a class="btn btn-gold" id="donationBtn" href="https://ultra.kesherhk.info/external/paymentPage/328257" target="_blank" rel="noopener">לתרומה מאובטחת</a>
       </div>
     </div>
   </section>
@@ -291,7 +328,7 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
         <div class="c-card">
           <p id="contactAddress">052-7707441 · בית חב״ד כפר רתמים</p>
           <div style="margin-top:16px">
-            <a class="btn btn-gold" id="contactWa" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ עכשיו</a>
+            <a class="btn btn-petrol" id="contactWa" href="https://wa.me/972527707441" target="_blank" rel="noopener">וואטסאפ עכשיו</a>
           </div>
         </div>
       </div>
@@ -357,7 +394,7 @@ function render(data){
     grid.innerHTML=order.map((key,i)=>{
       const it=items[key]; if(!it) return '';
       const wa='https://wa.me/972527707441?text='+encodeURIComponent(it.waText||'');
-      return `<div class="k-card"><div class="k-top"><div class="k-icon">${i+1}</div><span class="price-tag">${it.price||''}</span></div><h3>${it.title||''}</h3><p>${it.desc||''}</p><div class="k-actions"><a class="btn btn-gold" href="${wa}" target="_blank" rel="noopener">לפרטים / הזמנה</a></div></div>`;
+      return `<div class="k-card"><div class="k-top"><div class="k-icon">${i+1}</div><span class="price-tag">${it.price||''}</span></div><h3>${it.title||''}</h3><p>${it.desc||''}</p><div class="k-actions"><a class="btn btn-petrol" href="${wa}" target="_blank" rel="noopener">לפרטים / הזמנה</a></div></div>`;
     }).join('');
   }
   const side=$('sideList');
@@ -410,4 +447,5 @@ if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); });
 }
 </script>
-</body></html>
+</body>
+</html>
