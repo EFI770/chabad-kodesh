@@ -3,8 +3,8 @@
   "short_name": "חב״ד רתמים",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0b0f19",
-  "theme_color": "#0b0f19",
+  "background_color": "#e8f1fb",
+  "theme_color": "#e8f1fb",
   "lang": "he",
   "dir": "rtl",
   "icons": [
