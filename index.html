@@ -177,6 +177,11 @@ body.dark .mobile-menu{background:#0f1d33}
   .fab{display:none}
 }
 </style>
+<style id="a11y-reflow">
+.hero-actions .btn{min-width:0;white-space:normal}
+.hero-grid>*, .contact-grid>*, .services-grid>*, .kodesh-grid>*, .videos-wrap>*{min-width:0}
+h1,h2,h3,p,li,a.btn,strong,span{overflow-wrap:break-word}
+</style>
 </head>
 <body>
 
@@ -362,6 +367,7 @@ body.dark .mobile-menu{background:#0f1d33}
   <div class="container footer-grid">
     <div>© <span id="year"></span> בית חב״ד כפר רתמים</div>
     <div>טלפון / וואטסאפ: 052-7707441</div>
+    <div><a href="accessibility.html" style="color:inherit">הצהרת נגישות</a></div>
   </div>
 </footer>
 
@@ -501,5 +507,6 @@ if('serviceWorker' in navigator){
 }
 </script>
 <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"8d7ac41306b44802b1cb639770fd8f82"}'></script><!-- End Cloudflare Web Analytics -->
+<script src="a11y.js" defer></script>
 </body>
 </html>
